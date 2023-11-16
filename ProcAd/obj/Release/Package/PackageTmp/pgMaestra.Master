@@ -1,0 +1,54 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="pgMaestra.master.vb" Inherits="ProcAd.pgMaestra" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+<link rel="shortcut icon" href="images\ProcAd.ico" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>ProcAd</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .auto-style4 {
+            width: 694px;
+        }
+    </style>
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack() { window.history.forward(); }
+    </script>
+</head>
+<body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+    <form id="form1" runat="server">
+
+    <div>
+        <table style="width: 1366px;">
+            <tr>
+                <td style="margin-right: auto; margin-left: auto; text-align: center;">
+                    <asp:Image ID="imgTitulo" runat="server" ImageAlign="Middle" ImageUrl="images\banner v2.png" />
+                </td>
+            </tr>
+        </table>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            <table style="width: 1366px; font-family: Verdana; font-size: 8pt;">
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+            </table>
+        </asp:ContentPlaceHolder>
+    </div>
+        <asp:Button ID="btnMenu" runat="server" BackColor="White" BorderColor="White" BorderStyle="None" Font-Bold="True" Font-Names="Verdana" Font-Size="9pt" style="z-index: 1; left: 1201px; top: 99px; position: absolute; width: 130px;" Text="Menú Principal" />
+        <asp:Label ID="lblUsuario" runat="server" Text="Admon" Font-Bold="False" Font-Names="Verdana" Font-Size="9pt" style="z-index: 1; left: 78px; top: 111px; position: absolute"></asp:Label>
+        <asp:Image ID="imgUsuario" runat="server" ImageUrl="images\icn_user.png" style="z-index: 1; left: 56px; top: 108px; position: absolute" />
+        <asp:HyperLink ID="hlUNNE" runat="server" Font-Bold="True" Font-Names="Verdana" Font-Size="14pt" ForeColor="Black" NavigateUrl="http://unne.com.mx" style="z-index: 1; left: 1213px; top: 35px; position: absolute; width: 107px;">Ir a UNNE</asp:HyperLink>
+        <table style="width: 671px; position: absolute; z-index: 2; left: 351px; top: 103px; height: 20px;">
+            <tr>
+                <td class="auto-style4" style="text-align: center;">
+                    <asp:Label ID="lblTitulo" runat="server" Text="Título" Font-Bold="True" Font-Names="Verdana" Font-Size="12pt"></asp:Label>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
