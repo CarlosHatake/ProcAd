@@ -2739,6 +2739,7 @@
                 Session("id_usuario") = 0
                 ' Server.Transfer("Login.aspx")
                 Response.Redirect("Login.aspx")
+
             Catch ex As Exception
                 .litError.Text = ex.ToString
             End Try

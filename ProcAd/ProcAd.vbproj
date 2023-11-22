@@ -243,6 +243,7 @@
     <Content Include="ConsCompT.aspx" />
     <Content Include="ConsCompXConcepto.aspx" />
     <Content Include="ConsCompXConceptoAud.aspx" />
+    <Content Include="ConsConceptos.aspx" />
     <Content Include="ConsCotFact.aspx" />
     <Content Include="ConsDisp.aspx" />
     <Content Include="ConsEval.aspx" />
@@ -1103,6 +1104,13 @@
       <DependentUpon>ConsCompXConceptoAud.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
+    <Compile Include="ConsConceptos.aspx.designer.vb">
+      <DependentUpon>ConsConceptos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsConceptos.aspx.vb">
+      <DependentUpon>ConsConceptos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="ConsCotFact.aspx.designer.vb">
       <DependentUpon>ConsCotFact.aspx</DependentUpon>
     </Compile>
@@ -1435,7 +1443,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>60606</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:49786/</IISUrl>
+          <IISUrl>http://localhost:49787/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
