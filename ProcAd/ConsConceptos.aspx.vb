@@ -306,7 +306,7 @@
 
     Protected Sub btnExportar_Click(sender As Object, e As EventArgs) Handles btnExportar.Click
         Try
-            If gvRegistrosCon.Rows.Count <> 0 Then
+            If gvRegistrosCon.Rows.Count <> 0 Or gvServicios.Rows.Count <> 0 Then
                 exportar()
             End If
         Catch ex As Exception
