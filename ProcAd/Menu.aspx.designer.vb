@@ -1139,6 +1139,33 @@ Partial Public Class Menu
     Protected WithEvents btnCatListaNegra As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Control pnlConsSer.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlConsSer As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control imaCa19.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents imaCa19 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnConsServ.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnConsServ As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Control pnlFSATTitulo.
     '''</summary>
     '''<remarks>

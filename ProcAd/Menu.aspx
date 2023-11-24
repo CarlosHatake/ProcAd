@@ -579,6 +579,18 @@
                                                                    </tr>
                                                                </table>
                                                            </asp:Panel>
+                                                           <asp:Panel ID="pnlConsSer" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="imaCa19" runat="server" ImageUrl="images\icn_search.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnConsServ" runat="server" BackColor="White" BorderStyle="None" CssClass="stbutton" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" ForeColor="Black" Text="Consulta Conceptos y Servicios" Width="180px" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
                                                        </div>
                                                    </div>
                                                </div>
