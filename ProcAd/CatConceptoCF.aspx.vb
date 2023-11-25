@@ -214,7 +214,7 @@
                 actConceptos()
                 If Val(dsCatalogo.Tables(0).Rows(0).Item("no_conceptos").ToString()) >= 1 Then
                     .ddlCant1.SelectedValue = Val(dsCatalogo.Tables(0).Rows(0).Item("cantidad1").ToString())
-                    .ddlClave1.SelectedValue = dsCatalogo.Tables(0).Rows(0).Item("cve_concepto1").ToString()
+                    ddlClave1.SelectedValue = dsCatalogo.Tables(0).Rows(0).Item("cve_concepto1").ToString()
                 End If
                 If Val(dsCatalogo.Tables(0).Rows(0).Item("no_conceptos").ToString()) = 2 Then
                     .ddlCant2.SelectedValue = Val(dsCatalogo.Tables(0).Rows(0).Item("cantidad2").ToString())
