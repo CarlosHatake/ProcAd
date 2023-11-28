@@ -26,6 +26,7 @@
                     .pnlCatConsAut.Visible = False
                     .pnlCatVoBo.Visible = False
                     .pnlCatAuditoria.Visible = False
+                    .pnlConsSer.Visible = False
                     '-- Solicitar Recursos
                     .pnlSRTitulo.Visible = False
                     .pnlSRSolicitar.Visible = False
@@ -1316,7 +1317,7 @@
                                     .pnlCatAltaUsrAC.Visible = True
                                     .pnlCatConcepto.Visible = True
                                     .pnlCatServicio.Visible = True
-
+                                    pnlConsSer.Visible = True
                                     '-- Solicitar Recursos
                                     .pnlSRTitulo.Visible = True
                                     .pnlSRSolicitar.Visible = True
@@ -4817,7 +4818,9 @@
     Protected Sub btnCatListaNegra_Click(sender As Object, e As EventArgs) Handles btnCatListaNegra.Click
         envio("Catálogo Lista Negra", "CatListaNegra.aspx")
     End Sub
-
+    Protected Sub btnConsServ_Click(sender As Object, e As EventArgs) Handles btnConsServ.Click
+        envio("Consulta Conceptos y Servicios", "ConsConceptos.aspx")
+    End Sub
     'Solicitud de Recursos
     Protected Sub btnSolRec_Click(sender As Object, e As EventArgs) Handles btnSolRec.Click
         envio("Solicitar Recursos", "37.aspx")
@@ -6473,4 +6476,6 @@
     Protected Sub btnCatPermisos_Click(sender As Object, e As EventArgs) Handles btnCatPermisos.Click
         envio("Catálogo de Perfiles", "CatPermisos.aspx")
     End Sub
+
+
 End Class
