@@ -427,9 +427,9 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -474,9 +474,9 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -516,13 +516,13 @@
                                     .pnlNSConsultaNeg.Visible = True
 
                                     '-- Servicios Negociados
-                                    '.pnlSNTitulo.Visible = True
-                                    '.pnlSNSolicitar.Visible = True
+                                    .pnlSNTitulo.Visible = True
+                                    .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -570,9 +570,9 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -623,9 +623,9 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -672,10 +672,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -723,9 +723,9 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -776,10 +776,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -835,10 +835,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -888,10 +888,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -940,10 +940,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -994,10 +994,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1050,10 +1050,10 @@
                                     .pnlSNAutorizar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1104,10 +1104,10 @@
                                     .pnlSNSolicitar.Visible = True
                                     .pnlSNValPresup.Visible = True
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1172,10 +1172,10 @@
                                     .pnlSNAutorizar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1230,10 +1230,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1282,10 +1282,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1344,9 +1344,9 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1399,9 +1399,9 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1563,9 +1563,9 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1610,10 +1610,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1662,8 +1662,8 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1708,9 +1708,9 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -1760,10 +1760,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
+                                    .pnlFTitulo.Visible = True
+                                    .pnlFIngresar.Visible = True
+                                    .pnlFCorregir.Visible = True
+                                    .pnlFAutorizar.Visible = True
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True

@@ -2623,7 +2623,6 @@
         $(".card-body").each(function (index) {
             if ($(this).html().trim() == "") {
                 $(this).parent().parent().remove();
-                console.log($(this))
             }
         })
     });

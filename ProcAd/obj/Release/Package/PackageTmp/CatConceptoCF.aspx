@@ -257,6 +257,7 @@
                                             <asp:DropDownList ID="ddlClave1" runat="server" Font-Names="Verdana" Font-Size="8pt" Width="130px">
                                                 <asp:ListItem>Desayuno/Cena</asp:ListItem>
                                                 <asp:ListItem>Comida</asp:ListItem>
+                                                <asp:ListItem>Hospedaje</asp:ListItem>
                                             </asp:DropDownList>
                                         </td>
                                        <td style="text-align: left; width: 350px;">
