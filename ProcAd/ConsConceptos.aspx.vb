@@ -209,7 +209,6 @@
                     casilla = "E" + CStr(id)
                     sheet.Range(casilla).Text = dsConsulta.Rows(index).Item(3).ToString
 
-
                     'cve_concepto2'
                     casilla = "F" + CStr(id)
                     sheet.Range(casilla).Text = dsConsulta.Rows(index).Item(5).ToString
@@ -291,6 +290,7 @@
         End Try
     End Sub
 #End Region
+
 #Region "Botones"
     Protected Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Try
