@@ -64,6 +64,9 @@
                     .pnlFSATConsultar.Visible = False
                     .pnlFSATLiq.Visible = False
 
+                    '-- FACTURAS CFDI
+                    .pnlFCFDIConsulta.Visible = False
+
                     '-- Negociación de Servicio
                     .pnlNSTitulo.Visible = False
                     .pnlNSSolicitar.Visible = False
@@ -290,6 +293,26 @@
 
                             If dsCatalogo.Tables(0).Rows(0).Item("checador").ToString() = "S" Then
                                 .pnlChecador.Visible = True
+                            End If
+
+                            'Acceso a panel de facturas CFDI
+
+                            Dim accCFDI As Integer
+                            SCMValores.Connection = ConexionBD
+                            SCMValores.CommandText = ""
+                            SCMValores.Parameters.Clear()
+                            SCMValores.CommandText = " SELECT COUNT(*) " +
+                                " WHERE @idUsuario in (SELECT split.a.value('.', 'NVARCHAR(MAX)') DATA " +
+                                " FROM (SELECT cast('<X>' + replace((SELECT valor FROM cg_parametros WHERE parametro = 'facturas_CFDI'), ',', '</X><X>') + '</X>' as xml) AS string) AS A " +
+                                " CROSS APPLY string.nodes('/X') AS split(a)) "
+                            SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
+                            ConexionBD.Open()
+                            accCFDI = SCMValores.ExecuteScalar()
+                            ConexionBD.Close()
+                            If accCFDI > 0 Then
+                                .pnlFCFDIConsulta.Visible = True
+                            Else
+                                .pnlFCFDIConsulta.Visible = False
                             End If
 
                             .imgMenu.Visible = True

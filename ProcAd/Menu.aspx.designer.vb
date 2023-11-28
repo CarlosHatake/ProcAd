@@ -1274,6 +1274,60 @@ Partial Public Class Menu
     Protected WithEvents btnConsFactLiq As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Control pnlFCFDITitulo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlFCFDITitulo As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control imgFCFDI.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents imgFCFDI As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control lblProcAdFCFDI.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblProcAdFCFDI As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control pnlFCFDIConsulta.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlFCFDIConsulta As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control imgFCFDI1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents imgFCFDI1 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnConsCFDI.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnConsCFDI As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Control pnlNSTitulo.
     '''</summary>
     '''<remarks>
