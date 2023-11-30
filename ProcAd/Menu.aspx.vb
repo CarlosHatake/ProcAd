@@ -138,6 +138,8 @@
                     .pnlGDispersar.Visible = False
                     .pnlGComprobar.Visible = False
                     .pnlGConsultar.Visible = False
+                    .pnlModCargasCombustible.Visible = False
+
                     '-- Vehículos / Bloqueos por Rendimiento
                     .pnlVBRTitulo.Visible = False
                     .pnlVBRCatVehiculo.Visible = False
@@ -412,6 +414,8 @@
                                     .pnlGDispersar.Visible = True
                                     .pnlGComprobar.Visible = True
                                     .pnlGConsultar.Visible = True
+                                    .pnlModCargasCombustible.Visible = True
+
                                     '-- Vehículos / Bloqueos por Rendimiento
                                     .pnlVBRTitulo.Visible = True
                                     .pnlVBRCatVehiculo.Visible = True
