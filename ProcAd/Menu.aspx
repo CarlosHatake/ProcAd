@@ -865,7 +865,10 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+
+                                               <%--Validar de que proceso es--%>
+
+                                             <%--  <div>
                                                    <div id="headFact">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collFact" aria-expanded="true" aria-controls="collFact">
@@ -925,7 +928,7 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+                                               <div>--%>
                                                    <div id="headIngFact">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collIngFact" aria-expanded="true" aria-controls="collIngFact">
