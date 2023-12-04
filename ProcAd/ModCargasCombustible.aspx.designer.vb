@@ -401,22 +401,22 @@ Partial Public Class ModCargasCombustible
     Protected WithEvents lbl_FechaActual As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control wdpFechaDt.
+    '''Control txtFechaN.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents wdpFechaDt As Global.Infragistics.Web.UI.EditorControls.WebDateTimeEditor
+    Protected WithEvents txtFechaN As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control btnCambiarFecha.
+    '''Control btnComplementarHora.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnCambiarFecha As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnComplementarHora As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control btnDescomplementar.

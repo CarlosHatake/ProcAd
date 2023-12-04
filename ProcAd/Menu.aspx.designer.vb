@@ -860,6 +860,33 @@ Partial Public Class Menu
     Protected WithEvents btnCatUsuarioAC As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Control pnlModCargasCombustible.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlModCargasCombustible As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control Image5.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image5 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnModCargasC.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnModCargasC As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Control pnlCaTitulo.
     '''</summary>
     '''<remarks>
@@ -3594,33 +3621,6 @@ Partial Public Class Menu
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnConsComb As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control pnlModCargasCombustible.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlModCargasCombustible As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''Control Image4.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image4 As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''Control btnModCargasC.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnModCargasC As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control pnlCTitulo.

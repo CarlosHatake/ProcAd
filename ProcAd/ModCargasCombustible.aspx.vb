@@ -135,6 +135,9 @@
 
                 If gvMsCargasCombustible.Rows.Count() = 0 Then
                     litError.Text = "No existen registros para esos valores, rectifique"
+                    .gvMsCargasCombustible.Visible = False
+                Else
+                    .gvMsCargasCombustible.Visible = True
                 End If
             Catch ex As Exception
                 .litError.Text = ex.ToString()
@@ -169,7 +172,10 @@
                 dsConsulta.Dispose()
 
                 If gvDtCargaCombustible.Rows.Count() = 0 Then
-                    litError.Text = "No existen registros para esos valores, rectifique"
+                    .litError.Text = "No existen registros disponibles para actualizar la hora de carga, rectifique"
+                    .gvDtCargaCombustible.Visible = False
+                Else
+                    .gvDtCargaCombustible.Visible = True
                 End If
             Catch ex As Exception
                 litError.Text = ex.ToString()
@@ -225,7 +231,7 @@
                 sdaSol.Fill(dsSol)
                 ConexionBD.Close()
                 .lbl_UnidadDt.Text = dsSol.Tables(0).Rows(0).Item("identificador_vehiculo").ToString()
-                .lbl_FechaActual.Text = dsSol.Tables(0).Rows(0).Item("fecha").ToString()
+                .lbl_FechaActual.Text = dsSol.Tables(0).Rows(0).Item("fecha").ToShortDateString()
                 .lbl_StatusDt.Text = dsSol.Tables(0).Rows(0).Item("status").ToString()
                 sdaSol.Dispose()
                 dsSol.Dispose()
@@ -238,6 +244,10 @@
         End With
     End Sub
 
+    Private Sub gvDtCargasCombustible_PageIndexChanging(sender As Object, e As GridViewPageEventArgs) Handles gvDtCargaCombustible.PageIndexChanging
+        gvDtCargaCombustible.PageIndex = e.NewPageIndex
+        llenarGvDtCargaCombustible()
+    End Sub
 
     Public Sub limpiarPantalla()
         With Me
@@ -356,27 +366,32 @@
     Protected Sub btnAmpliarPeriodo_Click(sender As Object, e As EventArgs) Handles btnAmpliarPeriodo.Click
         With Me
             Try
-                Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
-                ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
-                Dim SCMValores As SqlCommand = New System.Data.SqlClient.SqlCommand
-                SCMValores.Connection = ConexionBD
-                SCMValores.Parameters.Clear()
-                SCMValores.CommandText = ""
 
-                SCMValores.CommandText = " UPDATE ms_comb " +
-                                        " SET periodo_fin = @periodo_fin," +
-                                        " periodo_ini = @periodo_ini " +
-                                        " WHERE id_ms_comb = @id_ms_comb  "
-                SCMValores.Parameters.AddWithValue("@periodo_ini", .wdpNuevoPeriodoIni.Text)
-                SCMValores.Parameters.AddWithValue("@periodo_fin", .wdpNuevoPeriodoFin.Text)
-                SCMValores.Parameters.AddWithValue("@id_ms_comb", .gvMsCargasCombustible.DataKeys(gvMsCargasCombustible.SelectedIndex).Values("id_ms_comb"))
-                ConexionBD.Open()
-                SCMValores.ExecuteNonQuery()
-                ConexionBD.Close()
+                If .wdpNuevoPeriodoIni.Value > .wdpNuevoPeriodoFin.Value Then
+                    .litError.Text = "Fechas de periodo invalidas, rectifique"
+                Else
+                    Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
+                    ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
+                    Dim SCMValores As SqlCommand = New System.Data.SqlClient.SqlCommand
+                    SCMValores.Connection = ConexionBD
+                    SCMValores.Parameters.Clear()
+                    SCMValores.CommandText = ""
 
-                llenarGvMsCargaCombustible()
-                .pnlAmpliarPeriodo.Visible = False
-                .gvMsCargasCombustible.SelectedIndex = -1
+                    SCMValores.CommandText = " UPDATE ms_comb " +
+                                            " SET periodo_fin = @periodo_fin," +
+                                            " periodo_ini = @periodo_ini " +
+                                            " WHERE id_ms_comb = @id_ms_comb  "
+                    SCMValores.Parameters.AddWithValue("@periodo_ini", .wdpNuevoPeriodoIni.Text)
+                    SCMValores.Parameters.AddWithValue("@periodo_fin", .wdpNuevoPeriodoFin.Text)
+                    SCMValores.Parameters.AddWithValue("@id_ms_comb", .gvMsCargasCombustible.DataKeys(gvMsCargasCombustible.SelectedIndex).Values("id_ms_comb"))
+                    ConexionBD.Open()
+                    SCMValores.ExecuteNonQuery()
+                    ConexionBD.Close()
+
+                    llenarGvMsCargaCombustible()
+                    .pnlAmpliarPeriodo.Visible = False
+                    .gvMsCargasCombustible.SelectedIndex = -1
+                End If
 
             Catch ex As Exception
                 .litError.Text = ex.ToString
@@ -389,27 +404,29 @@
         With Me
             .pnlAmpliarPeriodo.Visible = False
             .gvMsCargasCombustible.SelectedIndex = -1
+            .litError.Text = ""
         End With
     End Sub
 
-    Protected Sub btnCambiarFecha_Click(sender As Object, e As EventArgs) Handles btnCambiarFecha.Click
+    Protected Sub btnComplementarHora_Click(sender As Object, e As EventArgs) Handles btnComplementarHora.Click
         With Me
             Try
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
                 Dim SCMValores As SqlCommand = New System.Data.SqlClient.SqlCommand
-                Dim fecha As DateTime
+                Dim fechaF As String
 
-                fecha = Convert.ToDateTime(lbl_FechaActual.Text).ToShortDateString() & Convert.ToDateTime(.wdpFechaDt.Text)
+                fechaF = .lbl_FechaActual.Text + " " + .txtFechaN.Text
+
 
                 SCMValores.Connection = ConexionBD
                 SCMValores.Parameters.Clear()
                 SCMValores.CommandText = ""
 
                 SCMValores.CommandText = " UPDATE dt_carga_comb_toka " +
-                                        " SET fecha = @fecha" +
-                                        " WHERE id_dt_carga_comb_toka = @id_dt_carga_comb_toka"
-                SCMValores.Parameters.AddWithValue("@fecha", fecha)
+                                         " SET fecha = @fecha" +
+                                         " WHERE id_dt_carga_comb_toka = @id_dt_carga_comb_toka"
+                SCMValores.Parameters.AddWithValue("@fecha", fechaF)
                 SCMValores.Parameters.AddWithValue("@id_dt_carga_comb_toka", .gvDtCargaCombustible.DataKeys(gvDtCargaCombustible.SelectedIndex).Values("id_dt_carga_comb_toka"))
                 ConexionBD.Open()
                 SCMValores.ExecuteNonQuery()
@@ -469,7 +486,6 @@
                 End If
 
 
-
             Catch ex As Exception
                 .litError.Text = ex.ToString
             End Try
@@ -481,8 +497,11 @@
         With Me
             .pnlDescomplementar.Visible = False
             .gvDtCargaCombustible.SelectedIndex = -1
+            .litError.Text = ""
         End With
     End Sub
 
 #End Region
+
+
 End Class

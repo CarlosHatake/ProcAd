@@ -5,7 +5,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-     <ig:WebScriptManager ID="wsmCargasComb" runat="server"></ig:WebScriptManager>
+ <ig:WebScriptManager ID="wsmCargasComb" runat="server"></ig:WebScriptManager>
     <table style="width: 1360px; font-family: Verdana; font-size: 8pt;">
         <tr>
             <td style="text-align: center; font-family: Verdana; font-size: 8pt; color: #FF0000" class="auto-style6">
@@ -30,17 +30,17 @@
                     <asp:Panel runat="server" ID="pnlFiltrosBusqueda">
                         <table>
                             <tr>
-                                <td style="width: 100px"></td>
+                                <td style="width: 260px"></td>
                                 <td>
                                     <asp:CheckBox ID="cbEmpleado" runat="server" AutoPostBack="True" Font-Names="Verdana" Font-Size="8pt" Width="100px" Text="Empleado:" />
                                 </td>
-                                <td style="width:200px">
+                                <td style="width:230px">
                                     <asp:Panel runat="server" ID="pnlEmpleadoB">
                                         <asp:TextBox runat="server" ID="txtEmpleado" Width="170px" Font-Names="Verdana" Font-Size="8pt"></asp:TextBox>
                                         <asp:ImageButton ID="ibtnBuscarEmpleado" runat="server" ImageUrl="images\Search.png" ToolTip="Buscar" Width="17px" />
                                     </asp:Panel>
                                 </td>
-                                <td style="width: 150px"></td>
+                                <td style="width: 130px"></td>
                                 <td>
                                     <asp:CheckBox ID="cbUnidad" runat="server" AutoPostBack="True" Font-Names="Verdana" Font-Size="8pt" Text="Unidad:" />
                                 </td>
@@ -50,58 +50,58 @@
                                         <asp:ImageButton ID="ibtnBuscarUnidad" runat="server" ImageUrl="images\Search.png" ToolTip="Buscar" Width="17px" />
                                     </asp:Panel>
                                 </td>
-                                <td style="width: 200px"></td>
+                                <td style="width: 250px"></td>
 
                             </tr>
 
                             <tr>
-                                <td style="width: 100px"></td>
+                                <td style="width: 260px"></td>
                                 <td></td>
-                                <td style="width:200px">
+                                <td style="width:230px">
                                     <asp:Panel runat="server" ID="pnlEmpleadoD">
                                         <asp:DropDownList ID="ddlEmpleado" runat="server" AutoPostBack="True" Font-Names="Verdana" Font-Size="8pt" Width="200px"></asp:DropDownList>
                                     </asp:Panel>
                                 </td>
-                                <td style="width: 150px"></td>
+                                <td style="width: 130px"></td>
                                 <td></td>
                                 <td>
                                     <asp:Panel runat="server" ID="pnlUnidadD">
                                         <asp:DropDownList ID="ddlUnidad" runat="server" AutoPostBack="True" Font-Names="Verdana" Font-Size="8pt" Width="200px"></asp:DropDownList>
                                     </asp:Panel>
                                 </td>
-                                <td style="width: 200px"></td>
+                                <td style="width: 250px"></td>
 
                             </tr>
                             <tr>
-                                <td style="width:100px"></td>
+                                <td style="width:260px"></td>
                             </tr>
                             <tr>
                                 <td style="width:100px"></td>
                                 <td>
                                     <asp:CheckBox ID="cbPeriodo" runat="server" AutoPostBack="True" Font-Names="Verdana" Font-Size="8pt" Text="Periodo inicial:" />
                                 </td>
-                                <td style="width:300px">
+                                <td style="width:250px">
                                     <asp:Panel ID="pnlPeriodo" runat="server">
-                                        <table style="width: 300px;">
+                                        <table style="width: 220px;">
                                             <tr>
-                                                <td style="border: medium inset #808080; margin-right: auto; margin-left: auto;">
-                                                    <table style="width: 127px;">
+                                                <td style="border: medium inset #808080; margin-right: auto; margin-left: auto; width:110px;">
+                                                    <table style="width: 110px;">
                                                         <tr>
                                                             <td style="text-align: center">
                                                                 <asp:Label ID="lbl_FechaAsigI" runat="server" Text="Fecha Inicial"></asp:Label>
                                                             </td>
                                                         </tr>
                                                         <tr>
-                                                            <td style="text-align: center">
-                                                                <ig:WebDatePicker ID="wdpFechaI" runat="server" Font-Names="Verdana" Font-Size="8pt" Nullable="False">
+                                                            <td style="text-align: center;">
+                                                                <ig:WebDatePicker ID="wdpFechaI" runat="server" Font-Names="Verdana" Font-Size="8pt" Nullable="False" Width="100px">
                                                                 </ig:WebDatePicker>
                                                             </td>
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td>&nbsp;</td>
-                                                <td style="border: medium inset #808080; margin-right: auto; margin-left: auto;">
-                                                    <table style="width: 127px;">
+                                                <td style="width:10px"></td>
+                                                <td style="border: medium inset #808080; margin-right: auto; margin-left: auto; width:110px">
+                                                    <table style="width: 110px;">
                                                         <tr>
                                                             <td style="text-align: center" class="auto-style67">
                                                                 <asp:Label ID="lbl_FechaAsigF" runat="server" Text="Fecha Final"></asp:Label>
@@ -109,7 +109,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: center">
-                                                                <ig:WebDatePicker ID="wdpFechaF" runat="server" Font-Names="Verdana" Font-Size="8pt" Nullable="False">
+                                                                <ig:WebDatePicker ID="wdpFechaF" runat="server" Font-Names="Verdana" Font-Size="8pt" Nullable="False" Width="100px">
                                                                 </ig:WebDatePicker>
                                                             </td>
                                                         </tr>
@@ -120,16 +120,16 @@
                                         </table>
                                     </asp:Panel>
                                 </td>
-                                <td style="width: 150px"></td>
+                                <td style="width: 130px"></td>
                                 <td style="width:100px">
                                     <asp:CheckBox ID="cbFecha" runat="server" AutoPostBack="True" Font-Names="Verdana" Font-Size="8pt" Text="Fecha carga:" />
                                 </td>
-                                <td style="width:200px">
+                                <td style="width:110px">
                                     <asp:Panel runat="server" ID="pnlFecha">
                                         <table>
                                             <tr>
-                                                <td style="border: medium inset #808080; margin-right: auto; margin-left: auto;">
-                                                    <table style="width: 127px;">
+                                                <td style="border: medium inset #808080; margin-right: auto; margin-left: auto; width:110px">
+                                                    <table style="width: 110px;">
                                                         <tr>
                                                             <td style="text-align: center">
                                                                 <asp:Label ID="Label1" runat="server" Text="Fecha"></asp:Label>
@@ -137,7 +137,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td style="text-align: center">
-                                                                <ig:WebDatePicker ID="wdpFecha" runat="server" Font-Names="Verdana" Font-Size="8pt" Nullable="False">
+                                                                <ig:WebDatePicker ID="wdpFecha" runat="server" Font-Names="Verdana" Font-Size="8pt" Nullable="False" Width="110px">
                                                                 </ig:WebDatePicker>
                                                             </td>
                                                         </tr>
@@ -147,7 +147,7 @@
                                         </table>
                                     </asp:Panel>
                                 </td>
-                                <td style="width: 200px"></td>
+                                <td style="width: 250px"></td>
 
                             </tr>
 
@@ -161,14 +161,14 @@
                                 <td>&nbsp; </td>
                             </tr>
                             <tr>
-                                <td style="width: 550px"></td>
+                                <td style="width: 570px"></td>
                                 <td>
-                                    <asp:Button runat="server" Text="Buscar" Font-Names="Verdana" Font-Size="8pt" Width="150px" ID="btnBuscar" />
+                                    <asp:Button runat="server" Text="Buscar" Font-Names="Verdana" Font-Size="8pt" Width="130px" ID="btnBuscar" />
                                 </td>
-                                <td style="width: 600px"></td>
+                                <td style="width: 590px"></td>
                             </tr>
                             <tr>
-                                <td>&nbsp; </td>
+                                <td>&nbsp;</td>
                             </tr>
                         </table>
 
@@ -340,7 +340,7 @@
                                                                             <asp:Label runat="server" Text="Nueva hora:"></asp:Label>
                                                                         </td>
                                                                         <td>
-                                                                            <ig:WebDateTimeEditor runat="server" ID="wdpFechaDt" EditModeFormat="H:mm:ss fff" Nullable="False" Font-Size="8pt"></ig:WebDateTimeEditor>
+                                                                             <asp:TextBox type="time" ID="txtFechaN" runat="server" Width="100px" Height="15px" Font-Names="Verdana" Font-Size="8pt"></asp:TextBox>
                                                                         </td>
                                                                         <td style="width: 30px"></td>
                                                                     </tr>
@@ -356,7 +356,7 @@
                                                                     <tr>
                                                                         <td style="width: 30px"></td>
                                                                         <td style="width: 125px">
-                                                                            <asp:Button runat="server" Text="Cambiar fecha" ID="btnCambiarFecha" Width="125px" Font-Names="Verdana" Font-Size="8pt" />
+                                                                            <asp:Button runat="server" Text="Complementar hora" ID="btnComplementarHora" Width="125px" Font-Names="Verdana" Font-Size="8pt" />
                                                                         </td>
                                                                         <td style="width: 30px"></td>
                                                                         <td style="width: 120px">
