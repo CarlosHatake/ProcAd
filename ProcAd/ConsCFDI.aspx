@@ -596,19 +596,19 @@
                                         <asp:BoundField DataField="descuento" DataFormatString="{0:c}" HeaderText="Descuento">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_trasladadoIVA" DataFormatString="{0:c}" HeaderText="Total trasladado IVA">
+                                        <asp:BoundField DataField="total_tras_IVA" DataFormatString="{0:c}" HeaderText="Total trasladado IVA">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_trasladadoIEPS" DataFormatString="{0:c}" HeaderText="Total trasladado IEPS">
+                                        <asp:BoundField DataField="total_tras_IEPS" DataFormatString="{0:c}" HeaderText="Total trasladado IEPS">
                                             <ItemStyle HorizontalAlign="Right" Width="110px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_retenidoIVA" DataFormatString="{0:c}" HeaderText="Total retenido IVA">
+                                        <asp:BoundField DataField="total_ret_IVA" DataFormatString="{0:c}" HeaderText="Total retenido IVA">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_retenidoIEPS" DataFormatString="{0:c}" HeaderText="Total retenido IEPS">
+                                        <asp:BoundField DataField="total_ret_IEPS" DataFormatString="{0:c}" HeaderText="Total retenido IEPS">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_retenidoISR" DataFormatString="{0:c}" HeaderText="Total retenido ISR">
+                                        <asp:BoundField DataField="total_ret_ISR" DataFormatString="{0:c}" HeaderText="Total retenido ISR">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
                                        
