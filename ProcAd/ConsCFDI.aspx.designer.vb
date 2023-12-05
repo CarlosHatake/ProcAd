@@ -14,13 +14,13 @@ Option Explicit On
 Partial Public Class ConsCFDI
 
     '''<summary>
-    '''Control wsmConsFact.
+    '''Control wsInicio.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents wsmConsFact As Global.Infragistics.Web.UI.WebScriptManager
+    Protected WithEvents wsInicio As Global.Infragistics.Web.UI.WebScriptManager
 
     '''<summary>
     '''Control _txtIdUsuario.
