@@ -111,6 +111,7 @@
             txtDiv.Text = dsCodigo.Tables(0).Rows(0).Item("division").ToString
             txtZona.Text = dsCodigo.Tables(0).Rows(0).Item("zona").ToString
 
+            Me.pnlDatos.Visible = True 
 
         Catch ex As Exception
             litError.Text = ex.Message
@@ -164,22 +165,41 @@
                 SCMTemp.Parameters.Clear()
                 Select Case _txtTipoMov.Text 'Tipo de Ajuste (alta, baja o modificación)
                     Case "A"
-                        query = "select count(*) " +
-                                "from dt_movimientos_int " +
-                                "where cuenta_contable = @cuenta_contable " +
-                                "  and id_ms_movimientos_internos = @id_ms_movimientos_internos "
+                        query = " SELECT COUNT(*) FROM dt_movimientos_int " +
+                                " WHERE cuenta_contable = @cuenta_contable " +
+                                " AND id_ms_movimientos_internos = @id_ms_movimientos_internos " +
+                                " AND centro_costo = @centro_costo " +
+                                " AND division = @division " +
+                                " AND zona = @zona"
+
+                        'query = "select count(*) " +
+                        '        "from dt_movimientos_int " +
+                        '        "where cuenta_contable = @cuenta_contable " +
+                        '        "  and id_ms_movimientos_internos = @id_ms_movimientos_internos and centro_costo = @centro_costo"
                         SCMTemp.CommandText = query
                     Case Else
-                        query = "select count(*) " +
-                                "from dt_movimientos_int " +
-                                "where cuenta_contable = @cuenta_contable " +
-                                "  and id_ms_movimientos_internos  = @id_ms_movimientos_internos  " +
-                                "  and id_dt_movimientos_int <> @id_dt_movimientos_int "
+
+                        query = " SELECT COUNT(*) FROM dt_movimientos_int " +
+                                " WHERE cuenta_contable = @cuenta_contable " +
+                                " AND id_ms_movimientos_internos = @id_ms_movimientos_internos " +
+                                " AND centro_costo = @centro_costo " +
+                                " AND division = @division " +
+                                " AND zona = @zona" +
+                                " AND id_dt_movimientos_int <> @id_dt_movimientos_int "
+
+                        'query = "select count(*) " +
+                        '        "from dt_movimientos_int " +
+                        '        "where cuenta_contable = @cuenta_contable " +
+                        '        "  and id_ms_movimientos_internos  = @id_ms_movimientos_internos  " +
+                        '        "  and id_dt_movimientos_int <> @id_dt_movimientos_int "
                         SCMTemp.CommandText = query
-                        SCMTemp.Parameters.AddWithValue("@id_dt_autorizador", Val(gvRegistros.SelectedRow.Cells(0).Text))
+                        SCMTemp.Parameters.AddWithValue("@id_dt_movimientos_int", Val(gvRegistros.SelectedRow.Cells(0).Text))
                 End Select
                 SCMTemp.Parameters.AddWithValue("@cuenta_contable", txtCuentaContable.Text)
                 SCMTemp.Parameters.AddWithValue("@id_ms_movimientos_internos", Val(lblFolio.Text))
+                SCMTemp.Parameters.AddWithValue("@centro_costo", txtCentroCosto.Text)
+                SCMTemp.Parameters.AddWithValue("@division", txtDiv.Text)
+                SCMTemp.Parameters.AddWithValue("@zona", txtZona.Text)
                 ConexionBD.Open()
                 conteo = SCMTemp.ExecuteScalar
                 ConexionBD.Close()
@@ -450,10 +470,10 @@
                         lblPorcentaje.Text = Val(lblPorcentaje.Text) - Val(gvRegistros.SelectedRow.Cells(2).Text)
                     Case Else
                         If validar() Then
-                            SCMValores.CommandText = "update dt_movimientos_int set cuenta_contable = @cuenta_contable, porcentaje = @porcentaje, centro_costo = @centro_costo, division = @division, zona = @zona, id_usr_carga = @id_usr_carga, fecha = @fecha "
-
+                            SCMValores.CommandText = "update dt_movimientos_int set cuenta_contable = @cuenta_contable, porcentaje = @porcentaje, centro_costo = @centro_costo, division = @division, zona = @zona, id_usr_carga = @id_usr_carga, fecha = @fecha where id_dt_movimientos_int = @id_dt_movimientos_int"
+                            SCMValores.Parameters.AddWithValue("id_dt_movimientos_int", Val(gvRegistros.SelectedRow.Cells(0).Text))
                         Else
-                            litError.Text = ""
+                            litError.Text = "Valor invalido, ya existe esta cuenta contable con un porcentaje"
                             ban = 1
                         End If
                 End Select
