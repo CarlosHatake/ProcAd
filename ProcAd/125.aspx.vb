@@ -76,9 +76,9 @@
                         dsArchivos.Dispose()
                         .gvAdjuntos.SelectedIndex = -1
 
-                        pnlDatos.Visible = False
-                        ibtnBaja.Enabled = False
-                        ibtnModif.Enabled = False
+                        .pnlDatos.Visible = False
+                        .ibtnBaja.Enabled = False
+                        .ibtnModif.Enabled = False
                         llenarGridRegistros()
                     Else
                         Server.Transfer("Login.aspx")
@@ -125,7 +125,7 @@
             ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
             Dim sdaCatalogo As New SqlDataAdapter
             Dim dsCatalogo As New DataSet
-            gvRegistros.Columns(0).Visible = True
+            ' gvRegistros.Columns(0).Visible = True
             gvRegistros.DataSource = dsCatalogo
             Dim query As String = ""
             query = " select * from dt_movimientos_int where id_ms_movimientos_internos = @id_ms_movimientos_internos "
@@ -137,13 +137,13 @@
             ConexionBD.Close()
             sdaCatalogo.Dispose()
             dsCatalogo.Dispose()
-            gvRegistros.Columns(0).Visible = False
+            'gvRegistros.Columns(0).Visible = False
             gvRegistros.SelectedIndex = -1
             Dim sum As Double = 0
 
             If gvRegistros.Rows.Count > 0 Then
                 For index As Integer = 0 To gvRegistros.Rows.Count - 1
-                    sum = sum + Val(gvRegistros.Rows(index).Cells(2).Text)
+                    sum = sum + Val(gvRegistros.Rows(index).Cells(1).Text)
                 Next
             End If
             lblPorcentaje.Text = sum
@@ -193,7 +193,9 @@
                         '        "  and id_ms_movimientos_internos  = @id_ms_movimientos_internos  " +
                         '        "  and id_dt_movimientos_int <> @id_dt_movimientos_int "
                         SCMTemp.CommandText = query
-                        SCMTemp.Parameters.AddWithValue("@id_dt_movimientos_int", Val(gvRegistros.SelectedRow.Cells(0).Text))
+                        'SCMTemp.Parameters.AddWithValue("@id_dt_movimientos_int", Val(gvRegistros.SelectedRow.Cells(0).Text))
+                        SCMTemp.Parameters.AddWithValue("@id_dt_movimientos_int", Val(.gvRegistros.DataKeys(gvRegistros.SelectedIndex).Values("id_dt_movimientos_int")))
+
                 End Select
                 SCMTemp.Parameters.AddWithValue("@cuenta_contable", txtCuentaContable.Text)
                 SCMTemp.Parameters.AddWithValue("@id_ms_movimientos_internos", Val(lblFolio.Text))
@@ -388,6 +390,7 @@
             txtCentroCosto.Enabled = True
             txtDiv.Enabled = True
             txtZona.Enabled = True
+            lblTipoMov.Text = "Alta"
         Catch ex As Exception
             litError.Text = ex.Message
         End Try
@@ -396,7 +399,8 @@
     Protected Sub ibtnBaja_Click(sender As Object, e As ImageClickEventArgs) Handles ibtnBaja.Click
         Try
             _txtTipoMov.Text = "B"
-            Localizar(Val(gvRegistros.SelectedRow.Cells(0).Text))
+            'Localizar(Val(gvRegistros.SelectedRow.Cells(0).Text))
+            Localizar(Me.gvRegistros.DataKeys(Me.gvRegistros.SelectedIndex).Values("id_dt_movimientos_int"))
             txtCuentaContable.Enabled = False
             txtPorcentaje.Enabled = False
             txtCentroCosto.Enabled = False
@@ -405,6 +409,7 @@
             pnlGrid.Visible = False
             pnlDatos.Visible = True
             pnlBotones.Visible = False
+            lblTipoMov.Text = "Eliminar"
         Catch ex As Exception
             litError.Text = ex.Message
         End Try
@@ -413,9 +418,11 @@
     Protected Sub ibtnModif_Click(sender As Object, e As ImageClickEventArgs) Handles ibtnModif.Click
         Try
             _txtTipoMov.Text = "M"
-            Localizar(Val(gvRegistros.SelectedRow.Cells(0).Text))
+            'Localizar(Val(gvRegistros.SelectedRow.Cells(0).Text))
+            Localizar(Me.gvRegistros.DataKeys(Me.gvRegistros.SelectedIndex).Values("id_dt_movimientos_int"))
             pnlGrid.Visible = False
             pnlBotones.Visible = False
+            lblTipoMov.Text = "Modificación"
         Catch ex As Exception
             litError.Text = ex.Message
         End Try
@@ -466,12 +473,16 @@
                         End If
                     Case "B"
                         SCMValores.CommandText = "delete from dt_movimientos_int where id_dt_movimientos_int = @id_dt_movimientos_int"
-                        SCMValores.Parameters.AddWithValue("id_dt_movimientos_int", Val(gvRegistros.SelectedRow.Cells(0).Text))
-                        lblPorcentaje.Text = Val(lblPorcentaje.Text) - Val(gvRegistros.SelectedRow.Cells(2).Text)
+                        'SCMValores.Parameters.AddWithValue("id_dt_movimientos_int", Val(gvRegistros.SelectedRow.Cells(0).Text))
+                        SCMValores.Parameters.AddWithValue("id_dt_movimientos_int", Val(Me.gvRegistros.DataKeys(Me.gvRegistros.SelectedIndex).Values("id_dt_movimientos_int")))
+                        'lblPorcentaje.Text = Val(lblPorcentaje.Text) - Val(gvRegistros.SelectedRow.Cells(2).Text)
+                        lblPorcentaje.Text = Val(lblPorcentaje.Text) - Val(gvRegistros.SelectedRow.Cells(1).Text)
                     Case Else
                         If validar() Then
                             SCMValores.CommandText = "update dt_movimientos_int set cuenta_contable = @cuenta_contable, porcentaje = @porcentaje, centro_costo = @centro_costo, division = @division, zona = @zona, id_usr_carga = @id_usr_carga, fecha = @fecha where id_dt_movimientos_int = @id_dt_movimientos_int"
-                            SCMValores.Parameters.AddWithValue("id_dt_movimientos_int", Val(gvRegistros.SelectedRow.Cells(0).Text))
+                            'SCMValores.Parameters.AddWithValue("id_dt_movimientos_int", Val(gvRegistros.SelectedRow.Cells(0).Text))
+                            SCMValores.Parameters.AddWithValue("id_dt_movimientos_int", Val(Me.gvRegistros.DataKeys(Me.gvRegistros.SelectedIndex).Values("id_dt_movimientos_int")))
+
                         Else
                             litError.Text = "Valor invalido, ya existe esta cuenta contable con un porcentaje"
                             ban = 1

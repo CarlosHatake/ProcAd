@@ -329,6 +329,15 @@ Partial Public Class _125
     Protected WithEvents pnlDatos As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
+    '''Control lblTipoMov.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblTipoMov As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control lbl_CuentaContable.
     '''</summary>
     '''<remarks>
