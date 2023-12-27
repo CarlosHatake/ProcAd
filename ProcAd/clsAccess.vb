@@ -13,6 +13,7 @@ Public Class clsAccess
         pass = "12345#b"
 
 
+
         Select Case sistema
             Case "ProcAd"
                 Return "Data Source=" + servidor + ";Initial Catalog=bd_ProcAd;Persist Security Info=True;User ID=" + usr + ";Password=" + pass

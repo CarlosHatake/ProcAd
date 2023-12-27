@@ -87,10 +87,10 @@
                     .pnlSNCorregirF.Visible = False
 
                     '-- Facturas de Gastos, Seg. y Asesorías
-                    .pnlFTitulo.Visible = False
-                    .pnlFIngresar.Visible = False
-                    .pnlFCorregir.Visible = False
-                    .pnlFAutorizar.Visible = False
+                    '.pnlFTitulo.Visible = False
+                    '.pnlFIngresar.Visible = False
+                    '.pnlFCorregir.Visible = False
+                    '.pnlFAutorizar.Visible = False
 
                     '-- Versión 2 Inicio
                     .pnlIFTitulo.Visible = False
@@ -379,10 +379,10 @@
                                     .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
-                                    .pnlFTitulo.Visible = False
-                                    .pnlFIngresar.Visible = False
-                                    .pnlFCorregir.Visible = False
-                                    .pnlFAutorizar.Visible = False
+                                    '.pnlFTitulo.Visible = False
+                                    '.pnlFIngresar.Visible = False
+                                    '.pnlFCorregir.Visible = False
+                                    '.pnlFAutorizar.Visible = False
 
                                     '-- Versión 2 Inicio
                                     .pnlIFTitulo.Visible = True
@@ -543,8 +543,8 @@
                                     .pnlNSConsultaNeg.Visible = True
 
                                     '-- Servicios Negociados
-                                    '.pnlSNTitulo.Visible = True
-                                    '.pnlSNSolicitar.Visible = True
+                                    .pnlSNTitulo.Visible = True
+                                    .pnlSNSolicitar.Visible = True
 
                                     '-- Facturas de Gastos, Seg. y Asesorías
                                     '.pnlFTitulo.Visible = True
@@ -1688,7 +1688,7 @@
                                     .pnlSNTitulo.Visible = True
                                     .pnlSNSolicitar.Visible = True
 
-                                    '-- Facturas de Gastos, Seg. y Asesorías
+                                    ''-- Facturas de Gastos, Seg. y Asesorías
                                     '.pnlFTitulo.Visible = True
                                     '.pnlFIngresar.Visible = True
 
@@ -5144,19 +5144,19 @@
     End Sub
 
     'Faturas de Gastos, Seguros y Asesorías
-    Protected Sub btnSolFact_Click(sender As Object, e As EventArgs) Handles btnSolFact.Click
-        envio("Ingresar Factura", "13.aspx")
-    End Sub
+    'Protected Sub btnSolFact_Click(sender As Object, e As EventArgs) Handles btnSolFact.Click
+    '    envio("Ingresar Factura", "13.aspx")
+    'End Sub
 
-    Protected Sub btnCorrFact_Click(sender As Object, e As EventArgs) Handles btnCorrFact.Click
-        Me._txtIdAct.Text = 17
-        llenarGridF()
-    End Sub
+    'Protected Sub btnCorrFact_Click(sender As Object, e As EventArgs) Handles btnCorrFact.Click
+    '    Me._txtIdAct.Text = 17
+    '    llenarGridF()
+    'End Sub
 
-    Protected Sub btnAutFact_Click(sender As Object, e As EventArgs) Handles btnAutFact.Click
-        Me._txtIdAct.Text = 14
-        llenarGridF()
-    End Sub
+    'Protected Sub btnAutFact_Click(sender As Object, e As EventArgs) Handles btnAutFact.Click
+    '    Me._txtIdAct.Text = 14
+    '    llenarGridF()
+    'End Sub
 
     Protected Sub btnSolicitarGSA_Click(sender As Object, e As EventArgs) Handles btnSolicitarGSA.Click
         envio("Solicitar Gasto, Servicio o Asesoría", "43.aspx")

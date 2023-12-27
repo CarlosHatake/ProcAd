@@ -55520,6 +55520,654 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:ProcAd.ConsCFDI._wsmConsFact">
+<summary>
+Control wsmConsFact.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI.__txtIdUsuario">
+<summary>
+Control _txtIdUsuario.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._litError">
+<summary>
+Control litError.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlFiltros">
+<summary>
+Control pnlFiltros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._cbCFDI">
+<summary>
+Control cbCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlCFDI">
+<summary>
+Control pnlCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._txtCFDI">
+<summary>
+Control txtCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._cbSistema">
+<summary>
+Control cbSistema.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlSistema">
+<summary>
+Control pnlSistema.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._ddlSistema">
+<summary>
+Control ddlSistema.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._cbFechaCreacion">
+<summary>
+Control cbFechaCreacion.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlFechaCreacion">
+<summary>
+Control pnlFechaCreacion.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_FechaCI">
+<summary>
+Control lbl_FechaCI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._wdpFechaI">
+<summary>
+Control wdpFechaI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_FechaCF">
+<summary>
+Control lbl_FechaCF.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._wdpFechaF">
+<summary>
+Control wdpFechaF.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._cbUsoCFDI">
+<summary>
+Control cbUsoCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlUsoCFDI">
+<summary>
+Control pnlUsoCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._ddlUsoCFDI">
+<summary>
+Control ddlUsoCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._cbRFCEmisor">
+<summary>
+Control cbRFCEmisor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlRFCEmisor">
+<summary>
+Control pnlRFCEmisor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._txtRFCEmisor">
+<summary>
+Control txtRFCEmisor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._cbRFCReceptor">
+<summary>
+Control cbRFCReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlRFCReceptor">
+<summary>
+Control pnlRFCReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._txtRFCReceptor">
+<summary>
+Control txtRFCReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._cbVersion">
+<summary>
+Control cbVersion.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlVersion">
+<summary>
+Control pnlVersion.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._ddlVersion">
+<summary>
+Control ddlVersion.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._btnBuscar">
+<summary>
+Control btnBuscar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlRegistros">
+<summary>
+Control pnlRegistros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._btnExportar">
+<summary>
+Control btnExportar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._gvFacturasCFDI">
+<summary>
+Control gvFacturasCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlExportar">
+<summary>
+Control pnlExportar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._gvExportar">
+<summary>
+Control gvExportar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlConsultaFactura">
+<summary>
+Control pnlConsultaFactura.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_CFDI">
+<summary>
+Control lbl_CFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblCFDI">
+<summary>
+Control lblCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_Movimiento">
+<summary>
+Control lbl_Movimiento.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblMovimiento">
+<summary>
+Control lblMovimiento.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_Version">
+<summary>
+Control lbl_Version.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblVersion">
+<summary>
+Control lblVersion.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_Sistema">
+<summary>
+Control lbl_Sistema.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblSistema">
+<summary>
+Control lblSistema.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_FechaEmision">
+<summary>
+Control lbl_FechaEmision.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblFechaEmision">
+<summary>
+Control lblFechaEmision.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_RFCReceptor">
+<summary>
+Control lbl_RFCReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblRFCReceptor">
+<summary>
+Control lblRFCReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_Serie">
+<summary>
+Control lbl_Serie.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblSerie">
+<summary>
+Control lblSerie.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_Folio">
+<summary>
+Control lbl_Folio.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblFolio">
+<summary>
+Control lblFolio.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_FechaTimbrado">
+<summary>
+Control lbl_FechaTimbrado.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblFechaTimbrado">
+<summary>
+Control lblFechaTimbrado.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_UsoCFDI">
+<summary>
+Control lbl_UsoCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblUsoCFDI">
+<summary>
+Control lblUsoCFDI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_Moneda">
+<summary>
+Control lbl_Moneda.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblMoneda">
+<summary>
+Control lblMoneda.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_PACCertificador">
+<summary>
+Control lbl_PACCertificador.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lnlPACCertificador">
+<summary>
+Control lnlPACCertificador.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_RSReceptor">
+<summary>
+Control lbl_RSReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblRSReceptor">
+<summary>
+Control lblRSReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_RFReceptor">
+<summary>
+Control lbl_RFReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblRFReceptor">
+<summary>
+Control lblRFReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_DFReceptor">
+<summary>
+Control lbl_DFReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblDFReceptor">
+<summary>
+Control lblDFReceptor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_RSEmisor">
+<summary>
+Control lbl_RSEmisor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblRSEmisor">
+<summary>
+Control lblRSEmisor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lbl_RFEmisor">
+<summary>
+Control lbl_RFEmisor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._lblRFEmisor">
+<summary>
+Control lblRFEmisor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._pnlGvConsultaFactura">
+<summary>
+Control pnlGvConsultaFactura.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._gvConsultaFactura">
+<summary>
+Control gvConsultaFactura.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsCFDI._gvRegistroHistorico">
+<summary>
+Control gvRegistroHistorico.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:ProcAd.ConsComb._wsmConsComb">
 <summary>
 Control wsmConsComb.
@@ -58835,6 +59483,195 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:ProcAd.ConsCompXConceptoAud._gvRegistros">
 <summary>
 Control gvRegistros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._wsmConsSol">
+<summary>
+Control wsmConsSol.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos.__txtIdSolicito">
+<summary>
+Control _txtIdSolicito.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos.__txtPerfil">
+<summary>
+Control _txtPerfil.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos.__txtIdUsuario">
+<summary>
+Control _txtIdUsuario.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._litError">
+<summary>
+Control litError.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._pnlFiltros">
+<summary>
+Control pnlFiltros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._lbl_Filtros">
+<summary>
+Control lbl_Filtros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._pnlSolicitó">
+<summary>
+Control pnlSolicitó.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._cbConcepto">
+<summary>
+Control cbConcepto.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._pnlSolicitante">
+<summary>
+Control pnlSolicitante.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._ddlConcepto">
+<summary>
+Control ddlConcepto.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._cbServicios">
+<summary>
+Control cbServicios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._pnlServicios">
+<summary>
+Control pnlServicios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._ddlServicios">
+<summary>
+Control ddlServicios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._pnlExportar">
+<summary>
+Control pnlExportar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._btnExportar">
+<summary>
+Control btnExportar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._btnBuscar">
+<summary>
+Control btnBuscar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._pnlRegistros">
+<summary>
+Control pnlRegistros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._gvRegistrosCon">
+<summary>
+Control gvRegistrosCon.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._pnlRegistrosServicios">
+<summary>
+Control pnlRegistrosServicios.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsConceptos._gvServicios">
+<summary>
+Control gvServicios.
 </summary>
 <remarks>
 Campo generado automáticamente.
@@ -72746,6 +73583,33 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:ProcAd.Menu._pnlConsSer">
+<summary>
+Control pnlConsSer.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._imaCa19">
+<summary>
+Control imaCa19.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._btnConsServ">
+<summary>
+Control btnConsServ.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:ProcAd.Menu._pnlFSATTitulo">
 <summary>
 Control pnlFSATTitulo.
@@ -73307,114 +74171,6 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:ProcAd.Menu._btnCorregirFSN">
 <summary>
 Control btnCorregirFSN.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._pnlFTitulo">
-<summary>
-Control pnlFTitulo.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._imgFT">
-<summary>
-Control imgFT.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._lblProcAdF">
-<summary>
-Control lblProcAdF.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._pnlFIngresar">
-<summary>
-Control pnlFIngresar.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._imgF1">
-<summary>
-Control imgF1.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._btnSolFact">
-<summary>
-Control btnSolFact.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._pnlFCorregir">
-<summary>
-Control pnlFCorregir.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._imgF2">
-<summary>
-Control imgF2.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._btnCorrFact">
-<summary>
-Control btnCorrFact.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._pnlFAutorizar">
-<summary>
-Control pnlFAutorizar.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._imgF3">
-<summary>
-Control imgF3.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
-<member name="F:ProcAd.Menu._btnAutFact">
-<summary>
-Control btnAutFact.
 </summary>
 <remarks>
 Campo generado automáticamente.

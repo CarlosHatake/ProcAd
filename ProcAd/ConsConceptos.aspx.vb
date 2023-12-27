@@ -290,6 +290,7 @@
         End Try
     End Sub
 #End Region
+
 #Region "Botones"
     Protected Sub btnBuscar_Click(sender As Object, e As EventArgs) Handles btnBuscar.Click
         Try
