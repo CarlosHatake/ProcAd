@@ -14,6 +14,7 @@ Public Class clsAccess
 
 
 
+
         Select Case sistema
             Case "ProcAd"
                 Return "Data Source=" + servidor + ";Initial Catalog=bd_ProcAd;Persist Security Info=True;User ID=" + usr + ";Password=" + pass
