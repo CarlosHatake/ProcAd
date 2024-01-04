@@ -14,6 +14,7 @@
                 <asp:Literal ID="litError" runat="server"></asp:Literal>
             </td>
         </tr>
+
         <tr>
             <td class="auto-style6">
                 <asp:Panel ID="pnlInicio" runat="server">
