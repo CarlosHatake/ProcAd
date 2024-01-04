@@ -16,6 +16,8 @@
         .auto-style10 {
             width: 140px;
             height: 21px;
+
+
         }
     </style>
 </asp:Content>
