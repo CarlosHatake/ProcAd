@@ -64,6 +64,9 @@
                     .pnlFSATConsultar.Visible = False
                     .pnlFSATLiq.Visible = False
 
+                    '-- FACTURAS CFDI
+                    .pnlFCFDIConsulta.Visible = False
+
                     '-- Negociación de Servicio
                     .pnlNSTitulo.Visible = False
                     .pnlNSSolicitar.Visible = False
@@ -135,6 +138,8 @@
                     .pnlGDispersar.Visible = False
                     .pnlGComprobar.Visible = False
                     .pnlGConsultar.Visible = False
+                    .pnlModCargasCombustible.Visible = False
+
                     '-- Vehículos / Bloqueos por Rendimiento
                     .pnlVBRTitulo.Visible = False
                     .pnlVBRCatVehiculo.Visible = False
@@ -292,6 +297,26 @@
                                 .pnlChecador.Visible = True
                             End If
 
+                            'Acceso a panel de facturas CFDI
+
+                            Dim accCFDI As Integer
+                            SCMValores.Connection = ConexionBD
+                            SCMValores.CommandText = ""
+                            SCMValores.Parameters.Clear()
+                            SCMValores.CommandText = " SELECT COUNT(*) " +
+                                " WHERE @idUsuario in (SELECT split.a.value('.', 'NVARCHAR(MAX)') DATA " +
+                                " FROM (SELECT cast('<X>' + replace((SELECT valor FROM cg_parametros WHERE parametro = 'facturas_CFDI'), ',', '</X><X>') + '</X>' as xml) AS string) AS A " +
+                                " CROSS APPLY string.nodes('/X') AS split(a)) "
+                            SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
+                            ConexionBD.Open()
+                            accCFDI = SCMValores.ExecuteScalar()
+                            ConexionBD.Close()
+                            If accCFDI > 0 Then
+                                .pnlFCFDIConsulta.Visible = True
+                            Else
+                                .pnlFCFDIConsulta.Visible = False
+                            End If
+
                             .imgMenu.Visible = True
                             .imgMenu.Width = 695
                             Select Case ._txtPerfil.Text
@@ -389,6 +414,8 @@
                                     .pnlGDispersar.Visible = True
                                     .pnlGComprobar.Visible = True
                                     .pnlGConsultar.Visible = True
+                                    .pnlModCargasCombustible.Visible = True
+
                                     '-- Vehículos / Bloqueos por Rendimiento
                                     .pnlVBRTitulo.Visible = True
                                     .pnlVBRCatVehiculo.Visible = True
