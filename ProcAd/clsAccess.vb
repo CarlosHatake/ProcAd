@@ -7,7 +7,7 @@ Public Class clsAccess
         Dim usr As String
         Dim pass As String
 
-        ''' Local
+        '' Local
         servidor = "172.16.18.239"
         usr = "sa"
         pass = "12345#b"
