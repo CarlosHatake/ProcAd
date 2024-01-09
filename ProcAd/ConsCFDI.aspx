@@ -8,7 +8,7 @@
     <table style="width: 1366px; font-family: Verdana; font-size: 8pt;">
         <tr>
             <td style="width: 1366px; text-align: center; font-weight: bold; color: #FF0000;">
-                <ig:WebScriptManager ID="wsmConsFact" runat="server">
+                <ig:WebScriptManager ID="wsInicio" runat="server">
                 </ig:WebScriptManager>
                  <asp:TextBox ID="_txtIdUsuario" runat="server" Font-Names="Verdana" Font-Size="8pt" Visible="False" Width="10px"></asp:TextBox>
                  <asp:Literal ID="litError" runat="server"></asp:Literal>
@@ -42,6 +42,7 @@
                         <td style="text-align: left; width: 250px;">
                             <asp:Panel ID="pnlSistema" runat="server">
                                 <asp:DropDownList ID="ddlSistema" runat="server" Font-Names="Verdana" Font-Size="8pt" Width="250px">
+                                    <asp:ListItem >Seleccione una opción</asp:ListItem>
                                 </asp:DropDownList>
                             </asp:Panel>
                         </td>
@@ -97,6 +98,7 @@
                         <td style="text-align: left; width: 250px;">
                             <asp:Panel ID="pnlUsoCFDI" runat="server">
                                 <asp:DropDownList ID="ddlUsoCFDI" runat="server" Font-Names="Verdana" Font-Size="8pt" Width="250px">
+                                     <asp:ListItem >Seleccione una opción</asp:ListItem>
                                 </asp:DropDownList>
                             </asp:Panel>
                         </td>
@@ -131,6 +133,7 @@
                         <td style="text-align: left; width: 340px;">
                             <asp:Panel ID="pnlVersion" runat="server">
                                 <asp:DropDownList ID="ddlVersion" runat="server" Font-Names="Verdana" Font-Size="8pt" Width="250px">
+                                     <asp:ListItem >Seleccione una opción</asp:ListItem>
                                 </asp:DropDownList>
                             </asp:Panel>
                         </td>
@@ -596,19 +599,19 @@
                                         <asp:BoundField DataField="descuento" DataFormatString="{0:c}" HeaderText="Descuento">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_trasladadoIVA" DataFormatString="{0:c}" HeaderText="Total trasladado IVA">
+                                        <asp:BoundField DataField="total_tras_IVA" DataFormatString="{0:c}" HeaderText="Total trasladado IVA">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_trasladadoIEPS" DataFormatString="{0:c}" HeaderText="Total trasladado IEPS">
+                                        <asp:BoundField DataField="total_tras_IEPS" DataFormatString="{0:c}" HeaderText="Total trasladado IEPS">
                                             <ItemStyle HorizontalAlign="Right" Width="110px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_retenidoIVA" DataFormatString="{0:c}" HeaderText="Total retenido IVA">
+                                        <asp:BoundField DataField="total_ret_IVA" DataFormatString="{0:c}" HeaderText="Total retenido IVA">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_retenidoIEPS" DataFormatString="{0:c}" HeaderText="Total retenido IEPS">
+                                        <asp:BoundField DataField="total_ret_IEPS" DataFormatString="{0:c}" HeaderText="Total retenido IEPS">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="total_retenidoISR" DataFormatString="{0:c}" HeaderText="Total retenido ISR">
+                                        <asp:BoundField DataField="total_ret_ISR" DataFormatString="{0:c}" HeaderText="Total retenido ISR">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
                                        
