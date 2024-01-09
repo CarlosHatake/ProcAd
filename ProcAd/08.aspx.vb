@@ -1535,7 +1535,12 @@
                                                     ConexionBD.Open()
                                                     sdaEmpleado.Fill(dsEmpleado)
                                                     ConexionBD.Close()
-                                                    montoAcumDisp = dsEmpleado.Tables(0).Rows(0).Item("acumulado").ToString()
+                                                    If dsEmpleado.Tables(0).Rows.Count() > 0 Then
+                                                        montoAcumDisp = dsEmpleado.Tables(0).Rows(0).Item("acumulado").ToString()
+                                                    Else
+                                                        litError.Text = "NO EXISTE REGISTRO DE PRESUPUESTO DE GASTOS DE VIAJE EN EL CENTRO DE COSTOS O DIVISION SELECCIONADA, FAVOR DE VALIDAR CON EL AREA"
+                                                        Exit Sub
+                                                    End If
                                                     sdaEmpleado.Dispose()
                                                     dsEmpleado.Dispose()
 

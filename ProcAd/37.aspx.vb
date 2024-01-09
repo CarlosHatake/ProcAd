@@ -911,13 +911,19 @@
             sdaEmpleado.SelectCommand = New SqlCommand("SP_C_ms_presupuesto_acum", ConexionBD)
             sdaEmpleado.SelectCommand.CommandType = CommandType.StoredProcedure
             sdaEmpleado.SelectCommand.Parameters.AddWithValue("@año", wdpPeriodoFin.Date.Year())
-            sdaEmpleado.SelectCommand.Parameters.AddWithValue("@centro_costo", .ddlCC.SelectedValue())
+            sdaEmpleado.SelectCommand.Parameters.AddWithValue("@centro_costo", ddlCC.SelectedValue())
             sdaEmpleado.SelectCommand.Parameters.AddWithValue("@mes", wdpPeriodoFin.Date.Month())
 
             ConexionBD.Open()
             sdaEmpleado.Fill(dsEmpleado)
             ConexionBD.Close()
-            montoAcumDisp = dsEmpleado.Tables(0).Rows(0).Item("acumulado").ToString()
+
+            If dsEmpleado.Tables(0).Rows.Count() > 0 Then
+                montoAcumDisp = dsEmpleado.Tables(0).Rows(0).Item("acumulado").ToString()
+            Else
+                litError.Text = "NO EXISTE REGISTRO DE PRESUPUESTO DE GASTOS DE VIAJE EN EL CENTRO DE COSTOS O DIVISION SELECCIONADA, FAVOR DE VALIDAR CON EL AREA"
+                Exit Function
+            End If
             sdaEmpleado.Dispose()
             dsEmpleado.Dispose()
 
