@@ -668,7 +668,7 @@
                                                        </div>
                                                    </div>
                                                </div>
-
+                                               <%--cambio dayra--%>
                                              <%--  <div id="headFacturaCFDI">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collFacturasCFDI" aria-expanded="true" aria-controls="collFacturasCFDI">

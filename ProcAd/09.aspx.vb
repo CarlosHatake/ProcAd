@@ -602,7 +602,7 @@
                     ''SCMValores.ExecuteNonQuery()
                     ''ConexionBD.Close()
 
-                    '''Registrar en Histórico
+                    ''Registrar en Histórico
                     ''SCMValores.Parameters.Clear()
                     ''SCMValores.CommandText = "insert into ms_historico( id_ms_instancia, id_actividad, fecha, id_usr) " +
                     ''                         "                 values (@id_ms_instancia,@id_actividad,@fecha,@id_usr) "
