@@ -443,6 +443,19 @@
                                                                    </tr>
                                                                </table>
                                                            </asp:Panel>
+
+                                                           <asp:Panel ID="pnlModCargasCombustible" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image5" runat="server" ImageUrl="images\icn_new.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnModCargasC" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" EnableTheming="True" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Cargas de combustible" Width="132px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
                                                        </div>
                                                    </div>
                                                </div>
@@ -655,6 +668,42 @@
                                                        </div>
                                                    </div>
                                                </div>
+
+                                               <%--<div id="headFacturaCFDI">
+                                                       <div class="mb-0">
+                                                           <a class="btn btn-link" data-toggle="collapse" data-target="#collFacturasCFDI" aria-expanded="true" aria-controls="collFacturasCFDI">
+                                                               <asp:Panel ID="pnlFCFDITitulo" runat="server">
+                                                                   <table id="tblCFDI" style="height: 22px; width: 224px; text-align: right">
+                                                                       <tr>
+                                                                           <td style="text-align: center; width: 20px;">
+                                                                               <asp:Image ID="imgFCFDI" runat="server" ImageUrl="images\icn_categories.png" Width="17px" />
+                                                                           </td>
+                                                                           <td style="text-align: left">
+                                                                               <asp:Label ID="lblProcAdFCFDI" runat="server" Font-Bold="True" Font-Names="Tahoma" Font-Size="9pt" Style="z-index: 0" ForeColor="Black">Facturas NAV-NET-PROCAD</asp:Label>
+                                                                           </td>
+                                                                       </tr>
+                                                                   </table>
+                                                               </asp:Panel>
+                                                           </a>
+                                                       </div>
+                                                   </div>
+                                                   <div id="collFacturasCFDI" class="collapse" aria-labelledby="headFacturaSAT" data-parent="#accordion">
+                                                       <div class="card-body">
+                                                           <asp:Panel ID="pnlFCFDIConsulta" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="imgFCFDI1" runat="server" ImageUrl="images\icn_search.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnConsCFDI" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Consulta de Facturas" Width="115px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                       </div>
+                                                   </div>--%>
+
                                                <div>
                                                    <div id="headNegServ">
                                                        <div class="mb-0">

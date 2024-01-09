@@ -275,6 +275,7 @@
     <Content Include="IValeES.aspx" />
     <Content Include="Login.aspx" />
     <Content Include="Menu.aspx" />
+    <Content Include="ModCargasCombustible.aspx" />
     <Content Include="PeriodoEval.aspx" />
     <Content Include="PorcentBono.aspx" />
     <Content Include="RegCumplUN.aspx" />
@@ -1328,6 +1329,13 @@
     </Compile>
     <Compile Include="Menu.aspx.vb">
       <DependentUpon>Menu.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ModCargasCombustible.aspx.designer.vb">
+      <DependentUpon>ModCargasCombustible.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ModCargasCombustible.aspx.vb">
+      <DependentUpon>ModCargasCombustible.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />

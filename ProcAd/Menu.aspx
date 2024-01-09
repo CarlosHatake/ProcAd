@@ -669,7 +669,7 @@
                                                    </div>
                                                </div>
 
-                                               <div id="headFacturaCFDI">
+                                             <%--  <div id="headFacturaCFDI">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collFacturasCFDI" aria-expanded="true" aria-controls="collFacturasCFDI">
                                                                <asp:Panel ID="pnlFCFDITitulo" runat="server">
@@ -702,7 +702,7 @@
                                                                </table>
                                                            </asp:Panel>
                                                        </div>
-                                                   </div>
+                                                   </div>--%>
 
                                                <div>
                                                    <div id="headNegServ">
@@ -917,7 +917,7 @@
 
                                                <%--Validar de que proceso es--%>
 
-                                             <%--  <div>
+                                       <%--        <div>
                                                    <div id="headFact">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collFact" aria-expanded="true" aria-controls="collFact">

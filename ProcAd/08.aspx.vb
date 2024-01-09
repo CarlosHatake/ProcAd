@@ -1535,6 +1535,16 @@
                                                     ConexionBD.Open()
                                                     sdaEmpleado.Fill(dsEmpleado)
                                                     ConexionBD.Close()
+
+                                                    If dsEmpleado.Tables(0).Rows.Count() <= 0 Then
+                                                        .litError.Text = "El Centro de Costo deleccionado no cuenta con configuraíón, favor de validarlo con el responsable del Centro de Costo para que solicite la Ampliación del Presupuesto de Gastos de Viaje en caso de que aplique"
+                                                        banPGV = 1
+                                                    Else
+                                                        montoAcumDisp = dsEmpleado.Tables(0).Rows(0).Item("acumulado").ToString()
+                                                        sdaEmpleado.Dispose()
+                                                        dsEmpleado.Dispose()
+
+                                                    End If
                                                     montoAcumDisp = dsEmpleado.Tables(0).Rows(0).Item("acumulado").ToString()
                                                     sdaEmpleado.Dispose()
                                                     dsEmpleado.Dispose()

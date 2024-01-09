@@ -143,13 +143,13 @@
                 <asp:Panel ID="pnlGrid" runat="server">
                     <table style="width: 100%">
                         <tr>
-                            <td style="width: 100px;"></td>
-                            <td style="width: 850px">
-                                <asp:GridView ID="gvRegistros" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="700px">
+                            <td style="width: 150px;"></td>
+                            <td style="width: 700px">
+                                <asp:GridView ID="gvRegistros" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="700px" DataKeyNames ="id_dt_movimientos_int">
                                     <Columns>
-                                        <asp:BoundField DataField="id_dt_movimientos_int" HeaderText="id_dt_movimientos_int">
+                                        <%--<asp:BoundField DataField="id_dt_movimientos_int" HeaderText="id_dt_movimientos_int">
                                             <ItemStyle HorizontalAlign="Center" Width="10px" />
-                                        </asp:BoundField>
+                                        </asp:BoundField>--%>
                                         <asp:CommandField ButtonType="Image" SelectImageUrl="images\ok.png" SelectText="" ShowSelectButton="True">
                                             <ItemStyle Width="20px" />
                                         </asp:CommandField>
@@ -179,6 +179,7 @@
                                     <SortedDescendingHeaderStyle BackColor="#242121" />
                                 </asp:GridView>
                             </td>
+                            <td style="width:60px"></td>
                             <td>
                                 <table class="auto-style6">
                                     <tr>
@@ -203,8 +204,16 @@
                             <td>
                                 <table style="width: 100%; height: 50px;">
                                     <tr>
-                                        <td style="text-align: right; width: 110px;">
-                                            <asp:Label ID="lbl_CuentaContable" runat="server" Text="Cuenta Contable :"></asp:Label>
+                                        <td style="text-align: right; width: 140px;">
+                                            <asp:Label runat="server" Text="Tipo de movimiento:" ></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label runat ="server" ID ="lblTipoMov" Font-Bold ="true"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align: right; width: 140px;">
+                                            <asp:Label ID="lbl_CuentaContable" runat="server" Text="Cuenta Contable:"></asp:Label>
                                         </td>
                                         <td style="text-align: left; width:250px" >
                                             <asp:TextBox ID="txtCuentaContable" runat="server" Font-Names="Verdana" Font-Size="8pt" Height="16px" Width="250px"></asp:TextBox>
