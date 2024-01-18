@@ -14,13 +14,58 @@ Option Explicit On
 Partial Public Class SolAnticipo
 
     '''<summary>
-    '''Control wsm43.
+    '''Control wsm46.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents wsm43 As Global.Infragistics.Web.UI.WebScriptManager
+    Protected WithEvents wsm46 As Global.Infragistics.Web.UI.WebScriptManager
+
+    '''<summary>
+    '''Control litError.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents litError As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Control _txtIdUsuario.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtIdUsuario As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control _txtBan.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtBan As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control _txtIdMsInst.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtIdMsInst As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblMessage.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblMessage As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control pnlInicio.
@@ -86,40 +131,40 @@ Partial Public Class SolAnticipo
     Protected WithEvents lbl_Proveedor As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control TextBox1.
+    '''Control txtProveedor.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtProveedor As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control ImageButton1.
+    '''Control ibtnBuscarProv.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ImageButton1 As Global.System.Web.UI.WebControls.ImageButton
+    Protected WithEvents ibtnBuscarProv As Global.System.Web.UI.WebControls.ImageButton
 
     '''<summary>
-    '''Control UpdatePanel1.
+    '''Control upProveedor.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents UpdatePanel1 As Global.System.Web.UI.UpdatePanel
+    Protected WithEvents upProveedor As Global.System.Web.UI.UpdatePanel
 
     '''<summary>
-    '''Control DropDownList1.
+    '''Control ddlProveedor.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents DropDownList1 As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ddlProveedor As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''Control lblAutorizador.
@@ -149,13 +194,13 @@ Partial Public Class SolAnticipo
     Protected WithEvents lbl_Opcion As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control cblTipos.
+    '''Control cbTipoAnticipo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents cblTipos As Global.System.Web.UI.WebControls.CheckBoxList
+    Protected WithEvents cbTipoAnticipo As Global.System.Web.UI.WebControls.CheckBoxList
 
     '''<summary>
     '''Control lbl_Importe.
@@ -167,13 +212,13 @@ Partial Public Class SolAnticipo
     Protected WithEvents lbl_Importe As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control txtImporte.
+    '''Control wceImporte.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtImporte As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents wceImporte As Global.Infragistics.Web.UI.EditorControls.WebCurrencyEditor
 
     '''<summary>
     '''Control lbl_Divisa.
@@ -212,6 +257,24 @@ Partial Public Class SolAnticipo
     Protected WithEvents ddlPedidosCompra As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
+    '''Control ibtnAltaPedidoC.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ibtnAltaPedidoC As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
+    '''Control ibtnBajaPedidoC.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ibtnBajaPedidoC As Global.System.Web.UI.WebControls.ImageButton
+
+    '''<summary>
     '''Control lbl_Justificacion.
     '''</summary>
     '''<remarks>
@@ -228,6 +291,33 @@ Partial Public Class SolAnticipo
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtJustificacion As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control upPedidosCompras.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents upPedidosCompras As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
+    '''Control gvPedidosCompras.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvPedidosCompras As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control pnlAdjuntos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlAdjuntos As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
     '''Control lbl_Adjuntos.
@@ -248,11 +338,47 @@ Partial Public Class SolAnticipo
     Protected WithEvents fuAdjunto As Global.System.Web.UI.WebControls.FileUpload
 
     '''<summary>
-    '''Control btnAutorizar.
+    '''Control btnAgregarAdj.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents btnAutorizar As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnAgregarAdj As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control lbl_Adjunto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lbl_Adjunto As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control upAdjuntos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents upAdjuntos As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
+    '''Control gvAdjuntos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvAdjuntos As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control btnGuardar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnGuardar As Global.System.Web.UI.WebControls.Button
 End Class

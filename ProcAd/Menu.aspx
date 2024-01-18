@@ -414,7 +414,7 @@
                                                    <div id="headCatalogoUser">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collCatalogoUser" aria-expanded="true" aria-controls="collCatalogoUser">
-                                                               <asp:Panel ID="Panel1" runat="server">
+                                                               <asp:Panel ID="pnlCatTITitulo" runat="server">
                                                                    <table id="tbl57" style="height: 22px; width: 224px; text-align: right">
                                                                        <tr>
                                                                            <td style="text-align: center; width: 20px;">
@@ -669,7 +669,7 @@
                                                    </div>
                                                </div>
 
-                                               <div id="headFacturaCFDI">
+                                               <%--<div id="headFacturaCFDI">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collFacturasCFDI" aria-expanded="true" aria-controls="collFacturasCFDI">
                                                                <asp:Panel ID="pnlFCFDITitulo" runat="server">
@@ -702,7 +702,7 @@
                                                                </table>
                                                            </asp:Panel>
                                                        </div>
-                                                   </div>
+                                                   </div>--%>
 
                                                <div>
                                                    <div id="headNegServ">
@@ -1551,6 +1551,68 @@
                                                                    </tr>
                                                                </table>
                                                            </asp:Panel>
+                                                           <asp:Panel ID="pnlConsultaCompAntProv" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="imgAntProv" runat="server" ImageUrl="images\icn_search.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnConsCompAntProv" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Consulta comp. de anticipos prov." Width="200px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                           <asp:Panel ID="pnlSAntProveedor" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image4" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnSAntProveedor" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Sol. anticipo de proveedor " Width="160px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                           <asp:Panel ID="pnlVBOAnticipo" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image9" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnVBOAnticipo" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Visto bueno anticipo de proveedor " Width="195px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                           <asp:Panel ID="pnlAutSAnticipoProv" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image8" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnAutSAnticipoProv" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Aut. anticipo de proveedor " Width="160px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                           
+                                                           <asp:Panel ID="pnlRegistrarPagoNav" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image11" runat="server" ImageUrl="images\icn_search.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnRegistrarPagoNAv" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Registrar pago NAV " Width="130px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                           
                                                        </div>
                                                    </div>
                                                </div>
@@ -1866,6 +1928,30 @@
                                                                        </td>
                                                                        <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
                                                                            <asp:Button ID="btnValComp" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Validar Comprobación" Width="137px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                           <asp:Panel ID="pnlCAntProveedor" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image10" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnCAntProveedor" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Comprobar anticipo " Width="130px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                            <asp:Panel ID="pnlListValidacion" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image12" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnListValidacion" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Lista validación comprobación Ant." Width="130px" ForeColor="Black" />
                                                                        </td>
                                                                    </tr>
                                                                </table>
@@ -2630,6 +2716,44 @@
                                                                </asp:BoundField>
                                                                <asp:BoundField DataField="fecha_solicita" HeaderText="Fecha Solicitud">
                                                                    <ItemStyle HorizontalAlign="Center" Width="100px" />
+                                                               </asp:BoundField>
+                                                           </Columns>
+                                                           <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                                                           <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                                                           <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                                                           <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                                                           <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                                                           <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                                                           <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                                                           <SortedDescendingHeaderStyle BackColor="#242121" />
+                                                       </asp:GridView>
+
+                                                       <asp:GridView ID="gvRegistrosAntProv" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="950px" DataKeyNames="id_ms_instancia">
+                                                           <Columns>
+                                                               
+                                                               <asp:CommandField ButtonType="Image" SelectImageUrl="images\ok.png" ShowSelectButton="True">
+                                                                   <ItemStyle Width="15px" />
+                                                               </asp:CommandField>
+                                                               <asp:BoundField DataField="id_ms_anticipo_proveedor" HeaderText="No. Solicitud">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="50px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="empleado_solicita" HeaderText="Solicitó">
+                                                                   <ItemStyle HorizontalAlign="Left"  Width="180px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="fecha_solicita" HeaderText="Fecha Solicitud" DataFormatString="{0:dd/MM/yyyy}">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="80px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="empresa" HeaderText="Empresa">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="150px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="proveedor" HeaderText="Proveedor">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="200px" />
+                                                               </asp:BoundField>
+                                                                 <asp:BoundField DataField="importe_requerido" HeaderText="Importe requerido" DataFormatString="{0:c}">
+                                                                   <ItemStyle HorizontalAlign="Left"  Width="60px"/>
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="estado" HeaderText="Estatus">
+                                                                   <ItemStyle HorizontalAlign="Left"  Width="50px"/>
                                                                </asp:BoundField>
                                                            </Columns>
                                                            <FooterStyle BackColor="#CCCC99" ForeColor="Black" />

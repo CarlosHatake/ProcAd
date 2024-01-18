@@ -95,6 +95,7 @@
             .cbOmitirValidacionAnt.Enabled = valor
             .cbDatosComprobacion.Enabled = valor
             .cbMovimientosLibre.Enabled = valor
+            .cbConsAntProv.Enabled = valor
             .gvAutorizadores.Enabled = valor
             .ibtnAltaAut.Enabled = valor
             .ibtnBajaAut.Enabled = valor
@@ -541,6 +542,7 @@
                                                            "     , anticipo_obl " +
                                                            "     , edit_compro_datos " +
                                                             "     , isnull(movimientos_internos, 'N') as movimientos_internos " +
+                                                            "     , isnull(cons_comp_anticipo, 'N') as cons_comp_anticipo " +
                                                            "     , isnull(cg_usuario.fecha_termino, 'N') as fecha_termino " +
                                                            "from cg_usuario " +
                                                            "  inner join bd_empleado.dbo.cg_empleado Emp on cg_usuario.id_empleado = Emp.id_empleado " +
@@ -673,6 +675,11 @@
                     .cbChecador.Checked = True
                 Else
                     .cbChecador.Checked = False
+                End If
+                If dsCatalogo.Tables(0).Rows(0).Item("cons_comp_anticipo").ToString() = "S" Then
+                    .cbConsAntProv.Checked = True
+                Else
+                    .cbConsAntProv.Checked = False
                 End If
                 limpiarPantallaAut()
                 sdaCatalogo.Dispose()
@@ -1652,9 +1659,9 @@
                             If validar() Then
                                 'SCMValores.CommandText = "INSERT INTO cg_usuario (id_empleado, nick, pass, perfil, pin, ant_pendientes, limite_aut_dir, cotizacion_unica, factura_extemp, factura_emi_prev, pago_efectivo, unidad_comp, transporte, lider, omitir_PGV, alimentos_tab, taxi_tab, factura_extemp_comp, fecha_termino) values (@id_empleado, @nick, @pass, @perfil, @pin, @ant_pendientes, @limite_aut_dir, @cotizacion_unica, @factura_extemp, @factura_emi_prev, @pago_efectivo, @unidad_comp, @transporte, @lider, @omitir_PGV, @alimentos_tab, @taxi_tab , @hospedaje_libre , @factura_extemp_comp , @anticipo_obl ,@edit_compro_datos, @fecha_termino)"
 
-                                SCMValores.CommandText = "INSERT INTO cg_usuario (id_empleado, nick, pass, perfil, pin, ant_pendientes, limite_aut_dir, cotizacion_unica, factura_extemp, factura_emi_prev, pago_efectivo, unidad_comp, transporte, lider, omitir_PGV, alimentos_tab, taxi_tab , hospedaje_libre , factura_extemp_comp , anticipo_obl ,edit_compro_datos, fecha_termino, movimientos_internos) values(@id_empleado, @nick, @pass, @perfil, @pin, @ant_pendientes, @limite_aut_dir, @cotizacion_unica, @factura_extemp, @factura_emi_prev, @pago_efectivo, @unidad_comp, @transporte, @lider, @omitir_PGV, @alimentos_tab, @taxi_tab , @hospedaje_libre , @factura_extemp_comp , @anticipo_obl ,@edit_compro_datos, @fecha_termino, @movimientos_internos)"
+                                SCMValores.CommandText = "INSERT INTO cg_usuario (id_empleado, nick, pass, perfil, pin, ant_pendientes, limite_aut_dir, cotizacion_unica, factura_extemp, factura_emi_prev, pago_efectivo, unidad_comp, transporte, lider, omitir_PGV, alimentos_tab, taxi_tab , hospedaje_libre , factura_extemp_comp , anticipo_obl ,edit_compro_datos, fecha_termino, movimientos_internos, cons_comp_anticipo ) values(@id_empleado, @nick, @pass, @perfil, @pin, @ant_pendientes, @limite_aut_dir, @cotizacion_unica, @factura_extemp, @factura_emi_prev, @pago_efectivo, @unidad_comp, @transporte, @lider, @omitir_PGV, @alimentos_tab, @taxi_tab , @hospedaje_libre , @factura_extemp_comp , @anticipo_obl ,@edit_compro_datos, @fecha_termino, @movimientos_internos, @cons_comp_anticipo)"
 
-                                SCMValores.CommandText = "INSERT INTO cg_usuario (id_empleado, nick, pass, perfil, pin, ant_pendientes, limite_aut_dir, cotizacion_unica, factura_extemp, factura_emi_prev, pago_efectivo, unidad_comp, transporte, lider, omitir_PGV, alimentos_tab, taxi_tab , hospedaje_libre , factura_extemp_comp , anticipo_obl ,edit_compro_datos, fecha_termino, checador) values(@id_empleado, @nick, @pass, @perfil, @pin, @ant_pendientes, @limite_aut_dir, @cotizacion_unica, @factura_extemp, @factura_emi_prev, @pago_efectivo, @unidad_comp, @transporte, @lider, @omitir_PGV, @alimentos_tab, @taxi_tab , @hospedaje_libre , @factura_extemp_comp , @anticipo_obl ,@edit_compro_datos, @fecha_termino, @checador)"
+                                SCMValores.CommandText = "INSERT INTO cg_usuario (id_empleado, nick, pass, perfil, pin, ant_pendientes, limite_aut_dir, cotizacion_unica, factura_extemp, factura_emi_prev, pago_efectivo, unidad_comp, transporte, lider, omitir_PGV, alimentos_tab, taxi_tab , hospedaje_libre , factura_extemp_comp , anticipo_obl ,edit_compro_datos, fecha_termino, checador, cons_comp_anticipo) values(@id_empleado, @nick, @pass, @perfil, @pin, @ant_pendientes, @limite_aut_dir, @cotizacion_unica, @factura_extemp, @factura_emi_prev, @pago_efectivo, @unidad_comp, @transporte, @lider, @omitir_PGV, @alimentos_tab, @taxi_tab , @hospedaje_libre , @factura_extemp_comp , @anticipo_obl ,@edit_compro_datos, @fecha_termino, @checador, @cons_comp_anticipo)"
 
                             Else
                                 .litError.Text = "Valor Inválido, ya existe ese Usuario"
@@ -1666,9 +1673,9 @@
                         Case Else
                             If validar() Then
 
-                                SCMValores.CommandText = "UPDATE cg_usuario SET id_empleado = @id_empleado, perfil = @perfil, pin = @pin, ant_pendientes = @ant_pendientes, limite_aut_dir = @limite_aut_dir, cotizacion_unica = @cotizacion_unica, factura_extemp = @factura_extemp, factura_emi_prev = @factura_emi_prev, pago_efectivo = @pago_efectivo, unidad_comp = @unidad_comp, transporte = @transporte, lider = @lider, omitir_PGV = @omitir_PGV, alimentos_tab = @alimentos_tab, taxi_tab = @taxi_tab , hospedaje_libre=@hospedaje_libre ,factura_extemp_comp = @factura_extemp_comp, anticipo_obl = @anticipo_obl , edit_compro_datos = @edit_compro_datos, fecha_termino = @fecha_termino, movimientos_internos = @movimientos_internos  WHERE id_usuario = @id_usuario"
+                                SCMValores.CommandText = "UPDATE cg_usuario SET id_empleado = @id_empleado, perfil = @perfil, pin = @pin, ant_pendientes = @ant_pendientes, limite_aut_dir = @limite_aut_dir, cotizacion_unica = @cotizacion_unica, factura_extemp = @factura_extemp, factura_emi_prev = @factura_emi_prev, pago_efectivo = @pago_efectivo, unidad_comp = @unidad_comp, transporte = @transporte, lider = @lider, omitir_PGV = @omitir_PGV, alimentos_tab = @alimentos_tab, taxi_tab = @taxi_tab , hospedaje_libre=@hospedaje_libre ,factura_extemp_comp = @factura_extemp_comp, anticipo_obl = @anticipo_obl , edit_compro_datos = @edit_compro_datos, fecha_termino = @fecha_termino, movimientos_internos = @movimientos_internos, cons_comp_anticipo = @cons_comp_anticipo WHERE id_usuario = @id_usuario"
 
-                                SCMValores.CommandText = "UPDATE cg_usuario SET id_empleado = @id_empleado, perfil = @perfil, pin = @pin, ant_pendientes = @ant_pendientes, limite_aut_dir = @limite_aut_dir, cotizacion_unica = @cotizacion_unica, factura_extemp = @factura_extemp, factura_emi_prev = @factura_emi_prev, pago_efectivo = @pago_efectivo, unidad_comp = @unidad_comp, transporte = @transporte, lider = @lider, omitir_PGV = @omitir_PGV, alimentos_tab = @alimentos_tab, taxi_tab = @taxi_tab , hospedaje_libre=@hospedaje_libre ,factura_extemp_comp = @factura_extemp_comp, anticipo_obl = @anticipo_obl , edit_compro_datos = @edit_compro_datos, fecha_termino = @fecha_termino, checador = @checador WHERE id_usuario = @id_usuario"
+                                SCMValores.CommandText = "UPDATE cg_usuario SET id_empleado = @id_empleado, perfil = @perfil, pin = @pin, ant_pendientes = @ant_pendientes, limite_aut_dir = @limite_aut_dir, cotizacion_unica = @cotizacion_unica, factura_extemp = @factura_extemp, factura_emi_prev = @factura_emi_prev, pago_efectivo = @pago_efectivo, unidad_comp = @unidad_comp, transporte = @transporte, lider = @lider, omitir_PGV = @omitir_PGV, alimentos_tab = @alimentos_tab, taxi_tab = @taxi_tab , hospedaje_libre=@hospedaje_libre ,factura_extemp_comp = @factura_extemp_comp, anticipo_obl = @anticipo_obl , edit_compro_datos = @edit_compro_datos, fecha_termino = @fecha_termino, checador = @checador, cons_comp_anticipo = @cons_comp_anticipo WHERE id_usuario = @id_usuario"
 
                                 SCMValores.Parameters.AddWithValue("@id_usuario", .gvUsuario.SelectedRow.Cells(0).Text)
                             Else
@@ -1778,6 +1785,12 @@
                             SCMValores.Parameters.AddWithValue("@checador", "S")
                         Else
                             SCMValores.Parameters.AddWithValue("@checador", "N")
+                        End If
+
+                        If cbConsAntProv.Checked = True Then
+                            SCMValores.Parameters.AddWithValue("@cons_comp_anticipo", "S")
+                        Else
+                            SCMValores.Parameters.AddWithValue("@cons_comp_anticipo", "N")
                         End If
 
 
