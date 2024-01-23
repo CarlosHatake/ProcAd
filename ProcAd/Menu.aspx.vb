@@ -4694,6 +4694,71 @@
         End With
     End Sub
 
+    Public Sub llenarGridComprobacionAnticipo(Autorizador As Boolean, Segundo_Autorizador As Boolean, Tercer_Autorizador As Boolean)
+        Try
+            Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
+            ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
+            Dim sdaCatalogo As New SqlDataAdapter
+            Dim dsCatalogo As New DataSet
+            gvComprobacionAnticipo.DataSource = dsCatalogo
+            gvComprobacionAnticipo.Columns(0).Visible = True
+            Dim query As String = ""
+
+            If Autorizador Then
+                query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
+                       " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
+                       " MSA.fecha_solicita, centro_costos, division " +
+                       " from ms_comprobacion_anticipo MSA " +
+                       " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
+                       " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
+                       " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad "
+            End If
+            If Segundo_Autorizador Then
+                query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
+                    " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
+                    " MSA.fecha_solicita, centro_costos, division " +
+                    " from ms_comprobacion_anticipo MSA " +
+                    " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
+                    " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
+                    " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad and id_usr_autorizador2 = @id_usr_autorizador"
+            End If
+            If Tercer_Autorizador Then
+                query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
+                    " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
+                    " MSA.fecha_solicita, centro_costos, division " +
+                    " from ms_comprobacion_anticipo MSA " +
+                    " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
+                    " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
+                    " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad and id_usr_autorizador3 = @id_usr_autorizador"
+            End If
+            If Val(_txtIdAct.Text) = 149 Or Val(_txtIdAct.Text) = 150 Then
+                query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
+                       " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
+                       " MSA.fecha_solicita, centro_costos, division " +
+                       " from ms_comprobacion_anticipo MSA " +
+                       " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
+                       " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
+                       " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad "
+            End If
+            sdaCatalogo.SelectCommand = New SqlCommand(query, ConexionBD)
+            If Segundo_Autorizador Or Tercer_Autorizador Then
+                sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_autorizador", Val(_txtIdUsuario.Text))
+            End If
+            sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_actividad", Val(_txtIdAct.Text))
+            ConexionBD.Open()
+            sdaCatalogo.Fill(dsCatalogo)
+            gvComprobacionAnticipo.DataBind()
+            ConexionBD.Close()
+            sdaCatalogo.Dispose()
+            dsCatalogo.Dispose()
+            gvComprobacionAnticipo.SelectedIndex = -1
+            'Inhabilitar columnas para vista
+            gvComprobacionAnticipo.Columns(0).Visible = False
+        Catch ex As Exception
+            litError.Text = ex.Message
+        End Try
+    End Sub
+
     Public Function valNoProv()
         With Me
             Try
@@ -6504,5 +6569,49 @@
         envio("Catálogo de Perfiles", "CatPermisos.aspx")
     End Sub
 
+    Protected Sub btnAutorizarCompAnticipo_Click(sender As Object, e As EventArgs) Handles btnAutorizarCompAnticipo.Click
+        Me._txtIdAct.Text = 142
+        llenarGridComprobacionAnticipo(True, False, False)
+    End Sub
+    Protected Sub btnSegundoAutorizador_Click(sender As Object, e As EventArgs) Handles btnSegundoAutorizador.Click
+        Me._txtIdAct.Text = 143
+        llenarGridComprobacionAnticipo(False, True, False)
+    End Sub
+
+    Protected Sub btnTercerAutorizador_Click(sender As Object, e As EventArgs) Handles btnTercerAutorizador.Click
+        Me._txtIdAct.Text = 143
+        llenarGridComprobacionAnticipo(False, False, True)
+    End Sub
+    Protected Sub btnCompCodCont_Click(sender As Object, e As EventArgs) Handles btnCompCodCont.Click
+        Me._txtIdAct.Text = 149
+        llenarGridComprobacionAnticipo(False, False, False)
+    End Sub
+
+    Protected Sub btnAutorizarCP_Click(sender As Object, e As EventArgs) Handles btnAutorizarCP.Click
+        Me._txtIdAct.Text = 150
+        llenarGridComprobacionAnticipo(False, False, False)
+    End Sub
+    Protected Sub gvComprobacionAnticipo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles gvComprobacionAnticipo.SelectedIndexChanged
+        Try
+
+            litError.Text = ""
+            gvComprobacionAnticipo.Columns(0).Visible = True
+            Session("idMsInst") = Val(gvComprobacionAnticipo.SelectedRow.Cells(0).Text)
+            Select Case Val(_txtIdAct.Text)
+                Case 142
+                    envio("Autorizar Comprobacion Anticipo", "143.aspx")
+                Case 143
+                    envio("Autorizar Comprobacion Anticipo", "143.aspx")
+                Case 149
+                    envio("Codificación Contable Comprobacion Anticipo", "149.aspx")
+                Case 150
+                    envio("Autorizar Comprobacion Cuentas Por Pagar", "151.aspx")
+            End Select
+            gvComprobacionAnticipo.Columns(0).Visible = False
+        Catch ex As Exception
+
+        End Try
+
+    End Sub
 
 End Class

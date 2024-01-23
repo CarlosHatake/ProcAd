@@ -206,16 +206,16 @@
                     idActividad = SCMValores.ExecuteScalar()
                     ConexionBD.Close()
 
-                    If idActividad = 149 Then
-                        'Actualizar Instancia
-                        SCMValores.Parameters.Clear()
-                        SCMValores.CommandText = "update ms_instancia set id_actividad = @id_actividad where id_ms_instancia = @id_ms_instancia"
-                        SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInst.Text))
-                        SCMValores.Parameters.AddWithValue("@id_actividad", idActividad)
-                        ConexionBD.Open()
-                        SCMValores.ExecuteNonQuery()
-                        ConexionBD.Close()
-                    End If
+
+                    'Actualizar Instancia
+                    SCMValores.Parameters.Clear()
+                    SCMValores.CommandText = "update ms_instancia set id_actividad = @id_actividad where id_ms_instancia = @id_ms_instancia"
+                    SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInst.Text))
+                    SCMValores.Parameters.AddWithValue("@id_actividad", idActividad)
+                    ConexionBD.Open()
+                    SCMValores.ExecuteNonQuery()
+                    ConexionBD.Close()
+
 
                     'Registrar en Histórico
                     SCMValores.Parameters.Clear()
@@ -230,7 +230,7 @@
                     ConexionBD.Close()
 
 
-                    If estatusCancelacion <> "AF" Or estatusCancelacion <> "ZA" Then
+                    If estatusCancelacion = "ZD" Or estatusCancelacion = "ZC" Then
                         'Envío de Correo
                         Dim Mensaje As New System.Net.Mail.MailMessage()
                         Dim destinatario As String = ""
