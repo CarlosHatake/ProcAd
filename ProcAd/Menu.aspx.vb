@@ -65,7 +65,7 @@
                     .pnlFSATLiq.Visible = False
 
                     '-- FACTURAS CFDI
-                    .pnlFCFDIConsulta.Visible = False
+                    '.pnlFCFDIConsulta.Visible = False
 
                     '-- Negociación de Servicio
                     .pnlNSTitulo.Visible = False
@@ -299,23 +299,23 @@
 
                             'Acceso a panel de facturas CFDI
 
-                            Dim accCFDI As Integer
-                            SCMValores.Connection = ConexionBD
-                            SCMValores.CommandText = ""
-                            SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = " SELECT COUNT(*) " +
-                                " WHERE @idUsuario in (SELECT split.a.value('.', 'NVARCHAR(MAX)') DATA " +
-                                " FROM (SELECT cast('<X>' + replace((SELECT valor FROM cg_parametros WHERE parametro = 'facturas_CFDI'), ',', '</X><X>') + '</X>' as xml) AS string) AS A " +
-                                " CROSS APPLY string.nodes('/X') AS split(a)) "
-                            SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
-                            ConexionBD.Open()
-                            accCFDI = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If accCFDI > 0 Then
-                                .pnlFCFDIConsulta.Visible = True
-                            Else
-                                .pnlFCFDIConsulta.Visible = False
-                            End If
+                            'Dim accCFDI As Integer
+                            'SCMValores.Connection = ConexionBD
+                            'SCMValores.CommandText = ""
+                            'SCMValores.Parameters.Clear()
+                            'SCMValores.CommandText = " SELECT COUNT(*) " +
+                            '    " WHERE @idUsuario in (SELECT split.a.value('.', 'NVARCHAR(MAX)') DATA " +
+                            '    " FROM (SELECT cast('<X>' + replace((SELECT valor FROM cg_parametros WHERE parametro = 'facturas_CFDI'), ',', '</X><X>') + '</X>' as xml) AS string) AS A " +
+                            '    " CROSS APPLY string.nodes('/X') AS split(a)) "
+                            'SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
+                            'ConexionBD.Open()
+                            'accCFDI = SCMValores.ExecuteScalar()
+                            'ConexionBD.Close()
+                            'If accCFDI > 0 Then
+                            '    .pnlFCFDIConsulta.Visible = True
+                            'Else
+                            '    .pnlFCFDIConsulta.Visible = False
+                            'End If
 
                             .imgMenu.Visible = True
                             .imgMenu.Width = 695
@@ -3517,6 +3517,7 @@
                                 "        from dt_comp " +
                                 "        where dt_comp.id_ms_comp = ms_comp.id_ms_comp) as importe_comp " +
                                 "     , importe_tot " +
+                                "     , case ms_comp.AMEX when 'S' then 'S' else 'N' end as AMEX " +
                                 "from ms_instancia " +
                                 "  left join ms_comp on ms_instancia.id_ms_sol = ms_comp.id_ms_comp and ms_instancia.tipo = 'C' " +
                                 "where id_actividad = @id_actividad " +
@@ -3539,6 +3540,7 @@
                                 "        from dt_comp " +
                                 "        where dt_comp.id_ms_comp = ms_comp.id_ms_comp) as importe_comp " +
                                 "     , importe_tot " +
+                                 "     , case ms_comp.AMEX when 'S' then 'S' else 'N' end as AMEX " +
                                 "from ms_instancia " +
                                 "  left join ms_comp on ms_instancia.id_ms_sol = ms_comp.id_ms_comp and ms_instancia.tipo = 'C' " +
                                 "where id_actividad = @id_actividad "
@@ -3569,6 +3571,7 @@
                                 "        from dt_comp " +
                                 "        where dt_comp.id_ms_comp = ms_comp.id_ms_comp) as importe_comp " +
                                 "     , importe_tot " +
+                                 "     , case ms_comp.AMEX when 'S' then 'S' else 'N' end as AMEX " +
                                 "from ms_instancia " +
                                 "  left join ms_comp on ms_instancia.id_ms_sol = ms_comp.id_ms_comp and ms_instancia.tipo = 'C' " +
                                 "where id_actividad = @id_actividad " +
@@ -3591,6 +3594,7 @@
                                 "        from dt_comp " +
                                 "        where dt_comp.id_ms_comp = ms_comp.id_ms_comp) as importe_comp " +
                                 "     , importe_tot " +
+                                 "     , case ms_comp.AMEX when 'S' then 'S' else 'N' end as AMEX " +
                                 "from ms_instancia " +
                                 "  left join ms_comp on ms_instancia.id_ms_sol = ms_comp.id_ms_comp and ms_instancia.tipo = 'C' " +
                                 "where id_actividad = @id_actividad "

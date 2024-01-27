@@ -169,6 +169,8 @@
                 <asp:TextBox ID="_txtVal_Origen_Destino" runat="server" Width="15px" Visible="False"></asp:TextBox>
                 <asp:TextBox ID="_txtTot_ret_irs" runat="server" Width="15px" Visible="False"></asp:TextBox>
                 <asp:TextBox ID="_txtBotonCancelar" runat="server" Width="15px" Visible="false"></asp:TextBox>
+                <asp:TextBox ID="_txtAnticipo" runat="server" Width="15px" Visible="false"></asp:TextBox>
+               
                 <asp:UpdatePanel ID="upAbreviatura" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
                         <asp:TextBox ID="_txtTipoGasto" runat="server" Width="15px" Visible="False"></asp:TextBox>
@@ -400,6 +402,24 @@
                             </td>
                         </tr>
                     </table>
+                    <asp:Panel ID="pnlAnticiposDecision" runat="server">
+                        <table style="width: 1000px">
+                            <tr>
+                                <td style="width: 250px; text-align:right">
+                                   <asp:Label ID="lbl_Mensaje" runat="server" Text="Elije un Anticipo para comprobar"></asp:Label>
+                                </td>
+                                <td>
+                                    <asp:RadioButtonList ID="rbdOpcionAnticipo" runat="server" Width="250px" RepeatColumns="3" AutoPostBack="true">
+                                    
+                                        <asp:ListItem>Anticipo</asp:ListItem>
+                                      
+                                        <asp:ListItem>Anticipo AMEX</asp:ListItem>
+                                    </asp:RadioButtonList>
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
+                   
                     <table style="width: 1366px;">
                         <tr>
                             <td style="width: 130px; height: 30px; text-align: right">
@@ -419,6 +439,35 @@
                                                 </asp:BoundField>
                                                 <asp:BoundField DataField="importe" HeaderText="impAnt" />
                                                 <asp:BoundField DataField="importeAPGV" HeaderText="impAntPGV" />
+                                                <asp:TemplateField HeaderText="Comprobar">
+                                                    <ItemTemplate>
+                                                        <asp:CheckBox ID="chkCtrl" runat="server" />
+                                                    </ItemTemplate>
+                                                    <ItemStyle HorizontalAlign="Center" Width="90px" />
+                                                </asp:TemplateField>
+                                            </Columns>
+                                            <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                                            <HeaderStyle BackColor="Black" Font-Bold="True" ForeColor="White" />
+                                            <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                                            <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                                            <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                                            <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                                            <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                                            <SortedDescendingHeaderStyle BackColor="#242121" />
+                                        </asp:GridView>
+
+                                        <asp:GridView ID="gvAnticiposAmex" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="300px" >
+                                            <Columns>
+                                                <asp:BoundField DataField="id_ms_anticipo" HeaderText="id_ms_anticipo" />
+                                                <asp:BoundField DataField="fecha" DataFormatString="{0:d}" HeaderText="Fecha">
+                                                    <ItemStyle HorizontalAlign="Center" Width="100px" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="importe" DataFormatString="{0:c}" HeaderText="Importe">
+                                                    <ItemStyle HorizontalAlign="Right" />
+                                                </asp:BoundField>
+                                                <asp:BoundField DataField="importe" HeaderText="impAnt" />
+                                                <asp:BoundField DataField="importeAPGV" HeaderText="impAntPGV" />
+                                                <asp:BoundField DataField="tipo" HeaderText="AMEX"/>
                                                 <asp:TemplateField HeaderText="Comprobar">
                                                     <ItemTemplate>
                                                         <asp:CheckBox ID="chkCtrl" runat="server" />
@@ -511,9 +560,6 @@
                             </td>
                         </tr>
                     </table>
-                
-
-
                 
 
                     <asp:Panel ID="pnlConcepto1" runat="server">
@@ -968,10 +1014,6 @@
                         </table>
                     </asp:Panel>
                 
-
-                     
-                   
-
 
                     <asp:Panel ID="pnlFinalizar" runat="server">
                         <table style="width: 1366px; height: 40px;">

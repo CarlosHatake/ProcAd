@@ -196,7 +196,7 @@
                                     <tr>
                                         <td style="width: 1px">&nbsp;</td>
                                         <td>
-                                            <asp:GridView ID="gvRegistros" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="1680px">
+                                            <asp:GridView ID="gvRegistros" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="1780px">
                                                 <Columns>
                                                     <asp:CommandField ButtonType="Image" SelectImageUrl="images\ok.png" ShowSelectButton="True">
                                                     <ItemStyle Width="15px" />
@@ -252,6 +252,12 @@
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="nombre_actividad" HeaderText="Actividad Actual">
                                                     <ItemStyle HorizontalAlign="Center" Width="100px" />
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="AMEX" HeaderText="AMEX">
+                                                        <ItemStyle HorizontalAlign="Right" Width="50px" />
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="codigo_reservacion" HeaderText="Codigo Reservacion">
+                                                        <ItemStyle HorizontalAlign="center" Width="50px" />
                                                     </asp:BoundField>
                                                 </Columns>
                                                 <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
@@ -411,6 +417,14 @@
                             </td>
                             <td>
                                 <asp:Label ID="lblDirector" runat="server" ForeColor="Blue"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">
+                                <asp:Label ID="lbl_CodigoReservacion" runat="server" Text="Codigo Reservación:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="lblCodigoReservacion" runat="server" ForeColor="Blue"></asp:Label>
                             </td>
                         </tr>
                     </table>

@@ -221,6 +221,15 @@ Partial Public Class _08
     Protected WithEvents _txtBotonCancelar As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control _txtAnticipo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtAnticipo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''Control upAbreviatura.
     '''</summary>
     '''<remarks>
@@ -635,6 +644,33 @@ Partial Public Class _08
     Protected WithEvents gvEvidencias As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
+    '''Control pnlAnticiposDecision.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlAnticiposDecision As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control lbl_Mensaje.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lbl_Mensaje As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control rbdOpcionAnticipo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents rbdOpcionAnticipo As Global.System.Web.UI.WebControls.RadioButtonList
+
+    '''<summary>
     '''Control lbl_Anticipos.
     '''</summary>
     '''<remarks>
@@ -660,6 +696,15 @@ Partial Public Class _08
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents gvAnticipos As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control gvAnticiposAmex.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvAnticiposAmex As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''Control pnlUnidad.

@@ -181,6 +181,8 @@
                 <asp:TextBox ID="_txtPuestoTab" runat="server" Width="15px" Visible="False"></asp:TextBox>
                 <asp:TextBox ID="_txtNoEmpleado" runat="server" Width="15px" Visible="False"></asp:TextBox>
                 <asp:TextBox ID="_txtCorreo" runat="server" Width="15px" Visible="False"></asp:TextBox>
+                <asp:TextBox ID="_txtNo_Autorizador" runat="server" Width="15px" Visible="False"></asp:TextBox>
+                <asp:TextBox ID="_txtIdUsuarioSolicita" runat="server" Width="15px" Visible="False"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -501,6 +503,24 @@
                                                     </td>
                                                     <td style="text-align: left; ">
                                                         <asp:Label ID="lblJustAv" runat="server" Font-Bold="True" ForeColor="#003399"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                        <asp:Panel ID="pnlAmex" runat="server">
+                                            <table style="width: 670px;">
+                                                <tr>
+                                                    <td  style="text-align: right">
+                                                        <asp:Label ID="lblCodigoReservacion" runat="server" Text="Código de reservación:"></asp:Label>
+                                                    </td>
+                                                    <td style="text-align: left;">
+                                                        <asp:TextBox ID="txtCodigoReservacion" runat="server"></asp:TextBox>
+                                                    </td>
+                                                    <td>
+                                                         <asp:Label ID="lbl_ImporteAmex" runat="server" Text="Importe:"></asp:Label>
+                                                    </td>
+                                                    <td>
+                                                        <asp:TextBox ID="txtImporte" runat="server"></asp:TextBox>
                                                     </td>
                                                 </tr>
                                             </table>

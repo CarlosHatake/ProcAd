@@ -578,42 +578,44 @@
                 Dim dsConsulta As New DataSet
                 Dim query As String
 
-                query = "select id_ms_anticipo as no_anticipo " + _
-                        "     , Empresa " + _
-                        "     , empleado " + _
-                        "     , autorizador " + _
-                        "     , fecha_solicita " + _
-                        "     , fecha_autoriza " + _
-                        "     , fecha_pago " + _
-                        "     , periodo_ini " + _
-                        "     , periodo_fin " + _
-                        "     , case ms_anticipo.tipo_pago when 'E' then 'Efectivo' when 'T' then 'Transferencia' else '-' end as tipoAnt " + _
-                        "     , monto_hospedaje + monto_alimentos + monto_casetas + monto_otros as importe " + _
-                        "     , case status " + _
-                        "         when 'P' then 'Pendiente de Autorización' " + _
-                        "         when 'A' then 'Autorizado' " + _
-                        "         when 'Z' then 'Rechazado' " + _
-                        "         when 'ZC' then 'Cancelado' " + _
-                        "         when 'TR' then 'Transferencia Realizada' " + _
-                        "         when 'TRCP' then 'Transferencia Realizada' " + _
-                        "         when 'TRCA' then 'Transferencia Realizada' " + _
-                        "         when 'TRCR' then 'Transferencia Realizada' " + _
-                        "         when 'EE' then 'Efectivo Entregado' " + _
-                        "         when 'EECP' then 'Efectivo Entregado' " + _
-                        "         when 'EECA' then 'Efectivo Entregado' " + _
-                        "         when 'EECR' then 'Efectivo Entregado' " + _
-                        "       end as estatus " + _
-                        "     , case (select isnull((select top 1 ms_comp.status " + _
-                        "             from ms_comp " + _
-                        "               left join dt_anticipo on dt_anticipo.id_ms_comp = ms_comp.id_ms_comp " + _
-                        "             where ms_comp.status in ('P','A','R') " + _
-                        "               and id_ms_anticipo = ms_anticipo.id_ms_anticipo), '-') as estatus) " + _
-                        "         when 'P' then 'En Proceso' " + _
-                        "         when 'A' then 'Autorizada' " + _
-                        "         when 'R' then 'Registrada' " + _
-                        "		 else null " + _
-                        "	   end as comprobado " + _
-                        "from ms_anticipo " + _
+                query = "select id_ms_anticipo as no_anticipo " +
+                        "     , Empresa " +
+                        "     , empleado " +
+                        "     , autorizador " +
+                        "     , fecha_solicita " +
+                        "     , fecha_autoriza " +
+                        "     , fecha_pago " +
+                        "     , periodo_ini " +
+                        "     , periodo_fin " +
+                        "     , case tipo when 'AAE' then 'S' else 'N' end as AMEX " +
+                        "     , isnull(codigo_reservacion, ' ') as codigo_reservacion " +
+                        "     , case ms_anticipo.tipo_pago when 'E' then 'Efectivo' when 'T' then 'Transferencia' else '-' end as tipoAnt " +
+                        "     , monto_hospedaje + monto_alimentos + monto_casetas + monto_otros as importe " +
+                        "     , case status " +
+                        "         when 'P' then 'Pendiente de Autorización' " +
+                        "         when 'A' then 'Autorizado' " +
+                        "         when 'Z' then 'Rechazado' " +
+                        "         when 'ZC' then 'Cancelado' " +
+                        "         when 'TR' then 'Transferencia Realizada' " +
+                        "         when 'TRCP' then 'Transferencia Realizada' " +
+                        "         when 'TRCA' then 'Transferencia Realizada' " +
+                        "         when 'TRCR' then 'Transferencia Realizada' " +
+                        "         when 'EE' then 'Efectivo Entregado' " +
+                        "         when 'EECP' then 'Efectivo Entregado' " +
+                        "         when 'EECA' then 'Efectivo Entregado' " +
+                        "         when 'EECR' then 'Efectivo Entregado' " +
+                        "       end as estatus " +
+                        "     , case (select isnull((select top 1 ms_comp.status " +
+                        "             from ms_comp " +
+                        "               left join dt_anticipo on dt_anticipo.id_ms_comp = ms_comp.id_ms_comp " +
+                        "             where ms_comp.status in ('P','A','R') " +
+                        "               and id_ms_anticipo = ms_anticipo.id_ms_anticipo), '-') as estatus) " +
+                        "         when 'P' then 'En Proceso' " +
+                        "         when 'A' then 'Autorizada' " +
+                        "         when 'R' then 'Registrada' " +
+                        "		 else null " +
+                        "	   end as comprobado " +
+                        "from ms_anticipo " +
                         "where 1 =1  "
 
                 If ._txtPerfil.Text = "Aut" Or ._txtPerfil.Text = "SegViajes" Then
@@ -716,26 +718,27 @@
                 Dim sdaSol As New SqlDataAdapter
                 Dim dsSol As New DataSet
                 Dim query As String
-                query = "select empleado " + _
-                        "     , no_proveedor " + _
-                        "     , empresa " + _
-                        "     , autorizador " + _
-                        "     , periodo_comp " + _
-                        "     , destino " + _
-                        "     , actividad " + _
-                        "     , no_personas " + _
-                        "     , isnull(dias_hospedaje, 0) as dias_hospedaje " + _
-                        "     , monto_hospedaje " + _
-                        "     , isnull(dias_alimentos, 0) as dias_alimentos " + _
-                        "     , monto_alimentos " + _
-                        "     , isnull(dias_casetas, 0) as dias_casetas " + _
-                        "     , monto_casetas " + _
-                        "     , isnull(dias_otros, 0) as dias_otros " + _
-                        "     , monto_otros " + _
-                        "     , isnull(otros_especifico, 'XX') as otros_especifico " + _
-                        "     , case tipo_pago when 'E' then 'Efectivo' when 'T' then 'Transferencia' else '-' end as tipo_pago " + _
-                        "     , monto_hospedaje + monto_alimentos + monto_casetas + monto_otros as importe " + _
-                        "from ms_anticipo " + _
+                query = "select empleado " +
+                        "     , no_proveedor " +
+                        "     , empresa " +
+                        "     , autorizador " +
+                        "     , periodo_comp " +
+                        "     , destino " +
+                        "     , actividad " +
+                        "     , no_personas " +
+                        "     , isnull(dias_hospedaje, 0) as dias_hospedaje " +
+                        "     , monto_hospedaje " +
+                        "     , isnull(dias_alimentos, 0) as dias_alimentos " +
+                        "     , monto_alimentos " +
+                        "     , isnull(dias_casetas, 0) as dias_casetas " +
+                        "     , monto_casetas " +
+                        "     , isnull(dias_otros, 0) as dias_otros " +
+                        "     , monto_otros " +
+                        "     , isnull(otros_especifico, 'XX') as otros_especifico " +
+                        "     , case tipo_pago when 'E' then 'Efectivo' when 'T' then 'Transferencia' else '-' end as tipo_pago " +
+                        "     , monto_hospedaje + monto_alimentos + monto_casetas + monto_otros as importe " +
+                        "     ,  isnull(codigo_reservacion, 'XX') as codigo_reservacion " +
+                        "from ms_anticipo " +
                         "where id_ms_anticipo = @id_ms_anticipo "
                 sdaSol.SelectCommand = New SqlCommand(query, ConexionBD)
                 sdaSol.SelectCommand.Parameters.AddWithValue("@id_ms_anticipo", Val(.lblFolio.Text))
@@ -750,6 +753,15 @@
                 .lblDestino.Text = dsSol.Tables(0).Rows(0).Item("destino").ToString()
                 .txtAct.Text = dsSol.Tables(0).Rows(0).Item("actividad").ToString()
                 .wneNoPersonas.Value = Val(dsSol.Tables(0).Rows(0).Item("no_personas").ToString())
+                If dsSol.Tables(0).Rows(0).Item("codigo_reservacion").ToString() = "XX" Then
+                    .lbl_CodigoReservacion.Visible = False
+                    .lblCodigoReservacion.Visible = False
+                    .lblCodigoReservacion.Text = ""
+                Else
+                    .lbl_CodigoReservacion.Visible = True
+                    .lblCodigoReservacion.Visible = True
+                    .lblCodigoReservacion.Text = dsSol.Tables(0).Rows(0).Item("codigo_reservacion").ToString()
+                End If
                 If Val(dsSol.Tables(0).Rows(0).Item("dias_hospedaje").ToString()) = 0 Then
                     .wneDiasH.Text = ""
                     .wceMontoH.Text = ""

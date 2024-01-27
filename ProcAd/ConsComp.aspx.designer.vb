@@ -554,6 +554,24 @@ Partial Public Class ConsComp
     Protected WithEvents lblDirector As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Control lbl_CodigoReservacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lbl_CodigoReservacion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control lblCodigoReservacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCodigoReservacion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control lbl_Just.
     '''</summary>
     '''<remarks>
