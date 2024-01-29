@@ -49,9 +49,9 @@
                 .litError.Text = ""
 
                 ' '' Ruta Local
-                ''Dim sFileDir As String = "C:/ProcAd - Adjuntos Gas/" 'Ruta en que se almacenará el archivo
+                Dim sFileDir As String = "C:/ProcAd - Adjuntos Gas/" 'Ruta en que se almacenará el archivo
                 ' Ruta en Atenea
-                Dim sFileDir As String = "D:\ProcAd - Adjuntos Gas\" 'Ruta en que se almacenará el archivo
+                'Dim sFileDir As String = "D:\ProcAd - Adjuntos Gas\" 'Ruta en que se almacenará el archivo
                 Dim lMaxFileSize As Long = 10485760 'Equivalente a 10 Megabytes
 
                 'Verificar que el archivo ha sido seleccionado y es un archivo válido
