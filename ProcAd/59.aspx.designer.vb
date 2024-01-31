@@ -104,6 +104,24 @@ Partial Public Class _59
     Protected WithEvents _txtCorreo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control _txtNo_Autorizador.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtNo_Autorizador As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control _txtIdUsuarioSolicita.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtIdUsuarioSolicita As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''Control pnlInicio.
     '''</summary>
     '''<remarks>
@@ -750,6 +768,51 @@ Partial Public Class _59
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents lblJustAv As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control pnlAmex.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlAmex As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control lblCodigoReservacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCodigoReservacion As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtCodigoReservacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtCodigoReservacion As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lbl_ImporteAmex.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lbl_ImporteAmex As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control txtImporte.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtImporte As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control upVehiculo.

@@ -86,6 +86,8 @@
                                 "     , ms_avion.fecha_regreso as fecha_regreso " +
                                 "     , isnull(ms_avion.justificacion, '') as justificacion " +
                                 "     , isnull(ms_recursos.centro_costo, '') as centro_costo " +
+                                "     , ms_recursos.no_autorizador " +
+                                "     , ms_recursos.id_usr_solicita " +
                                 "from ms_instancia " +
                                 "  left join ms_recursos on ms_instancia.id_ms_sol = ms_recursos.id_ms_recursos and ms_instancia.tipo = 'SR' " +
                                 "  left join ms_anticipo on ms_recursos.id_ms_anticipo = ms_anticipo.id_ms_anticipo " +
@@ -111,6 +113,7 @@
                         Else
                             .lbl_NoProveedor.Visible = True
                         End If
+                        _txtNo_Autorizador.Text = dsSol.Tables(0).Rows(0).Item("no_autorizador").ToString()
                         .lblAutorizador.Text = dsSol.Tables(0).Rows(0).Item("autorizador").ToString()
                         ._txtPuestoTab.Text = dsSol.Tables(0).Rows(0).Item("puesto_tab").ToString()
                         .lblOrig.Text = dsSol.Tables(0).Rows(0).Item("lugar_orig").ToString()
@@ -253,6 +256,8 @@
                             .lblFechaSalida.Text = dsSol.Tables(0).Rows(0).Item("fecha_salida").ToString()
                             .lblFechaRegreso.Text = dsSol.Tables(0).Rows(0).Item("fecha_regreso").ToString()
                             .lblJustAv.Text = dsSol.Tables(0).Rows(0).Item("justificacion").ToString()
+                            _txtIdUsuarioSolicita.Text = dsSol.Tables(0).Rows(0).Item("id_usr_solicita").ToString
+                            pnlAmex.Visible = True
                             If .lblJustAv.Text = "" Then
                                 .pnlJust.Visible = False
                             Else
@@ -628,6 +633,50 @@
         Return temp
     End Function
 
+    Public Sub llenarAnticipo()
+        Try
+            Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
+            ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
+
+            'Insertar Anticipo'
+            Dim SCMValores As SqlCommand = New System.Data.SqlClient.SqlCommand
+            SCMValores.Connection = ConexionBD
+            SCMValores.Parameters.Clear()
+            SCMValores.CommandText = "insert into ms_anticipo ( id_usr_solicita,  fecha_solicita,  id_usr_autoriza,  empresa,  no_empleado,  no_proveedor,  empleado,  no_autorizador,  autorizador,  destino,  actividad,  periodo_comp,  periodo_ini,  periodo_fin,  tipo_pago,  no_personas,  dias_hospedaje,  monto_hospedaje,  dias_alimentos,  monto_alimentos,  dias_casetas,  monto_casetas,  dias_otros,  monto_otros,  otros_especifico, status, tipo, codigo_reservacion) " +
+                                                         " 			       values (@id_usr_solicita, @fecha_solicita, @id_usr_autoriza, @empresa, @no_empleado, @no_proveedor, @empleado, @no_autorizador, @autorizador, @destino, @actividad, @periodo_comp, @periodo_ini, @periodo_fin, @tipo_pago, @no_personas, @dias_hospedaje, @monto_hospedaje, @dias_alimentos, @monto_alimentos, @dias_casetas, @monto_casetas, @dias_otros, @monto_otros, @otros_especifico,'TR', 'AAE', @codigo_reservacion)"
+            SCMValores.Parameters.AddWithValue("@id_usr_solicita", Val(_txtIdUsuarioSolicita.Text))
+            SCMValores.Parameters.AddWithValue("@fecha_solicita", Date.Now)
+            SCMValores.Parameters.AddWithValue("@id_usr_autoriza", DBNull.Value)
+            SCMValores.Parameters.AddWithValue("@empresa", lblEmpresa.Text)
+            SCMValores.Parameters.AddWithValue("@no_empleado", _txtNoEmpleado.Text)
+            SCMValores.Parameters.AddWithValue("@no_proveedor", lblNoProveedor.Text)
+            SCMValores.Parameters.AddWithValue("@empleado", lblSolicitante.Text)
+            SCMValores.Parameters.AddWithValue("@no_autorizador", _txtNo_Autorizador.Text)
+            SCMValores.Parameters.AddWithValue("@autorizador", lblAutorizador.Text)
+            SCMValores.Parameters.AddWithValue("@destino", lblDestino.Text)
+            SCMValores.Parameters.AddWithValue("@actividad", txtJust.Text)
+            SCMValores.Parameters.AddWithValue("@periodo_comp", "Del " + lblPeriodoIni.Text + " al " + lblPeriodoFin.Text)
+            SCMValores.Parameters.AddWithValue("@periodo_ini", lblPeriodoIni.Text)
+            SCMValores.Parameters.AddWithValue("@periodo_fin", lblPeriodoFin.Text)
+            SCMValores.Parameters.AddWithValue("@tipo_pago", "T")
+            SCMValores.Parameters.AddWithValue("@no_personas", 1)
+            SCMValores.Parameters.AddWithValue("@dias_hospedaje", DBNull.Value)
+            SCMValores.Parameters.AddWithValue("@monto_hospedaje", 0)
+            SCMValores.Parameters.AddWithValue("@dias_alimentos", DBNull.Value)
+            SCMValores.Parameters.AddWithValue("@monto_alimentos", 0)
+            SCMValores.Parameters.AddWithValue("@dias_casetas", DBNull.Value)
+            SCMValores.Parameters.AddWithValue("@monto_casetas", 0)
+            SCMValores.Parameters.AddWithValue("@dias_otros", DBNull.Value)
+            SCMValores.Parameters.AddWithValue("@monto_otros", Val(txtImporte.Text))
+            SCMValores.Parameters.AddWithValue("@otros_especifico", "Boletos de avión American Express")
+            SCMValores.Parameters.AddWithValue("@codigo_reservacion", txtCodigoReservacion.Text)
+            ConexionBD.Open()
+            SCMValores.ExecuteNonQuery()
+            ConexionBD.Close()
+        Catch ex As Exception
+            litError.Text = ex.Message
+        End Try
+    End Sub
 #End Region
 
 #Region "Autorizar / Rechazar"
@@ -636,208 +685,343 @@
         With Me
             Try
                 .litError.Text = ""
-
-                If Session("Error") = "" Then
-                    Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
-                    ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
-                    Dim SCMValores As SqlCommand = New System.Data.SqlClient.SqlCommand
-                    SCMValores.Connection = ConexionBD
-                    Dim fecha As DateTime = Date.Now
-                    While Val(._txtBan.Text) = 0
-                        'Actualizar datos de la Solicitud de Recursos
-                        Dim valor As Integer = 0
-                        SCMValores.CommandText = ""
-                        SCMValores.Parameters.Clear()
-                        SCMValores.CommandText = "DECLARE @valorR int;  Execute Sp_U_VoBoSolRecu  @id_usr_vobo, @fecha_vobo,  @comentario_vobo, @id_ms_recursos,  @id_actividad, @id_ms_instancia,  @montoPgvEp, @valorR OUTPUT; select @valorR"
-                        SCMValores.Parameters.AddWithValue("@id_usr_vobo", Val(._txtIdUsuario.Text))
-                        SCMValores.Parameters.AddWithValue("@fecha_vobo", fecha)
-                        If .txtComentario.Text.Trim <> "" Then
-                            SCMValores.Parameters.AddWithValue("@comentario_vobo", .txtComentario.Text.Trim)
-                        Else
-                            SCMValores.Parameters.AddWithValue("@comentario_vobo", DBNull.Value)
-                        End If
-                        SCMValores.Parameters.AddWithValue("@id_ms_recursos", Val(.lblFolio.Text))
-                        SCMValores.Parameters.AddWithValue("@id_actividad", 39)
-                        SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInst.Text))
-                        SCMValores.Parameters.AddWithValue("@montoPgvEp", 0)
-                        ConexionBD.Open()
-                        valor = SCMValores.ExecuteScalar()
-                        ConexionBD.Close()
-
-                        If valor = 0 Then
-                            Server.Transfer("Menu.aspx")
-                        End If
-                        SCMValores.Parameters.Clear()
-                        ''Actualizar datos de la Solicitud de Recursos
-                        'SCMValores.CommandText = ""
-                        'SCMValores.Parameters.Clear()
-                        'SCMValores.CommandText = "update ms_recursos set id_usr_vobo = @id_usr_vobo, fecha_vobo = @fecha_vobo, comentario_vobo = @comentario_vobo, status = 'A' where id_ms_recursos = @id_ms_recursos "
-                        'SCMValores.Parameters.AddWithValue("@id_usr_vobo", Val(._txtIdUsuario.Text))
-                        'SCMValores.Parameters.AddWithValue("@fecha_vobo", fecha)
-                        'If .txtComentario.Text.Trim <> "" Then
-                        '    SCMValores.Parameters.AddWithValue("@comentario_vobo", .txtComentario.Text.Trim)
-                        'Else
-                        '    SCMValores.Parameters.AddWithValue("@comentario_vobo", DBNull.Value)
-                        'End If
-                        'SCMValores.Parameters.AddWithValue("@id_ms_recursos", Val(.lblFolio.Text))
-                        'ConexionBD.Open()
-                        'SCMValores.ExecuteNonQuery()
-                        'ConexionBD.Close()
-
-                        ''Actualizar Instancia
-                        'SCMValores.Parameters.Clear()
-                        'SCMValores.CommandText = "update ms_instancia set id_actividad = @id_actividad where id_ms_instancia = @id_ms_instancia"
-                        'SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInst.Text))
-                        'SCMValores.Parameters.AddWithValue("@id_actividad", 39)
-                        'ConexionBD.Open()
-                        'SCMValores.ExecuteNonQuery()
-                        'ConexionBD.Close()
-
-                        ''Registrar en Histórico
-                        'SCMValores.Parameters.Clear()
-                        'SCMValores.CommandText = "insert into ms_historico( id_ms_instancia, id_actividad, fecha, id_usr) " +
-                        '                         "                 values (@id_ms_instancia,@id_actividad,@fecha,@id_usr) "
-                        'SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInst.Text))
-                        'SCMValores.Parameters.AddWithValue("@id_actividad", 39)
-                        'SCMValores.Parameters.AddWithValue("@fecha", fecha)
-                        'SCMValores.Parameters.AddWithValue("@id_usr", Val(._txtIdUsuario.Text))
-                        'ConexionBD.Open()
-                        'SCMValores.ExecuteNonQuery()
-                        'ConexionBD.Close()
-
-                        ._txtBan.Text = 1
-
-                        'Generar Instancias de acuerdo a los recursos solicitados
-                        ' * * * Anticipo * * * 
-                        If .cblRecursos.Items(0).Selected = True Then
-                            'Actualizar datos del Anticipo
+                If pnlAmex.Visible = True And txtCodigoReservacion.Text <> "" And Val(txtImporte.Text) <> 0 Then
+                    If Session("Error") = "" Then
+                        Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
+                        ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
+                        Dim SCMValores As SqlCommand = New System.Data.SqlClient.SqlCommand
+                        SCMValores.Connection = ConexionBD
+                        Dim fecha As DateTime = Date.Now
+                        While Val(._txtBan.Text) = 0
+                            'Actualizar datos de la Solicitud de Recursos
+                            Dim valor As Integer = 0
                             SCMValores.CommandText = ""
                             SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "update ms_anticipo set tipo_hospedaje = @tipo_hospedaje, fecha_autoriza = @fecha_autoriza, status = 'A' where id_ms_anticipo = @id_ms_anticipo "
-                            If .ddlTipoHospedaje.Visible = True Then
-                                SCMValores.Parameters.AddWithValue("@tipo_hospedaje", .ddlTipoHospedaje.SelectedItem.Text)
+                            SCMValores.CommandText = "DECLARE @valorR int;  Execute Sp_U_VoBoSolRecu  @id_usr_vobo, @fecha_vobo,  @comentario_vobo, @id_ms_recursos,  @id_actividad, @id_ms_instancia,  @montoPgvEp, @valorR OUTPUT; select @valorR"
+                            SCMValores.Parameters.AddWithValue("@id_usr_vobo", Val(._txtIdUsuario.Text))
+                            SCMValores.Parameters.AddWithValue("@fecha_vobo", fecha)
+                            If .txtComentario.Text.Trim <> "" Then
+                                SCMValores.Parameters.AddWithValue("@comentario_vobo", .txtComentario.Text.Trim)
                             Else
-                                SCMValores.Parameters.AddWithValue("@tipo_hospedaje", DBNull.Value)
+                                SCMValores.Parameters.AddWithValue("@comentario_vobo", DBNull.Value)
                             End If
-                            SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
-                            SCMValores.Parameters.AddWithValue("@id_ms_anticipo", Val(.lblFolioA.Text))
+                            SCMValores.Parameters.AddWithValue("@id_ms_recursos", Val(.lblFolio.Text))
+                            SCMValores.Parameters.AddWithValue("@id_actividad", 39)
+                            SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInst.Text))
+                            SCMValores.Parameters.AddWithValue("@montoPgvEp", 0)
                             ConexionBD.Open()
-                            SCMValores.ExecuteNonQuery()
+                            valor = SCMValores.ExecuteScalar()
                             ConexionBD.Close()
 
-                            'Crear Instancia del Anticipo
-                            SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "insert into ms_instancia ( id_ms_sol,  tipo,  id_actividad) " +
-                                                     "				    values (@id_ms_sol, @tipo, @id_actividad) "
-                            SCMValores.Parameters.AddWithValue("@id_ms_sol", Val(.lblFolioA.Text))
-                            SCMValores.Parameters.AddWithValue("@tipo", "A")
-                            If .lblTipoPago.Text = "Transferencia" Then
-                                SCMValores.Parameters.AddWithValue("@id_actividad", 3)
-                            Else
-                                SCMValores.Parameters.AddWithValue("@id_actividad", 5)
+                            If valor = 0 Then
+                                Server.Transfer("Menu.aspx")
                             End If
-                            ConexionBD.Open()
-                            SCMValores.ExecuteNonQuery()
-                            ConexionBD.Close()
-                            'Obtener ID de la Instancia del Anticipo
-                            SCMValores.CommandText = "select max(id_ms_instancia) from ms_instancia where id_ms_sol = @id_ms_sol and tipo = 'A' "
-                            ConexionBD.Open()
-                            ._txtIdMsInstA.Text = SCMValores.ExecuteScalar
-                            ConexionBD.Close()
-                            'Insertar Históricos
                             SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "insert into ms_historico ( id_ms_instancia,  id_actividad,  id_usr,  fecha) " +
-                                                     "				    values (@id_ms_instancia, @id_actividad, @id_usr, @fecha) "
-                            SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInstA.Text))
-                            If .lblTipoPago.Text = "Transferencia" Then
-                                SCMValores.Parameters.AddWithValue("@id_actividad", 3)
-                            Else
-                                SCMValores.Parameters.AddWithValue("@id_actividad", 5)
-                            End If
-                            SCMValores.Parameters.AddWithValue("@id_usr", Val(._txtIdUsuario.Text))
-                            SCMValores.Parameters.AddWithValue("@fecha", fecha)
-                            ConexionBD.Open()
-                            SCMValores.ExecuteNonQuery()
-                            ConexionBD.Close()
+                            ''Actualizar datos de la Solicitud de Recursos
+                            'SCMValores.CommandText = ""
+                            'SCMValores.Parameters.Clear()
+                            'SCMValores.CommandText = "update ms_recursos set id_usr_vobo = @id_usr_vobo, fecha_vobo = @fecha_vobo, comentario_vobo = @comentario_vobo, status = 'A' where id_ms_recursos = @id_ms_recursos "
+                            'SCMValores.Parameters.AddWithValue("@id_usr_vobo", Val(._txtIdUsuario.Text))
+                            'SCMValores.Parameters.AddWithValue("@fecha_vobo", fecha)
+                            'If .txtComentario.Text.Trim <> "" Then
+                            '    SCMValores.Parameters.AddWithValue("@comentario_vobo", .txtComentario.Text.Trim)
+                            'Else
+                            '    SCMValores.Parameters.AddWithValue("@comentario_vobo", DBNull.Value)
+                            'End If
+                            'SCMValores.Parameters.AddWithValue("@id_ms_recursos", Val(.lblFolio.Text))
+                            'ConexionBD.Open()
+                            'SCMValores.ExecuteNonQuery()
+                            'ConexionBD.Close()
 
-                            If .lblTipoPago.Text = "Efectivo" Then
-                                'Envío de Correo
-                                Dim Mensaje As New System.Net.Mail.MailMessage()
-                                Dim destinatario As String = ""
-                                'Obtener el Correo del Solicitante
-                                SCMValores.CommandText = "select cgEmpl.correo " +
-                                                         "from ms_anticipo " +
-                                                         "  left join cg_usuario on ms_anticipo.id_usr_solicita = cg_usuario.id_usuario " +
-                                                         "  left join bd_empleado.dbo.cg_empleado cgEmpl on cg_usuario.id_empleado = cgEmpl.id_empleado " +
-                                                         "where id_ms_anticipo = @id_ms_anticipo "
+                            ''Actualizar Instancia
+                            'SCMValores.Parameters.Clear()
+                            'SCMValores.CommandText = "update ms_instancia set id_actividad = @id_actividad where id_ms_instancia = @id_ms_instancia"
+                            'SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInst.Text))
+                            'SCMValores.Parameters.AddWithValue("@id_actividad", 39)
+                            'ConexionBD.Open()
+                            'SCMValores.ExecuteNonQuery()
+                            'ConexionBD.Close()
+
+                            ''Registrar en Histórico
+                            'SCMValores.Parameters.Clear()
+                            'SCMValores.CommandText = "insert into ms_historico( id_ms_instancia, id_actividad, fecha, id_usr) " +
+                            '                         "                 values (@id_ms_instancia,@id_actividad,@fecha,@id_usr) "
+                            'SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInst.Text))
+                            'SCMValores.Parameters.AddWithValue("@id_actividad", 39)
+                            'SCMValores.Parameters.AddWithValue("@fecha", fecha)
+                            'SCMValores.Parameters.AddWithValue("@id_usr", Val(._txtIdUsuario.Text))
+                            'ConexionBD.Open()
+                            'SCMValores.ExecuteNonQuery()
+                            'ConexionBD.Close()
+
+                            ._txtBan.Text = 1
+
+                            'Generar Instancias de acuerdo a los recursos solicitados
+                            ' * * * Anticipo * * * 
+                            If .cblRecursos.Items(0).Selected = True Then
+                                'Actualizar datos del Anticipo
+                                SCMValores.CommandText = ""
+                                SCMValores.Parameters.Clear()
+                                SCMValores.CommandText = "update ms_anticipo set tipo_hospedaje = @tipo_hospedaje, fecha_autoriza = @fecha_autoriza, status = 'A' where id_ms_anticipo = @id_ms_anticipo "
+                                If .ddlTipoHospedaje.Visible = True Then
+                                    SCMValores.Parameters.AddWithValue("@tipo_hospedaje", .ddlTipoHospedaje.SelectedItem.Text)
+                                Else
+                                    SCMValores.Parameters.AddWithValue("@tipo_hospedaje", DBNull.Value)
+                                End If
+                                SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
                                 SCMValores.Parameters.AddWithValue("@id_ms_anticipo", Val(.lblFolioA.Text))
                                 ConexionBD.Open()
-                                destinatario = SCMValores.ExecuteScalar()
+                                SCMValores.ExecuteNonQuery()
                                 ConexionBD.Close()
 
-                                Mensaje.[To].Add(destinatario)
-                                Mensaje.Bcc.Add("notificaciones.procad@unne.com.mx")
-                                Mensaje.From = New MailAddress("notificaciones.procad@unne.com.mx")
-                                Mensaje.Subject = "ProcAd - Anticipo No. " + .lblFolioA.Text + " Autorizado"
-                                Dim texto As String
-                                texto = "<span style=""font-family:Verdana;font-size: 10pt;"">" +
-                                        "El anticipo número <b>" + .lblFolioA.Text + "</b> fue autorizado, favor de pasar por el efectivo. <br></span>"
-                                Mensaje.Body = texto
-                                Mensaje.IsBodyHtml = True
-                                Mensaje.Priority = MailPriority.Normal
-
-                                Dim Servidor As New SmtpClient()
-                                Servidor.Host = "10.10.10.30"
-                                Servidor.Port = 587
-                                Servidor.EnableSsl = False
-                                Servidor.UseDefaultCredentials = False
-                                Servidor.Credentials = New System.Net.NetworkCredential("nprocad", "mc8HLB8lPe78")
-
-                                Try
-                                    Servidor.Send(Mensaje)
-                                Catch ex As System.Net.Mail.SmtpException
-                                    .litError.Text = ex.ToString
-                                End Try
-                            End If
-                        End If
-
-                        ' * * * Vehículo * * * 
-                        If .cblRecursos.Items(1).Selected = True Then
-                            If .lbl_FolioV.Visible = True Then
-                                'ms_reserva
-                                SCMValores.CommandText = ""
+                                'Crear Instancia del Anticipo
                                 SCMValores.Parameters.Clear()
-                                SCMValores.CommandText = "update ms_reserva " +
-                                                         "  set status = 'A', fecha_autorizo = @fecha " +
-                                                         "where id_ms_reserva = @idMsReserv "
+                                SCMValores.CommandText = "insert into ms_instancia ( id_ms_sol,  tipo,  id_actividad) " +
+                                                         "				    values (@id_ms_sol, @tipo, @id_actividad) "
+                                SCMValores.Parameters.AddWithValue("@id_ms_sol", Val(.lblFolioA.Text))
+                                SCMValores.Parameters.AddWithValue("@tipo", "A")
+                                If .lblTipoPago.Text = "Transferencia" Then
+                                    SCMValores.Parameters.AddWithValue("@id_actividad", 3)
+                                Else
+                                    SCMValores.Parameters.AddWithValue("@id_actividad", 5)
+                                End If
+                                ConexionBD.Open()
+                                SCMValores.ExecuteNonQuery()
+                                ConexionBD.Close()
+                                'Obtener ID de la Instancia del Anticipo
+                                SCMValores.CommandText = "select max(id_ms_instancia) from ms_instancia where id_ms_sol = @id_ms_sol and tipo = 'A' "
+                                ConexionBD.Open()
+                                ._txtIdMsInstA.Text = SCMValores.ExecuteScalar
+                                ConexionBD.Close()
+                                'Insertar Históricos
+                                SCMValores.Parameters.Clear()
+                                SCMValores.CommandText = "insert into ms_historico ( id_ms_instancia,  id_actividad,  id_usr,  fecha) " +
+                                                         "				    values (@id_ms_instancia, @id_actividad, @id_usr, @fecha) "
+                                SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInstA.Text))
+                                If .lblTipoPago.Text = "Transferencia" Then
+                                    SCMValores.Parameters.AddWithValue("@id_actividad", 3)
+                                Else
+                                    SCMValores.Parameters.AddWithValue("@id_actividad", 5)
+                                End If
+                                SCMValores.Parameters.AddWithValue("@id_usr", Val(._txtIdUsuario.Text))
                                 SCMValores.Parameters.AddWithValue("@fecha", fecha)
-                                SCMValores.Parameters.AddWithValue("@idMsReserv", Val(.lblFolioV.Text))
                                 ConexionBD.Open()
                                 SCMValores.ExecuteNonQuery()
                                 ConexionBD.Close()
 
-                                'Envío de Correo
-                                Dim Mensaje As New System.Net.Mail.MailMessage()
-                                Dim destinatario As String = ""
-                                'Obtener el Correo del Solicitante
-                                SCMValores.CommandText = "select cgEmpl.correo " +
-                                                         "from ms_reserva " +
-                                                         "  left join cg_usuario on ms_reserva.id_usr_solicito = cg_usuario.id_usuario " +
-                                                         "  left join bd_empleado.dbo.cg_empleado cgEmpl on cg_usuario.id_empleado = cgEmpl.id_empleado " +
-                                                         "where id_ms_reserva = @id_ms_reserva "
-                                SCMValores.Parameters.AddWithValue("@id_ms_reserva", Val(.lblFolioV.Text))
+                                If .lblTipoPago.Text = "Efectivo" Then
+                                    'Envío de Correo
+                                    Dim Mensaje As New System.Net.Mail.MailMessage()
+                                    Dim destinatario As String = ""
+                                    'Obtener el Correo del Solicitante
+                                    SCMValores.CommandText = "select cgEmpl.correo " +
+                                                             "from ms_anticipo " +
+                                                             "  left join cg_usuario on ms_anticipo.id_usr_solicita = cg_usuario.id_usuario " +
+                                                             "  left join bd_empleado.dbo.cg_empleado cgEmpl on cg_usuario.id_empleado = cgEmpl.id_empleado " +
+                                                             "where id_ms_anticipo = @id_ms_anticipo "
+                                    SCMValores.Parameters.AddWithValue("@id_ms_anticipo", Val(.lblFolioA.Text))
+                                    ConexionBD.Open()
+                                    destinatario = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+
+                                    Mensaje.[To].Add(destinatario)
+                                    Mensaje.Bcc.Add("notificaciones.procad@unne.com.mx")
+                                    Mensaje.From = New MailAddress("notificaciones.procad@unne.com.mx")
+                                    Mensaje.Subject = "ProcAd - Anticipo No. " + .lblFolioA.Text + " Autorizado"
+                                    Dim texto As String
+                                    texto = "<span style=""font-family:Verdana;font-size: 10pt;"">" +
+                                            "El anticipo número <b>" + .lblFolioA.Text + "</b> fue autorizado, favor de pasar por el efectivo. <br></span>"
+                                    Mensaje.Body = texto
+                                    Mensaje.IsBodyHtml = True
+                                    Mensaje.Priority = MailPriority.Normal
+
+                                    Dim Servidor As New SmtpClient()
+                                    Servidor.Host = "10.10.10.30"
+                                    Servidor.Port = 587
+                                    Servidor.EnableSsl = False
+                                    Servidor.UseDefaultCredentials = False
+                                    Servidor.Credentials = New System.Net.NetworkCredential("nprocad", "mc8HLB8lPe78")
+
+                                    Try
+                                        Servidor.Send(Mensaje)
+                                    Catch ex As System.Net.Mail.SmtpException
+                                        .litError.Text = ex.ToString
+                                    End Try
+                                End If
+                            End If
+
+                            ' * * * Vehículo * * * 
+                            If .cblRecursos.Items(1).Selected = True Then
+                                If .lbl_FolioV.Visible = True Then
+                                    'ms_reserva
+                                    SCMValores.CommandText = ""
+                                    SCMValores.Parameters.Clear()
+                                    SCMValores.CommandText = "update ms_reserva " +
+                                                             "  set status = 'A', fecha_autorizo = @fecha " +
+                                                             "where id_ms_reserva = @idMsReserv "
+                                    SCMValores.Parameters.AddWithValue("@fecha", fecha)
+                                    SCMValores.Parameters.AddWithValue("@idMsReserv", Val(.lblFolioV.Text))
+                                    ConexionBD.Open()
+                                    SCMValores.ExecuteNonQuery()
+                                    ConexionBD.Close()
+
+                                    'Envío de Correo
+                                    Dim Mensaje As New System.Net.Mail.MailMessage()
+                                    Dim destinatario As String = ""
+                                    'Obtener el Correo del Solicitante
+                                    SCMValores.CommandText = "select cgEmpl.correo " +
+                                                             "from ms_reserva " +
+                                                             "  left join cg_usuario on ms_reserva.id_usr_solicito = cg_usuario.id_usuario " +
+                                                             "  left join bd_empleado.dbo.cg_empleado cgEmpl on cg_usuario.id_empleado = cgEmpl.id_empleado " +
+                                                             "where id_ms_reserva = @id_ms_reserva "
+                                    SCMValores.Parameters.AddWithValue("@id_ms_reserva", Val(.lblFolioV.Text))
+                                    ConexionBD.Open()
+                                    destinatario = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+
+                                    Mensaje.[To].Add(destinatario)
+                                    Mensaje.Bcc.Add("notificaciones.procad@unne.com.mx")
+                                    Mensaje.From = New MailAddress("notificaciones.procad@unne.com.mx")
+                                    Mensaje.Subject = "ProcAd - Reservación No. " + .lblFolioV.Text + " Autorizada"
+                                    Dim texto As String
+                                    texto = "<span style=""font-family:Verdana;font-size: 10pt;"">" +
+                                            "La reservación número <b>" + .lblFolioV.Text + "</b> fue autorizada. <br></span>"
+                                    Mensaje.Body = texto
+                                    Mensaje.IsBodyHtml = True
+                                    Mensaje.Priority = MailPriority.Normal
+
+                                    Dim Servidor As New SmtpClient()
+                                    Servidor.Host = "10.10.10.30"
+                                    Servidor.Port = 587
+                                    Servidor.EnableSsl = False
+                                    Servidor.UseDefaultCredentials = False
+                                    Servidor.Credentials = New System.Net.NetworkCredential("nprocad", "mc8HLB8lPe78")
+
+                                    Try
+                                        Servidor.Send(Mensaje)
+                                    Catch ex As System.Net.Mail.SmtpException
+                                        .litError.Text = ex.ToString
+                                    End Try
+                                Else
+                                    'dt_hist_util
+                                    SCMValores.CommandText = ""
+                                    SCMValores.Parameters.Clear()
+                                    SCMValores.CommandText = "update dt_hist_util " +
+                                                             "  set status = 'A', fecha_autoriza = @fecha_autoriza " +
+                                                             "where id_dt_hist_util = @id_dt_hist_util "
+                                    SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
+                                    SCMValores.Parameters.AddWithValue("@id_dt_hist_util", Val(.lblFolioV.Text))
+                                    ConexionBD.Open()
+                                    SCMValores.ExecuteNonQuery()
+                                    ConexionBD.Close()
+                                End If
+                            End If
+
+                            ' * * * Combustible * * * 
+                            If .cblRecursos.Items(2).Selected = True Then
+                                'Actualizar datos de la Solicitud de Combustible
+                                SCMValores.CommandText = ""
+                                SCMValores.Parameters.Clear()
+                                SCMValores.CommandText = "update ms_comb set fecha_autoriza = @fecha_autoriza, status = 'A' where id_ms_comb = @id_ms_comb "
+                                SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
+                                SCMValores.Parameters.AddWithValue("@id_ms_comb", Val(.lblFolioC.Text))
                                 ConexionBD.Open()
-                                destinatario = SCMValores.ExecuteScalar()
+                                SCMValores.ExecuteNonQuery()
                                 ConexionBD.Close()
 
-                                Mensaje.[To].Add(destinatario)
+                                'Crear Instancia 
+                                SCMValores.Parameters.Clear()
+                                SCMValores.CommandText = "insert into ms_instancia ( id_ms_sol,  tipo,  id_actividad) " +
+                                                         "				    values (@id_ms_sol, @tipo, @id_actividad) "
+                                SCMValores.Parameters.AddWithValue("@id_ms_sol", Val(.lblFolioC.Text))
+                                SCMValores.Parameters.AddWithValue("@tipo", "Comb")
+                                SCMValores.Parameters.AddWithValue("@id_actividad", 40)
+                                ConexionBD.Open()
+                                SCMValores.ExecuteNonQuery()
+                                ConexionBD.Close()
+                                'Obtener ID de la Instancia
+                                SCMValores.CommandText = "select max(id_ms_instancia) from ms_instancia where id_ms_sol = @id_ms_sol and tipo = 'Comb' "
+                                ConexionBD.Open()
+                                ._txtIdMsInstC.Text = SCMValores.ExecuteScalar
+                                ConexionBD.Close()
+                                'Insertar Históricos
+                                SCMValores.Parameters.Clear()
+                                SCMValores.CommandText = "insert into ms_historico ( id_ms_instancia,  id_actividad,  id_usr,  fecha) " +
+                                                         "				    values (@id_ms_instancia, @id_actividad, @id_usr, @fecha) "
+                                SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInstC.Text))
+                                SCMValores.Parameters.AddWithValue("@id_actividad", 40)
+                                SCMValores.Parameters.AddWithValue("@id_usr", Val(._txtIdUsuario.Text))
+                                SCMValores.Parameters.AddWithValue("@fecha", fecha)
+                                ConexionBD.Open()
+                                SCMValores.ExecuteNonQuery()
+                                ConexionBD.Close()
+                            End If
+
+                            ' * * * Avión * * * 
+                            If .cblRecursos.Items(3).Selected = True Then
+                                'Actualizar datos de la Solicitud de Reserva de Avión
+                                SCMValores.CommandText = ""
+                                SCMValores.Parameters.Clear()
+                                SCMValores.CommandText = "update ms_avion set fecha_autoriza = @fecha_autoriza, status = 'A' where id_ms_avion = @id_ms_avion "
+                                SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
+                                SCMValores.Parameters.AddWithValue("@id_ms_avion", Val(.lblFolioAv.Text))
+                                ConexionBD.Open()
+                                SCMValores.ExecuteNonQuery()
+                                ConexionBD.Close()
+
+                                llenarAnticipo()
+
+                            End If
+
+                            .btnAutoriza.Enabled = False
+                            .btnRechaza.Enabled = False
+
+                            'Generación de Encuestas
+                            Dim sdaEncuestas As New SqlDataAdapter
+                            Dim dsEncuestas As New DataSet
+                            sdaEncuestas.SelectCommand = New SqlCommand("select NEWID() as ID, isnull(correo,'XX') as correo " +
+                                                                        "from ms_recursos " +
+                                                                        "  inner join cg_usuario on cg_usuario.id_usuario = ms_recursos.id_usr_solicita " +
+                                                                        "  inner join bd_Empleado.dbo.cg_empleado on cg_usuario.id_empleado = cg_empleado.id_empleado " +
+                                                                        "where id_ms_recursos = @Folio ", ConexionBD)
+                            sdaEncuestas.SelectCommand.Parameters.AddWithValue("@Folio", Val(.lblFolio.Text))
+                            ConexionBD.Open()
+                            sdaEncuestas.Fill(dsEncuestas)
+                            ConexionBD.Close()
+
+                            'Insertar en Tabla
+                            SCMValores.CommandText = ""
+                            SCMValores.Parameters.Clear()
+                            SCMValores.CommandText = "insert into ms_encuesta( id_ms_recursos,  id,  fecha_crea) " +
+                                                     "                 values(@id_ms_recursos, @id, @fecha_crea)"
+                            SCMValores.Parameters.AddWithValue("@id_ms_recursos", Val(.lblFolio.Text))
+                            SCMValores.Parameters.AddWithValue("@id", dsEncuestas.Tables(0).Rows(0).Item("ID").ToString())
+                            SCMValores.Parameters.AddWithValue("@fecha_crea", fecha)
+                            ConexionBD.Open()
+                            SCMValores.ExecuteNonQuery()
+                            ConexionBD.Close()
+
+                            'Envío de Correo
+                            If dsEncuestas.Tables(0).Rows(0).Item("correo").ToString() <> "XX" Then
+                                Dim Mensaje As New System.Net.Mail.MailMessage()
+
+                                Mensaje.[To].Add(dsEncuestas.Tables(0).Rows(0).Item("correo").ToString())
                                 Mensaje.Bcc.Add("notificaciones.procad@unne.com.mx")
                                 Mensaje.From = New MailAddress("notificaciones.procad@unne.com.mx")
-                                Mensaje.Subject = "ProcAd - Reservación No. " + .lblFolioV.Text + " Autorizada"
-                                Dim texto As String
-                                texto = "<span style=""font-family:Verdana;font-size: 10pt;"">" +
-                                        "La reservación número <b>" + .lblFolioV.Text + "</b> fue autorizada. <br></span>"
-                                Mensaje.Body = texto
+                                Mensaje.Subject = "ProcAd - Encuesta de Satisfacción [Solicitud de Recursos " + .lblFolio.Text + "]"
+                                Mensaje.Body = "<span style=""font-family:Verdana; font-size: 10pt;"">" +
+                                               "Buen día,<br><br>" +
+                                               "Solicitamos tu apoyo para complementar la siguiente encuesta sobre la Solicitud de Recursos <b>" + .lblFolio.Text + "</b>" +
+                                               "; a continuación se presenta el link... <br><br>" +
+                                               "http://148.223.153.43/ProcAd/Encuesta.aspx?idMs=" + .lblFolio.Text + "&id=" + dsEncuestas.Tables(0).Rows(0).Item("ID").ToString() +
+                                               "<br><br></span>" +
+                                               "<span style=""font-family: Verdana; font-size: 9pt; color: #FF0000; "">" +
+                                               "<br><br> <b>Nota: Favor de <u>no</u> contestar a este correo</b>" +
+                                               "</span>"
+                                ' Servidor
+                                ' --  "http://148.223.153.43/ProcAd/Encuesta.aspx?idMs=" + .lblFolio.Text + "&id=" + dsEncuestas.Tables(0).Rows(0).Item("ID").ToString()
+                                ' Local
+                                ' --  "http://localhost:49786/Encuesta.aspx?idMs=" + .lblFolio.Text + "&id=" + dsEncuestas.Tables(0).Rows(0).Item("ID").ToString()
                                 Mensaje.IsBodyHtml = True
                                 Mensaje.Priority = MailPriority.Normal
 
@@ -853,153 +1037,22 @@
                                 Catch ex As System.Net.Mail.SmtpException
                                     .litError.Text = ex.ToString
                                 End Try
-                            Else
-                                'dt_hist_util
-                                SCMValores.CommandText = ""
-                                SCMValores.Parameters.Clear()
-                                SCMValores.CommandText = "update dt_hist_util " +
-                                                         "  set status = 'A', fecha_autoriza = @fecha_autoriza " +
-                                                         "where id_dt_hist_util = @id_dt_hist_util "
-                                SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
-                                SCMValores.Parameters.AddWithValue("@id_dt_hist_util", Val(.lblFolioV.Text))
-                                ConexionBD.Open()
-                                SCMValores.ExecuteNonQuery()
-                                ConexionBD.Close()
+                                Mensaje.Dispose()
+                                Servidor.Dispose()
                             End If
-                        End If
+                            sdaEncuestas.Dispose()
+                            dsEncuestas.Dispose()
 
-                        ' * * * Combustible * * * 
-                        If .cblRecursos.Items(2).Selected = True Then
-                            'Actualizar datos de la Solicitud de Combustible
-                            SCMValores.CommandText = ""
-                            SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "update ms_comb set fecha_autoriza = @fecha_autoriza, status = 'A' where id_ms_comb = @id_ms_comb "
-                            SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
-                            SCMValores.Parameters.AddWithValue("@id_ms_comb", Val(.lblFolioC.Text))
-                            ConexionBD.Open()
-                            SCMValores.ExecuteNonQuery()
-                            ConexionBD.Close()
-
-                            'Crear Instancia 
-                            SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "insert into ms_instancia ( id_ms_sol,  tipo,  id_actividad) " +
-                                                     "				    values (@id_ms_sol, @tipo, @id_actividad) "
-                            SCMValores.Parameters.AddWithValue("@id_ms_sol", Val(.lblFolioC.Text))
-                            SCMValores.Parameters.AddWithValue("@tipo", "Comb")
-                            SCMValores.Parameters.AddWithValue("@id_actividad", 40)
-                            ConexionBD.Open()
-                            SCMValores.ExecuteNonQuery()
-                            ConexionBD.Close()
-                            'Obtener ID de la Instancia
-                            SCMValores.CommandText = "select max(id_ms_instancia) from ms_instancia where id_ms_sol = @id_ms_sol and tipo = 'Comb' "
-                            ConexionBD.Open()
-                            ._txtIdMsInstC.Text = SCMValores.ExecuteScalar
-                            ConexionBD.Close()
-                            'Insertar Históricos
-                            SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "insert into ms_historico ( id_ms_instancia,  id_actividad,  id_usr,  fecha) " +
-                                                     "				    values (@id_ms_instancia, @id_actividad, @id_usr, @fecha) "
-                            SCMValores.Parameters.AddWithValue("@id_ms_instancia", Val(._txtIdMsInstC.Text))
-                            SCMValores.Parameters.AddWithValue("@id_actividad", 40)
-                            SCMValores.Parameters.AddWithValue("@id_usr", Val(._txtIdUsuario.Text))
-                            SCMValores.Parameters.AddWithValue("@fecha", fecha)
-                            ConexionBD.Open()
-                            SCMValores.ExecuteNonQuery()
-                            ConexionBD.Close()
-                        End If
-
-                        ' * * * Avión * * * 
-                        If .cblRecursos.Items(3).Selected = True Then
-                            'Actualizar datos de la Solicitud de Reserva de Avión
-                            SCMValores.CommandText = ""
-                            SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "update ms_avion set fecha_autoriza = @fecha_autoriza, status = 'A' where id_ms_avion = @id_ms_avion "
-                            SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
-                            SCMValores.Parameters.AddWithValue("@id_ms_avion", Val(.lblFolioAv.Text))
-                            ConexionBD.Open()
-                            SCMValores.ExecuteNonQuery()
-                            ConexionBD.Close()
-                        End If
-
-                        .btnAutoriza.Enabled = False
-                        .btnRechaza.Enabled = False
-
-                        'Generación de Encuestas
-                        Dim sdaEncuestas As New SqlDataAdapter
-                        Dim dsEncuestas As New DataSet
-                        sdaEncuestas.SelectCommand = New SqlCommand("select NEWID() as ID, isnull(correo,'XX') as correo " +
-                                                                    "from ms_recursos " +
-                                                                    "  inner join cg_usuario on cg_usuario.id_usuario = ms_recursos.id_usr_solicita " +
-                                                                    "  inner join bd_Empleado.dbo.cg_empleado on cg_usuario.id_empleado = cg_empleado.id_empleado " +
-                                                                    "where id_ms_recursos = @Folio ", ConexionBD)
-                        sdaEncuestas.SelectCommand.Parameters.AddWithValue("@Folio", Val(.lblFolio.Text))
-                        ConexionBD.Open()
-                        sdaEncuestas.Fill(dsEncuestas)
-                        ConexionBD.Close()
-
-                        'Insertar en Tabla
-                        SCMValores.CommandText = ""
-                        SCMValores.Parameters.Clear()
-                        SCMValores.CommandText = "insert into ms_encuesta( id_ms_recursos,  id,  fecha_crea) " +
-                                                 "                 values(@id_ms_recursos, @id, @fecha_crea)"
-                        SCMValores.Parameters.AddWithValue("@id_ms_recursos", Val(.lblFolio.Text))
-                        SCMValores.Parameters.AddWithValue("@id", dsEncuestas.Tables(0).Rows(0).Item("ID").ToString())
-                        SCMValores.Parameters.AddWithValue("@fecha_crea", fecha)
-                        ConexionBD.Open()
-                        SCMValores.ExecuteNonQuery()
-                        ConexionBD.Close()
-
-                        'Envío de Correo
-                        If dsEncuestas.Tables(0).Rows(0).Item("correo").ToString() <> "XX" Then
-                            Dim Mensaje As New System.Net.Mail.MailMessage()
-
-                            Mensaje.[To].Add(dsEncuestas.Tables(0).Rows(0).Item("correo").ToString())
-                            Mensaje.Bcc.Add("notificaciones.procad@unne.com.mx")
-                            Mensaje.From = New MailAddress("notificaciones.procad@unne.com.mx")
-                            Mensaje.Subject = "ProcAd - Encuesta de Satisfacción [Solicitud de Recursos " + .lblFolio.Text + "]"
-                            Mensaje.Body = "<span style=""font-family:Verdana; font-size: 10pt;"">" +
-                                           "Buen día,<br><br>" +
-                                           "Solicitamos tu apoyo para complementar la siguiente encuesta sobre la Solicitud de Recursos <b>" + .lblFolio.Text + "</b>" +
-                                           "; a continuación se presenta el link... <br><br>" +
-                                           "http://148.223.153.43/ProcAd/Encuesta.aspx?idMs=" + .lblFolio.Text + "&id=" + dsEncuestas.Tables(0).Rows(0).Item("ID").ToString() +
-                                           "<br><br></span>" +
-                                           "<span style=""font-family: Verdana; font-size: 9pt; color: #FF0000; "">" +
-                                           "<br><br> <b>Nota: Favor de <u>no</u> contestar a este correo</b>" +
-                                           "</span>"
-                            ' Servidor
-                            ' --  "http://148.223.153.43/ProcAd/Encuesta.aspx?idMs=" + .lblFolio.Text + "&id=" + dsEncuestas.Tables(0).Rows(0).Item("ID").ToString()
-                            ' Local
-                            ' --  "http://localhost:49786/Encuesta.aspx?idMs=" + .lblFolio.Text + "&id=" + dsEncuestas.Tables(0).Rows(0).Item("ID").ToString()
-                            Mensaje.IsBodyHtml = True
-                            Mensaje.Priority = MailPriority.Normal
-
-                            Dim Servidor As New SmtpClient()
-                            Servidor.Host = "10.10.10.30"
-                            Servidor.Port = 587
-                            Servidor.EnableSsl = False
-                            Servidor.UseDefaultCredentials = False
-                            Servidor.Credentials = New System.Net.NetworkCredential("nprocad", "mc8HLB8lPe78")
-
-                            Try
-                                Servidor.Send(Mensaje)
-                            Catch ex As System.Net.Mail.SmtpException
-                                .litError.Text = ex.ToString
-                            End Try
-                            Mensaje.Dispose()
-                            Servidor.Dispose()
-                        End If
-                        sdaEncuestas.Dispose()
-                        dsEncuestas.Dispose()
-
-                        Session("id_actividadM") = 59
-                        Session("TipoM") = "SR"
+                            Session("id_actividadM") = 59
+                            Session("TipoM") = "SR"
+                            Server.Transfer("Menu.aspx")
+                        End While
+                    Else
                         Server.Transfer("Menu.aspx")
-                    End While
+                    End If
                 Else
-                    Server.Transfer("Menu.aspx")
+                    litError.Text = "Debe meter un Codigo de reservación y un importe"
                 End If
-
-
             Catch ex As Exception
                 If ex.Message = "Subproceso anulado." Then
                     Session("Error") = "S"

@@ -244,6 +244,13 @@
                                                     <asp:BoundField DataField="comprobado" HeaderText="Comprobación">
                                                     <ItemStyle HorizontalAlign="Center" Width="90px" />
                                                     </asp:BoundField>
+                                                    <asp:BoundField DataField="AMEX" HeaderText="AMEX">
+                                                        <ItemStyle HorizontalAlign="Right" Width="50px" />
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="codigo_reservacion" HeaderText="Codigo Reservacion">
+                                                        <ItemStyle HorizontalAlign="center" Width="50px" />
+                                                    </asp:BoundField>
+
                                                 </Columns>
                                                 <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
                                                 <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
@@ -367,6 +374,14 @@
                             </td>
                             <td>
                                 <asp:Label ID="lblDestino" runat="server" ForeColor="Blue" Width="280px"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: right">
+                                <asp:Label ID="lbl_CodigoReservacion" runat="server" Text="Codigo Reservación:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label ID="lblCodigoReservacion" runat="server" ForeColor="Blue"></asp:Label>
                             </td>
                         </tr>
                     </table>

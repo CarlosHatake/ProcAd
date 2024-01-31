@@ -286,17 +286,17 @@
                 Dim dsConsulta As New DataSet
                 Dim query As String
 
-                query = "select id_ms_comp as no_comp " +
-                        "     , Empresa " +
-                        "     , empleado " +
-                        "     , autorizador " +
-                        "     , director " +
-                        "     , fecha_solicita " +
-                        "     , fecha_autoriza " +
-                        "     , case when autorizador = director then fecha_autoriza else fecha_aut_dir end as fecha_aut_dir " +
-                        "     , fecha_valida " +
-                        "     , periodo_ini " +
-                        "     , periodo_fin " +
+                query = "select ms_comp.id_ms_comp as no_comp " +
+                        "     , ms_comp.Empresa " +
+                        "     , ms_comp.empleado " +
+                        "     , ms_comp.autorizador " +
+                        "     , ms_comp.director " +
+                        "     , ms_comp.fecha_solicita " +
+                        "     , ms_comp.fecha_autoriza " +
+                        "     , case when ms_comp.autorizador = director then ms_comp.fecha_autoriza else fecha_aut_dir end as fecha_aut_dir " +
+                        "     , ms_comp.fecha_valida " +
+                        "     , ms_comp.periodo_ini " +
+                        "     , ms_comp.periodo_fin " +
                         "     , (select sum(monto_hospedaje) + sum(monto_alimentos) + sum(monto_casetas) + sum(monto_otros) as monto_ant " +
                         "        from dt_anticipo " +
                         "          left join ms_anticipo on dt_anticipo.id_ms_anticipo = ms_anticipo.id_ms_anticipo " +
@@ -318,38 +318,42 @@
                         "     , cg_actividad_inst.nombre_actividad " +
                         "     , case pago_efectivo when 'S' then 'Sí' when 'N' then 'No' else null end as [Pago Efectivo] " +
                         "     , fecha_efectivo as [Fecha Efectivo] " +
+                        "    , case ms_comp.AMEX when 'S' then 'S' else 'N' end as AMEX " +
+                        "    , isnull(MSA.codigo_reservacion, ' ') as codigo_reservacion " +
                         "from ms_comp " +
+                        " left join dt_anticipo DTA on ms_comp.id_ms_comp = DTA.id_ms_comp " +
+                        " left join ms_anticipo MSA on DTA.id_ms_anticipo = MSA.id_ms_anticipo " +
                         "  left join ms_instancia on ms_comp.id_ms_comp = ms_instancia.id_ms_sol and ms_instancia.tipo = 'C' " +
                         "  left join cg_actividad_inst on ms_instancia.id_actividad = cg_actividad_inst.id_actividad " +
                         "where 1 =1  "
 
                 If ._txtPerfil.Text = "Aut" Or ._txtPerfil.Text = "SegViajes" Then
-                    query = query + "and (empleado = @autorizadorU or autorizador = @autorizadorU or id_usr_aut_dir = @idUsrDir) "
+                    query = query + "and (ms_comp.empleado = @autorizadorU or ms_comp.autorizador = @autorizadorU or ms_comp.id_usr_aut_dir = @idUsrDir) "
                 End If
 
                 If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Or ._txtPerfil.Text = "CxP" Or .cbSolicitante.Checked = True Then
-                    query = query + "  and id_usr_solicita = @id_usr_solicita "
+                    query = query + "  and ms_comp.id_usr_solicita = @id_usr_solicita "
                 End If
                 If .cbEmpresa.Checked = True Then
-                    query = query + "  and empresa = @empresa "
+                    query = query + "  and ms_comp.empresa = @empresa "
                 End If
                 If .cbFechaC.Checked = True Then
-                    query = query + "  and (fecha_solicita between @fechaIni and @fechaFin) "
+                    query = query + "  and (ms_comp.fecha_solicita between @fechaIni and @fechaFin) "
                 End If
                 If .cbAutorizador.Checked = True Then
-                    query = query + "  and autorizador = @autorizador "
+                    query = query + "  and ms_comp.autorizador = @autorizador "
                 End If
                 If .cbPagoEfec.Checked = True Then
                     query = query + "  and ms_comp.pago_efectivo = @pago_efectivo "
                 End If
                 If .cbNoComp.Checked = True Then
-                    query = query + "  and id_ms_comp = @id_ms_comp "
+                    query = query + "  and ms_comp.id_ms_comp = @id_ms_comp "
                 End If
                 If .cbStatus.Checked = True Then
                     'query = query + "  and status in (" + .ddlStatus.SelectedValue + ") "
                     query = query + "  and ms_comp.status in (" + .ddlStatus.SelectedValue + ") "
                 End If
-                query = query + "order by id_ms_comp "
+                query = query + "order by ms_comp.id_ms_comp "
 
                 sdaConsulta.SelectCommand = New SqlCommand(query, ConexionBD)
 
@@ -525,6 +529,7 @@
                                                            "     , periodo_ini " +
                                                            "     , periodo_fin " +
                                                            "     , monto_hospedaje + monto_alimentos + monto_casetas + monto_otros as importe " +
+                                                           "     ,  isnull(codigo_reservacion, 'XX') as codigo_reservacion " +
                                                            "from dt_anticipo " +
                                                            "	left join ms_anticipo on dt_anticipo.id_ms_anticipo = ms_anticipo.id_ms_anticipo " +
                                                            "where dt_anticipo.id_ms_comp = @id_ms_comp ", ConexionBD)
@@ -533,6 +538,15 @@
                 sdaAnticipo.Fill(dsAnticipo)
                 .gvAnticipos.DataBind()
                 ConexionBD.Close()
+                If dsAnticipo.Tables(0).Rows(0).Item("codigo_reservacion").ToString() = "XX" Then
+                    .lbl_CodigoReservacion.Visible = False
+                    .lblCodigoReservacion.Visible = False
+                    .lblCodigoReservacion.Text = ""
+                Else
+                    .lbl_CodigoReservacion.Visible = True
+                    .lblCodigoReservacion.Visible = True
+                    .lblCodigoReservacion.Text = dsAnticipo.Tables(0).Rows(0).Item("codigo_reservacion").ToString()
+                End If
                 sdaAnticipo.Dispose()
                 dsAnticipo.Dispose()
 

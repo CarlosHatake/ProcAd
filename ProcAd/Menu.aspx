@@ -32,7 +32,7 @@
     </script>
     <link href="css\bootstrap.css" rel="stylesheet" />
 </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
         <form id="form1" runat="server">
             <div>
                   <table style="width: 1366px; font-family: Verdana; font-size: 8pt;">
@@ -2149,6 +2149,52 @@
                                                                    </tr>
                                                                </table>
                                                            </asp:Panel>
+                                                           <asp:Panel ID="pnlAutorizarTemporal" runat="server">
+                                                               <table style="height: 60px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="imgAT1" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnAutorizarCompAnticipo" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image9" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnSegundoAutorizador" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image10" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnTercerAutorizador" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image4" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnCompCodCont" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Codificacion Contable Comprobacion Anticipo" Width="200px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image8" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnAutorizarCP" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Cuentas Por Pagar" Width="170px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+
                                                        </div>
                                                    </div>
                                                </div>
@@ -2351,6 +2397,9 @@
                                                                </asp:BoundField>
                                                                <asp:BoundField DataField="importe_tot" DataFormatString="{0:c}" HeaderText="Saldo">
                                                                    <ItemStyle HorizontalAlign="Right" Width="90px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="AMEX" HeaderText="AMEX">
+                                                                   <ItemStyle HorizontalAlign="Right" Width="50px" />
                                                                </asp:BoundField>
                                                            </Columns>
                                                            <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
@@ -2626,6 +2675,40 @@
                                                                    <ItemStyle HorizontalAlign="Left" />
                                                                </asp:BoundField>
                                                                <asp:BoundField DataField="centro_costo" HeaderText="Centro Costo / División">
+                                                                   <ItemStyle HorizontalAlign="Left" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="fecha_solicita" HeaderText="Fecha Solicitud">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="100px" />
+                                                               </asp:BoundField>
+                                                           </Columns>
+                                                           <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                                                           <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                                                           <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                                                           <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                                                           <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                                                           <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                                                           <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                                                           <SortedDescendingHeaderStyle BackColor="#242121" />
+                                                       </asp:GridView>
+                                                       <asp:GridView ID="gvComprobacionAnticipo" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="900px">
+                                                           <Columns>
+                                                               <asp:BoundField DataField="id_ms_instancia" HeaderText="id_ms_instancia" />
+                                                               <asp:CommandField ButtonType="Image" SelectImageUrl="images\ok.png" ShowSelectButton="True">
+                                                                   <ItemStyle Width="15px" />
+                                                               </asp:CommandField>
+                                                               <asp:BoundField DataField="id_ms_comprobacion_anticipo" HeaderText="No. Solicitud">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="50px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="empresa" HeaderText="Empresa">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="60px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="solicita" HeaderText="Solicitó">
+                                                                   <ItemStyle HorizontalAlign="Left" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="centro_costos" HeaderText="Centro Costo ">
+                                                                   <ItemStyle HorizontalAlign="Left" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="division" HeaderText=" División">
                                                                    <ItemStyle HorizontalAlign="Left" />
                                                                </asp:BoundField>
                                                                <asp:BoundField DataField="fecha_solicita" HeaderText="Fecha Solicitud">
