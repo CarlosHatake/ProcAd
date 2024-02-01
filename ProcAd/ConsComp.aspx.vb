@@ -538,17 +538,19 @@
                 sdaAnticipo.Fill(dsAnticipo)
                 .gvAnticipos.DataBind()
                 ConexionBD.Close()
-                If dsAnticipo.Tables(0).Rows(0).Item("codigo_reservacion").ToString() = "XX" Then
-                    .lbl_CodigoReservacion.Visible = False
-                    .lblCodigoReservacion.Visible = False
-                    .lblCodigoReservacion.Text = ""
-                Else
-                    .lbl_CodigoReservacion.Visible = True
-                    .lblCodigoReservacion.Visible = True
-                    .lblCodigoReservacion.Text = dsAnticipo.Tables(0).Rows(0).Item("codigo_reservacion").ToString()
+                If dsAnticipo.Tables(0).Rows.Count > 0 Then
+                    If dsAnticipo.Tables(0).Rows(0).Item("codigo_reservacion").ToString() = "XX" Then
+                        .lbl_CodigoReservacion.Visible = False
+                        .lblCodigoReservacion.Visible = False
+                        .lblCodigoReservacion.Text = ""
+                    Else
+                        .lbl_CodigoReservacion.Visible = True
+                        .lblCodigoReservacion.Visible = True
+                        .lblCodigoReservacion.Text = dsAnticipo.Tables(0).Rows(0).Item("codigo_reservacion").ToString()
+                    End If
+                    sdaAnticipo.Dispose()
+                    dsAnticipo.Dispose()
                 End If
-                sdaAnticipo.Dispose()
-                dsAnticipo.Dispose()
 
                 'Conceptos
                 Dim sdaConcepto As New SqlDataAdapter
