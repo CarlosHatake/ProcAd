@@ -426,6 +426,10 @@
                                     ''-- Catálogos de Evaluaciones
                                     '.pnlCatEvaluacion.Visible = True
 
+                                    '-- auditorua
+                                    pnlConsAud.Visible = True
+
+
                                     .imgMenu.ImageUrl = "images\Admon.png"
                                 Case "AltUsr"
                                     '-- Catálogo de Usuarios

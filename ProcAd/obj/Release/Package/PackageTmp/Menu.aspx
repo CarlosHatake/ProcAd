@@ -25,6 +25,10 @@
         .stbutton{
             text-align:left;
         }
+        .auto-style15 {
+            height: 20px;
+            width: 224px;
+        }
     </style>
     <script type="text/javascript">
         window.history.forward();
@@ -32,7 +36,7 @@
     </script>
     <link href="css\bootstrap.css" rel="stylesheet" />
 </head>
-    <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
+     <body onload="noBack();" onpageshow="if (event.persisted) noBack();" onunload="">
         <form id="form1" runat="server">
             <div>
                   <table style="width: 1366px; font-family: Verdana; font-size: 8pt;">
@@ -58,6 +62,8 @@
                                        <td class="auto-style13">&nbsp;</td>
                                        <td class="auto-style1" style="vertical-align: top">
                                            <div id="accordion">
+                                               <%--Evaluaciones--%>
+
                                                <div>
                                                    <div id="headEvaluacion">
                                                        <div class="mb-0">
@@ -266,7 +272,12 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+
+
+                                               
+                                                  <%--Reuniones--%>
+
+                                                 <div>
                                                    <div id="headReunion">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collReunion" aria-expanded="true" aria-controls="collReunion">
@@ -374,7 +385,10 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+
+
+                                                <%--Checador--%>
+                                                  <div>
                                                    <div id="headChecador">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collChecador" aria-expanded="true" aria-controls="collChecador">
@@ -410,7 +424,9 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+
+                                                <%--Catalogos Usuario--%>
+                                                <div>
                                                    <div id="headCatalogoUser">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collCatalogoUser" aria-expanded="true" aria-controls="collCatalogoUser">
@@ -459,7 +475,10 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+
+
+                                                <%--Catalogos--%>
+                                                 <div>
                                                    <div id="headCatalogo">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collCatalogo" aria-expanded="true" aria-controls="collCatalogo">
@@ -608,7 +627,8 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+                                                <%--factura sat--%>
+                                                    <div>
                                                    <div id="headFacturaSAT">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collFacturaSAT" aria-expanded="true" aria-controls="collFacturaSAT">
@@ -669,42 +689,9 @@
                                                    </div>
                                                </div>
 
-                                               <%--<div id="headFacturaCFDI">
-                                                       <div class="mb-0">
-                                                           <a class="btn btn-link" data-toggle="collapse" data-target="#collFacturasCFDI" aria-expanded="true" aria-controls="collFacturasCFDI">
-                                                               <asp:Panel ID="pnlFCFDITitulo" runat="server">
-                                                                   <table id="tblCFDI" style="height: 22px; width: 224px; text-align: right">
-                                                                       <tr>
-                                                                           <td style="text-align: center; width: 20px;">
-                                                                               <asp:Image ID="imgFCFDI" runat="server" ImageUrl="images\icn_categories.png" Width="17px" />
-                                                                           </td>
-                                                                           <td style="text-align: left">
-                                                                               <asp:Label ID="lblProcAdFCFDI" runat="server" Font-Bold="True" Font-Names="Tahoma" Font-Size="9pt" Style="z-index: 0" ForeColor="Black">Facturas NAV-NET-PROCAD</asp:Label>
-                                                                           </td>
-                                                                       </tr>
-                                                                   </table>
-                                                               </asp:Panel>
-                                                           </a>
-                                                       </div>
-                                                   </div>
-                                                   <div id="collFacturasCFDI" class="collapse" aria-labelledby="headFacturaSAT" data-parent="#accordion">
-                                                       <div class="card-body">
-                                                           <asp:Panel ID="pnlFCFDIConsulta" runat="server">
-                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
-                                                                   <tr>
-                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="imgFCFDI1" runat="server" ImageUrl="images\icn_search.png" Width="17px" />
-                                                                       </td>
-                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnConsCFDI" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Consulta de Facturas" Width="115px" ForeColor="Black" />
-                                                                       </td>
-                                                                   </tr>
-                                                               </table>
-                                                           </asp:Panel>
-                                                       </div>
-                                                   </div>--%>
+                                            <%--  Negociacion de servicio--%>
 
-                                               <div>
+                                                   <div>
                                                    <div id="headNegServ">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collNegServ" aria-expanded="true" aria-controls="collNegServ">
@@ -790,6 +777,7 @@
                                                        </div>
                                                    </div>
                                                </div>
+                                            <%--Servicio Negociado--%>
                                                <div>
                                                    <div id="headServNeg">
                                                        <div class="mb-0">
@@ -915,69 +903,8 @@
                                                    </div>
                                                </div>
 
-                                               <%--Validar de que proceso es--%>
-
-                                             <%--  <div>
-                                                   <div id="headFact">
-                                                       <div class="mb-0">
-                                                           <a class="btn btn-link" data-toggle="collapse" data-target="#collFact" aria-expanded="true" aria-controls="collFact">
-                                                               <asp:Panel ID="pnlFTitulo" runat="server">
-                                                                   <table id="Table62" style="height: 22px; width: 234px; text-align: right">
-                                                                       <tr>
-                                                                           <td style="text-align: center; width: 20px;">
-                                                                               <asp:Image ID="imgFT" runat="server" ImageUrl="images\icn_categories.png" Width="17px" />
-                                                                           </td>
-                                                                           <td style="text-align: left">
-                                                                               <asp:Label ID="lblProcAdF" runat="server" Font-Bold="True" Font-Names="Tahoma" Font-Size="9pt" Style="z-index: 0" ForeColor="Black">Facturas de Gasto, Seg. y Asesoría</asp:Label>
-                                                                           </td>
-                                                                       </tr>
-                                                                   </table>
-                                                               </asp:Panel>
-                                                           </a>
-                                                       </div>
-                                                   </div>
-                                                   <div id="collFact" class="collapse" aria-labelledby="headFact" data-parent="#accordion">
-                                                       <div class="card-body">
-                                                           <asp:Panel ID="pnlFIngresar" runat="server">
-                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
-                                                                   <tr>
-                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="imgF1" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
-                                                                       </td>
-                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnSolFact" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Ingresar Factura" Width="105px" ForeColor="Black" />
-                                                                       </td>
-                                                                   </tr>
-                                                               </table>
-                                                           </asp:Panel>
-                                                           <asp:Panel ID="pnlFCorregir" runat="server">
-                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
-                                                                   <tr>
-                                                                       <td class="auto-style12" style="border-width: 0px; padding: 0px; margin: 0px;">
-                                                                           <asp:Image ID="imgF2" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
-                                                                       </td>
-                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnCorrFact" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Corregir Factura" Width="105px" ForeColor="Black" />
-                                                                       </td>
-                                                                   </tr>
-                                                               </table>
-                                                           </asp:Panel>
-                                                           <asp:Panel ID="pnlFAutorizar" runat="server">
-                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
-                                                                   <tr>
-                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="imgF3" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
-                                                                       </td>
-                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnAutFact" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Factura" Width="110px" ForeColor="Black" />
-                                                                       </td>
-                                                                   </tr>
-                                                               </table>
-                                                           </asp:Panel>
-                                                       </div>
-                                                   </div>
-                                               </div>
-                                               <div>--%>
+                                            <%--Solicitud de gastos servici o asesoria--%>
+                                               <div>
                                                    <div id="headIngFact">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collIngFact" aria-expanded="true" aria-controls="collIngFact">
@@ -1062,7 +989,7 @@
                                                                </table>
                                                            </asp:Panel>
                                                            <asp:Panel ID="pnlIFValidarPresup" runat="server">
-                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                               <table style="font-family: Verdana; font-size: 8px;" class="auto-style15">
                                                                    <tr>
                                                                        <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
                                                                            <asp:Image ID="imgIF12" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
@@ -1231,7 +1158,12 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+
+
+                                              <%--Presupuesto GASTOS DE VIAJE--%>
+
+
+                                                 <div>
                                                    <div id="headPresupGV">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collPresupGV" aria-expanded="true" aria-controls="collPresupGV">
@@ -1338,7 +1270,11 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+
+                                            <%--    Solicitud de recursos--%>
+
+
+                                                 <div>
                                                    <div id="headSolRec">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collSolRec" aria-expanded="true" aria-controls="collSolRec">
@@ -1446,7 +1382,8 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+                                                  <%--   Anticipos--%>
+                                                   <div>
                                                    <div id="headAnt">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collAnt" aria-expanded="true" aria-controls="collAnt">
@@ -1554,7 +1491,9 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+                                              
+                                            <%--Reservacion de Vehiculo--%>
+                                                 <div>
                                                    <div id="headReservVeh">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collReservVeh" aria-expanded="true" aria-controls="collReservVeh">
@@ -1654,7 +1593,8 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+                                                <%-- Gasolina--%>
+                                                  <div>
                                                    <div id="headGasolina">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collGasolina" aria-expanded="true" aria-controls="collGasolina">
@@ -1766,6 +1706,8 @@
                                                        </div>
                                                    </div>
                                                </div>
+
+                                            <%-- Comprobaciones--%>
                                                <div>
                                                    <div id="headComprob">
                                                        <div class="mb-0">
@@ -1973,12 +1915,14 @@
                                                        </div>
                                                    </div>
                                                </div>
-                                               <div>
+
+                                                <%--Consulta Rendimientos--%>
+                                                <div>
                                                    <div id="headingOne">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                                <asp:Panel ID="pnlVBRTitulo" runat="server">
-                                                                   <table id="Table65" style="height: 22px; width: 245px; text-align: right">
+                                                                   <table id="Table65" style="height: 22px; width: 255px; text-align: right">
                                                                        <tr>
                                                                            <td style="text-align: center; width: 20px;">
                                                                                <asp:Image ID="imgVBRT" runat="server" ImageUrl="images\icn_categories.png" Width="17px" />
@@ -1992,6 +1936,9 @@
                                                            </a>
                                                        </div>
                                                    </div>
+
+
+
                                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
                                                        <div class="card-body">
                                                            <asp:Panel ID="pnlVBRCatVehiculo" runat="server">
@@ -2075,8 +2022,13 @@
                                                            </asp:Panel>
                                                        </div>
                                                    </div>
-                                               </div>
-                                               <div>
+                                               </div> 
+
+                                            
+
+                                                <%--movimientos internos--%>
+
+                                                 <div>
                                                    <div id="headingInt">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collapseInt" aria-expanded="true" aria-controls="collapseInt">
@@ -2149,14 +2101,62 @@
                                                                    </tr>
                                                                </table>
                                                            </asp:Panel>
+                                                           <asp:Panel ID="pnlAutorizarTemporal" runat="server">
+                                                               <table style="height: 60px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="imgAT1" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnAutorizarCompAnticipo" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image9" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnSegundoAutorizador" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image10" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnTercerAutorizador" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image4" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnCompCodCont" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Codificacion Contable Comprobacion Anticipo" Width="200px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image8" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnAutorizarCP" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Cuentas Por Pagar" Width="170px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
                                                        </div>
                                                    </div>
                                                </div>
+
                                            </div>
                                        </td>
 
 
-                                       <td style="text-align: center; vertical-align: top;">
+
+                                       <%--Secccion de Grid--%>
+                                        <td style="text-align: center; vertical-align: top;">
                                            <asp:Image ID="imgMenu" runat="server" Width="695px" />
                                            <table style="width: 100%;">
                                                <tr>
@@ -2351,6 +2351,9 @@
                                                                </asp:BoundField>
                                                                <asp:BoundField DataField="importe_tot" DataFormatString="{0:c}" HeaderText="Saldo">
                                                                    <ItemStyle HorizontalAlign="Right" Width="90px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="AMEX" HeaderText="AMEX">
+                                                                   <ItemStyle HorizontalAlign="Right" Width="50px" />
                                                                </asp:BoundField>
                                                            </Columns>
                                                            <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
@@ -2641,11 +2644,44 @@
                                                            <SortedDescendingCellStyle BackColor="#E5E5E5" />
                                                            <SortedDescendingHeaderStyle BackColor="#242121" />
                                                        </asp:GridView>
+                                                       <asp:GridView ID="gvComprobacionAnticipo" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="900px">
+                                                           <Columns>
+                                                               <asp:BoundField DataField="id_ms_instancia" HeaderText="id_ms_instancia" />
+                                                               <asp:CommandField ButtonType="Image" SelectImageUrl="images\ok.png" ShowSelectButton="True">
+                                                                   <ItemStyle Width="15px" />
+                                                               </asp:CommandField>
+                                                               <asp:BoundField DataField="id_ms_comprobacion_anticipo" HeaderText="No. Solicitud">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="50px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="empresa" HeaderText="Empresa">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="60px" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="solicita" HeaderText="Solicitó">
+                                                                   <ItemStyle HorizontalAlign="Left" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="centro_costos" HeaderText="Centro Costo ">
+                                                                   <ItemStyle HorizontalAlign="Left" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="division" HeaderText=" División">
+                                                                   <ItemStyle HorizontalAlign="Left" />
+                                                               </asp:BoundField>
+                                                               <asp:BoundField DataField="fecha_solicita" HeaderText="Fecha Solicitud">
+                                                                   <ItemStyle HorizontalAlign="Center" Width="100px" />
+                                                               </asp:BoundField>
+                                                           </Columns>
+                                                           <FooterStyle BackColor="#CCCC99" ForeColor="Black" />
+                                                           <HeaderStyle BackColor="#333333" Font-Bold="True" ForeColor="White" />
+                                                           <PagerStyle BackColor="White" ForeColor="Black" HorizontalAlign="Right" />
+                                                           <SelectedRowStyle BackColor="#CC3333" Font-Bold="True" ForeColor="White" />
+                                                           <SortedAscendingCellStyle BackColor="#F7F7F7" />
+                                                           <SortedAscendingHeaderStyle BackColor="#4B4B4B" />
+                                                           <SortedDescendingCellStyle BackColor="#E5E5E5" />
+                                                           <SortedDescendingHeaderStyle BackColor="#242121" />
+                                                       </asp:GridView>
                                                    </td>
                                                </tr>
                                            </table>
                                        </td>
-
                                    </tr>
                                </table>
                            </td>
@@ -2680,3 +2716,109 @@
         })
     });
 </script>
+
+
+
+                                          
+                                           
+                                               <%--cambio dayra--%>
+                                             <%--  <div id="headFacturaCFDI">
+                                                       <div class="mb-0">
+                                                           <a class="btn btn-link" data-toggle="collapse" data-target="#collFacturasCFDI" aria-expanded="true" aria-controls="collFacturasCFDI">
+                                                               <asp:Panel ID="pnlFCFDITitulo" runat="server">
+                                                                   <table id="tblCFDI" style="height: 22px; width: 224px; text-align: right">
+                                                                       <tr>
+                                                                           <td style="text-align: center; width: 20px;">
+                                                                               <asp:Image ID="imgFCFDI" runat="server" ImageUrl="images\icn_categories.png" Width="17px" />
+                                                                           </td>
+                                                                           <td style="text-align: left">
+                                                                               <asp:Label ID="lblProcAdFCFDI" runat="server" Font-Bold="True" Font-Names="Tahoma" Font-Size="9pt" Style="z-index: 0" ForeColor="Black">Facturas NAV-NET-PROCAD</asp:Label>
+                                                                           </td>
+                                                                       </tr>
+                                                                   </table>
+                                                               </asp:Panel>
+                                                           </a>
+                                                       </div>
+                                                   </div>
+                                                   <div id="collFacturasCFDI" class="collapse" aria-labelledby="headFacturaSAT" data-parent="#accordion">
+                                                       <div class="card-body">
+                                                           <asp:Panel ID="pnlFCFDIConsulta" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="imgFCFDI1" runat="server" ImageUrl="images\icn_search.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnConsCFDI" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Consulta de Facturas" Width="115px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                       </div>
+                                                   </div>--%>
+
+                                          
+                                            
+
+                                               <%--Validar de que proceso es--%>
+
+                                       <%--        <div>
+                                                   <div id="headFact">
+                                                       <div class="mb-0">
+                                                           <a class="btn btn-link" data-toggle="collapse" data-target="#collFact" aria-expanded="true" aria-controls="collFact">
+                                                               <asp:Panel ID="pnlFTitulo" runat="server">
+                                                                   <table id="Table62" style="height: 22px; width: 234px; text-align: right">
+                                                                       <tr>
+                                                                           <td style="text-align: center; width: 20px;">
+                                                                               <asp:Image ID="imgFT" runat="server" ImageUrl="images\icn_categories.png" Width="17px" />
+                                                                           </td>
+                                                                           <td style="text-align: left">
+                                                                               <asp:Label ID="lblProcAdF" runat="server" Font-Bold="True" Font-Names="Tahoma" Font-Size="9pt" Style="z-index: 0" ForeColor="Black">Facturas de Gasto, Seg. y Asesoría</asp:Label>
+                                                                           </td>
+                                                                       </tr>
+                                                                   </table>
+                                                               </asp:Panel>
+                                                           </a>
+                                                       </div>
+                                                   </div>
+                                                   <div id="collFact" class="collapse" aria-labelledby="headFact" data-parent="#accordion">
+                                                       <div class="card-body">
+                                                           <asp:Panel ID="pnlFIngresar" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="imgF1" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnSolFact" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Ingresar Factura" Width="105px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                           <asp:Panel ID="pnlFCorregir" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td class="auto-style12" style="border-width: 0px; padding: 0px; margin: 0px;">
+                                                                           <asp:Image ID="imgF2" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnCorrFact" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Corregir Factura" Width="105px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                           <asp:Panel ID="pnlFAutorizar" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="imgF3" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="btnAutFact" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Factura" Width="110px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+                                                       </div>
+                                                   </div>
+                                               </div>--%>

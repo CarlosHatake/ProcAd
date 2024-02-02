@@ -62,7 +62,6 @@
                                                                    "     , right('0000000' + ltrim(rtrim(no_empleado)),7) as no_empleado " +
                                                                    "     , factura_extemp_comp " +
                                                                    "     , edit_compro_datos " +
-                                                                   "     , cg_usuario.american_express " +
                                                                    "from cg_usuario " +
                                                                    "  left join bd_Empleado.dbo.cg_empleado cgEmpl on cg_usuario.id_empleado = cgEmpl.id_empleado " +
                                                                    "  left join bd_Empleado.dbo.cg_cc cgCC on cgEmpl.id_cc = cgCC.id_cc " +
@@ -1765,7 +1764,7 @@
                 bandera = True
 
             Else
-                If _txtAnticipo.Text = "Anticipo" Then
+                If _txtAnticipo.Text = "Anticipo" Or _txtAnticipo.Text = "" Then
                     bandera = True
                 Else
                     bandera = False

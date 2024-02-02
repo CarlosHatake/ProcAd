@@ -685,7 +685,10 @@
         With Me
             Try
                 .litError.Text = ""
-                If pnlAmex.Visible = True And txtCodigoReservacion.Text <> "" And Val(txtImporte.Text) <> 0 Then
+
+                If .cblRecursos.Items(3).Selected = True And (txtCodigoReservacion.Text = "" Or txtImporte.Text = "") Then
+                    litError.Text = "Debe meter un Codigo de reservación y un importe"
+                Else
                     If Session("Error") = "" Then
                         Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                         ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -1050,8 +1053,7 @@
                     Else
                         Server.Transfer("Menu.aspx")
                     End If
-                Else
-                    litError.Text = "Debe meter un Codigo de reservación y un importe"
+
                 End If
             Catch ex As Exception
                 If ex.Message = "Subproceso anulado." Then
