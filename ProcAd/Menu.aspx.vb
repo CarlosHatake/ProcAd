@@ -2790,7 +2790,7 @@
                 Server.Transfer(pagina)
 
             Catch ex As Exception
-                .litError.Text = ex.ToString
+                litError.Text = ex.ToString
             End Try
         End With
     End Sub
@@ -5058,8 +5058,8 @@
                 SCMValores.Parameters.Clear()
                 SCMValores.CommandText = "select count(*) from ms_anticipo" +
                                          "               where id_usr_solicita = @idUsuario " +
-                                         "               and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA') " +
-                                         "               and tipo = 'A'"
+                                         "               and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA') "
+                ' "               and tipo = 'A' or tipo = 'AAE'"
                 SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
                 ConexionBD.Open()
                 cont = Val(SCMValores.ExecuteScalar)

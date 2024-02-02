@@ -230,6 +230,15 @@ Partial Public Class _08
     Protected WithEvents _txtAnticipo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control _txtSNAnticipo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtSNAnticipo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''Control upAbreviatura.
     '''</summary>
     '''<remarks>
@@ -282,6 +291,15 @@ Partial Public Class _08
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents litError As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Control litErrorAMEX.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents litErrorAMEX As Global.System.Web.UI.WebControls.Literal
 
     '''<summary>
     '''Control pnlInicio.

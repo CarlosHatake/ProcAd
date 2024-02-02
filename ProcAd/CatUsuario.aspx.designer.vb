@@ -554,6 +554,24 @@ Partial Public Class CatUsuario
     Protected WithEvents cbIngresarNocheHospedaje As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
+    '''Control cbAmericanExpress.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cbAmericanExpress As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
+    '''Control txtAnticipoAmex.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtAnticipoAmex As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''Control gvAutorizadores.
     '''</summary>
     '''<remarks>
