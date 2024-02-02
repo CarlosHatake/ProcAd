@@ -5,9 +5,6 @@
         .auto-style29 {
             width: 963px;
         }
-        .auto-style30 {
-            width: 170px;
-        }
         </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -303,9 +300,13 @@
                                                  <td class="auto-style89" style="text-align: left; ">
                                                      <asp:CheckBox ID="cbFechaTermino" runat="server" Text="Fecha Termino Libre" />
                                                  </td>
-                                                 <td class="auto-style90" style="text-align: left; ">&nbsp;</td>
+                                                 <td class="auto-style90" style="text-align: left; ">
+                                                     &nbsp;</td>
                                                  <td class="auto-style83" style="text-align: left; ">&nbsp;</td>
-                                                 <td class="auto-style88" style="text-align: left; ">&nbsp;</td>
+                                                 <td class="auto-style88" style="text-align: left;">
+                                                     <asp:CheckBox ID="cbAmericanExpress" runat="server" Font-Names="Verdana" Font-Size="8pt" Text="American Express" />
+                                                     <asp:TextBox ID="txtAnticipoAmex" runat="server" Font-Names="Verdana" Font-Size="8pt" MaxLength="4" Width="30px"></asp:TextBox>
+                                                 </td>
                                              </tr>
                                         </table> 
                                      <%--   <table style="width:865px;">

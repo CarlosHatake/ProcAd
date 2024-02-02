@@ -74,6 +74,7 @@
             .cbDatosComprobacion.Enabled = valor
             .cbFechaTermino.Enabled = valor
             .cbMovimientosLibre.Enabled = valor
+            cbAmericanExpress.Enabled = valor
             .gvAutorizadores.Enabled = valor
         End With
     End Sub
@@ -244,6 +245,8 @@
                                                            "     , edit_compro_datos " +
                                                            "     , isnull(cg_usuario.fecha_termino, 'N') as fecha_termino " +
                                                            "     , isnull(movimientos_internos, 'N') as movimientos_internos " +
+                                                           "     , isnull(american_express, 'N') as american_express " +
+                                                           "     , (select no_anticipos from cg_usuario_ant where id_usuario = @id_usuario and tipo = 'AMEX') as anticipo_AMEX " +
                                                            "from cg_usuario " +
                                                            "  inner join bd_empleado.dbo.cg_empleado Emp on cg_usuario.id_empleado = Emp.id_empleado " +
                                                            "  inner join bd_empleado.dbo.cg_cc CC on Emp.id_cc = CC.id_cc " +
@@ -370,6 +373,18 @@
                     cbMovimientosLibre.Checked = False
                 End If
 
+                If dsCatalogo.Tables(0).Rows(0).Item("american_express").ToString() = "S" Then
+                    cbAmericanExpress.Checked = True
+                    If Val(dsCatalogo.Tables(0).Rows(0).Item("anticipo_AMEX").ToString()) = 0 Then
+                        txtAnticipoAmex.Text = 1
+                    Else
+                        txtAnticipoAmex.Text = Val(dsCatalogo.Tables(0).Rows(0).Item("anticipo_AMEX").ToString())
+                    End If
+                Else
+                    cbAmericanExpress.Checked = False
+                End If
+
+
                 llenarAutorizadores(idRegistro)
                 sdaCatalogo.Dispose()
                 dsCatalogo.Dispose()
@@ -485,7 +500,7 @@
                 SCMValores.Connection = ConexionBD
                 SCMValores.CommandText = ""
                 SCMValores.Parameters.Clear()
-                SCMValores.CommandText = "UPDATE cg_usuario SET  ant_pendientes = @ant_pendientes, limite_aut_dir = @limite_aut_dir, cotizacion_unica = @cotizacion_unica, factura_extemp = @factura_extemp, factura_emi_prev = @factura_emi_prev, pago_efectivo = @pago_efectivo, unidad_comp = @unidad_comp, transporte = @transporte, lider = @lider, omitir_PGV = @omitir_PGV, alimentos_tab = @alimentos_tab, taxi_tab = @taxi_tab , hospedaje_libre=@hospedaje_libre ,factura_extemp_comp = @factura_extemp_comp , anticipo_obl = @anticipo_obl , edit_compro_datos = @edit_compro_datos, fecha_termino = @fecha_termino, movimientos_internos = @movimientos_internos WHERE id_usuario = @id_usuario"
+                SCMValores.CommandText = "UPDATE cg_usuario SET  ant_pendientes = @ant_pendientes, limite_aut_dir = @limite_aut_dir, cotizacion_unica = @cotizacion_unica, factura_extemp = @factura_extemp, factura_emi_prev = @factura_emi_prev, pago_efectivo = @pago_efectivo, unidad_comp = @unidad_comp, transporte = @transporte, lider = @lider, omitir_PGV = @omitir_PGV, alimentos_tab = @alimentos_tab, taxi_tab = @taxi_tab , hospedaje_libre=@hospedaje_libre ,factura_extemp_comp = @factura_extemp_comp , anticipo_obl = @anticipo_obl , edit_compro_datos = @edit_compro_datos, fecha_termino = @fecha_termino, movimientos_internos = @movimientos_internos, american_express = @american_express WHERE id_usuario = @id_usuario"
                 SCMValores.Parameters.AddWithValue("@id_usuario", .gvUsuario.SelectedRow.Cells(0).Text)
                 If ban = 0 Then
                     If .cbAntPend.Checked = True Then
@@ -578,6 +593,11 @@
                     Else
                         SCMValores.Parameters.AddWithValue("@movimientos_internos", "N")
                     End If
+                    If cbAmericanExpress.Checked = True Then
+                        SCMValores.Parameters.AddWithValue("@american_express", "S")
+                    Else
+                        SCMValores.Parameters.AddWithValue("@american_express", "N")
+                    End If
                     ConexionBD.Open()
                     SCMValores.ExecuteNonQuery()
                     ConexionBD.Close()
@@ -596,7 +616,7 @@
                     Dim cont As Integer
                     SCMValores.CommandText = ""
                     SCMValores.Parameters.Clear()
-                    SCMValores.CommandText = "select count(*) from cg_usuario_ant where id_usuario = @id_usuario "
+                    SCMValores.CommandText = "select count(*) from cg_usuario_ant where id_usuario = @id_usuario and tipo is null "
                     SCMValores.Parameters.AddWithValue("@id_usuario", idUsr)
                     ConexionBD.Open()
                     cont = SCMValores.ExecuteScalar()
@@ -615,6 +635,33 @@
                     Else
                         If cont > 0 Then
                             SCMValores.CommandText = "delete from cg_usuario_ant where id_usuario = @id_usuario "
+                            ConexionBD.Open()
+                            SCMValores.ExecuteNonQuery()
+                            ConexionBD.Close()
+                        End If
+                    End If
+
+                    'Anticipos AMEX'
+                    SCMValores.CommandText = ""
+                    SCMValores.Parameters.Clear()
+                    SCMValores.CommandText = "select no_anticipos from cg_usuario_ant where id_usuario = @id_usuario and tipo = 'AMEX' "
+                    SCMValores.Parameters.AddWithValue("@id_usuario", idUsr)
+                    ConexionBD.Open()
+                    cont = SCMValores.ExecuteScalar()
+                    ConexionBD.Close()
+                    If cbAmericanExpress.Checked = True Then
+                        If cont > 0 Then
+                            SCMValores.CommandText = "update cg_usuario_ant set no_anticipos = @no_anticipos where id_usuario = @id_usuario and tipo = 'AMEX'"
+                        Else
+                            SCMValores.CommandText = "insert into cg_usuario_ant (id_usuario, no_anticipos, tipo) values (@id_usuario, @no_anticipos, 'AMEX') "
+                        End If
+                        SCMValores.Parameters.AddWithValue("@no_anticipos", Val(txtAnticipoAmex.Text))
+                        ConexionBD.Open()
+                        SCMValores.ExecuteNonQuery()
+                        ConexionBD.Close()
+                    Else
+                        If cont > 0 Then
+                            SCMValores.CommandText = "delete from cg_usuario_ant where id_usuario = @id_usuario and tipo = 'AMEX' "
                             ConexionBD.Open()
                             SCMValores.ExecuteNonQuery()
                             ConexionBD.Close()

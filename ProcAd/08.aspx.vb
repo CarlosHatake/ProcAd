@@ -31,14 +31,15 @@
                         SCMValores.Parameters.AddWithValue("@id_usuario", Val(._txtIdUsuario.Text))
                         ConexionBD.Open()
                         sin_comprobacion = SCMValores.ExecuteScalar
+                        _txtSNAnticipo.Text = sin_comprobacion
                         ConexionBD.Close()
                         If sin_comprobacion = "N" Then
                             SCMValores.CommandText = ""
                             SCMValores.Parameters.Clear()
                             SCMValores.CommandText = "select count(*) from ms_anticipo" +
                                                      "               where id_usr_solicita = @idUsuario " +
-                                                     "               and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA') " +
-                                                     "               and tipo = 'A'"
+                                                     "               and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA') " '+
+                            '    "               and tipo = 'A'"
                             SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
                             ConexionBD.Open()
                             cont = Val(SCMValores.ExecuteScalar)
@@ -740,7 +741,30 @@
                 .gvAnticipos.Columns(3).Visible = False
                 .gvAnticipos.Columns(4).Visible = False
 
-                'AMEX'
+                'AMEX ANTCIPOS'
+                Dim comprobacionAnticipos As Integer = 0
+                Dim SCMValores As SqlCommand = New System.Data.SqlClient.SqlCommand
+                SCMValores.Connection = ConexionBD
+                SCMValores.CommandText = ""
+                SCMValores.Parameters.Clear()
+                SCMValores.CommandText = " select COUNT(*) from dt_anticipo ant " +
+                                         "  left join ms_comp as com on com.id_ms_comp = ant.id_ms_comp " +
+                                         "  left join ms_anticipo as ma on ma.id_ms_anticipo = ant.id_ms_anticipo " +
+                                         "  where com.id_usr_solicita = @id_usuario and com.status in ('A','P') and ma.tipo = 'AAE' "
+                SCMValores.Parameters.AddWithValue("@id_usuario", Val(_txtIdUsuario.Text))
+                ConexionBD.Open()
+                comprobacionAnticipos = SCMValores.ExecuteScalar
+                ConexionBD.Close()
+
+                Dim noAnticiposAmex As Integer = 0
+                SCMValores.CommandText = "select no_anticipos from cg_usuario_ant where id_usuario = @id_usuario and tipo = 'AMEX'"
+                ConexionBD.Open()
+                noAnticiposAmex = SCMValores.ExecuteScalar
+                If noAnticiposAmex = 0 Then
+                    noAnticiposAmex = 1
+                End If
+                ConexionBD.Close()
+
                 Dim sdaAnticiposAMEX As New SqlDataAdapter
                 Dim dsAnticiposAMEX As New DataSet
                 .gvAnticiposAmex.DataSource = dsAnticiposAMEX
@@ -773,9 +797,6 @@
                 .gvAnticiposAmex.Columns(3).Visible = False
                 .gvAnticiposAmex.Columns(4).Visible = False
 
-                If gvAnticiposAmex.Rows.Count = 0 Then
-                    gvAnticiposAmex.Visible = False
-                End If
 
                 rbdOpcionAnticipo.Items(0).Text = rbdOpcionAnticipo.Items(0).Text + " (" + gvAnticipos.Rows.Count().ToString + ")"
                 rbdOpcionAnticipo.Items(1).Text = rbdOpcionAnticipo.Items(1).Text + " (" + gvAnticiposAmex.Rows.Count().ToString + ")"
@@ -844,6 +865,22 @@
                             .lblFechFin.Visible = False
 
                         End If
+
+                        If comprobacionAnticipos >= noAnticiposAmex Then
+                            litError.Text = "Execedio el limite de anticipos con AMEX"
+                            gvAnticiposAmex.Visible = False
+                            btnAceptar.Visible = False
+                            If _txtSNAnticipo.Text = "N" And gvAnticipos.Rows.Count() = 0 Then
+                                gvAnticipos.Visible = False
+                                btnAceptar.Visible = False
+                                litErrorAMEX.Text = "Excedio el limite de anticipos con AMEX y no tiene anticipos para comprobar"
+                            Else
+                                gvAnticipos.Visible = True
+                            End If
+
+                        Else
+                            gvAnticiposAmex.Visible = True
+                        End If
                     End If
                 End If
 
@@ -880,7 +917,7 @@
     Public Sub mostrarOcultarCampos()
         With Me
             Try
-                .litError.Text = ""
+                litError.Text = ""
                 'Ocultar Paneles, excepto el primero
                 .pnlConcepto1.Visible = True
                 If .cbFactura1.Checked = False And .cbTabulador1.Checked = False Then
@@ -1507,8 +1544,6 @@
                                 columnas = gvAnticipos.Rows.Count()
 
                             End If
-
-
 
                             If columnas > 0 And totalAnt = 0 And Val(_txtAntPend.Text) = 0 Then
                                 .litError.Text = "Favor de seleccionar el Anticipo a Comprobar"
