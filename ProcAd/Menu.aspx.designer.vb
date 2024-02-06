@@ -806,13 +806,13 @@ Partial Public Class Menu
     Protected WithEvents btnChecador As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control Panel1.
+    '''Control pnlCatTITitulo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Panel1 As Global.System.Web.UI.WebControls.Panel
+    Protected WithEvents pnlCatTITitulo As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
     '''Control Image2.
@@ -3038,6 +3038,141 @@ Partial Public Class Menu
     Protected WithEvents btnConsAntAud As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Control pnlConsultaCompAntProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlConsultaCompAntProv As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control imgAntProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents imgAntProv As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnConsCompAntProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnConsCompAntProv As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlSAntProveedor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlSAntProveedor As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control Image4.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image4 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnSAntProveedor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnSAntProveedor As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlVBOAnticipo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlVBOAnticipo As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control Image9.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image9 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnVBOAnticipo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnVBOAnticipo As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlAutSAnticipoProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlAutSAnticipoProv As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control Image8.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image8 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnAutSAnticipoProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnAutSAnticipoProv As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlRegistrarPagoNav.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlRegistrarPagoNav As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control Image11.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image11 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnRegistrarPagoNAv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnRegistrarPagoNAv As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
     '''Control pnlRVTitulo.
     '''</summary>
     '''<remarks>
@@ -3693,6 +3828,60 @@ Partial Public Class Menu
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnValComp As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlCAntProveedor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlCAntProveedor As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control Image10.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image10 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnCAntProveedor.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCAntProveedor As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlListValidacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlListValidacion As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control Image12.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image12 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnListValidacion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnListValidacion As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control pnlCEntregarEfect.
@@ -4548,6 +4737,15 @@ Partial Public Class Menu
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents gvMovInt As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control gvRegistrosAntProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvRegistrosAntProv As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''Control gvComprobacionAnticipo.

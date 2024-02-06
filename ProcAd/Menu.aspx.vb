@@ -58,6 +58,9 @@
                     .pnlCConsCompSV.Visible = False
                     .pnlCConsCompExp.Visible = False
                     .pnlCConsultarComp.Visible = False
+                    .pnlConsultaCompAntProv.Visible = False
+                    .pnlCAntProveedor.Visible = True 'Cambiar a false
+                    .pnlListValidacion.Visible = True 'Cambiar a false
                     '-- Facturas SAT
                     .pnlFSATTitulo.Visible = False
                     .pnlFSATCarga.Visible = False
@@ -362,6 +365,7 @@
                                     .pnlCConsCompSV.Visible = True
                                     .pnlCConsCompExp.Visible = True
                                     .pnlCConsultarComp.Visible = True
+                                    .pnlConsultaCompAntProv.Visible = True
                                     '-- Facturas SAT
                                     .pnlFSATTitulo.Visible = True
                                     .pnlFSATCarga.Visible = True
@@ -490,7 +494,6 @@
                                     .pnlCTitulo.Visible = True
                                     .pnlCGenerarComp.Visible = True
                                     .pnlCConsultar.Visible = True
-
                                     '-- Negociación de Servicio
                                     .pnlNSTitulo.Visible = True
                                     .pnlNSSolicitar.Visible = True
@@ -532,6 +535,8 @@
                                     '-- Anticipos
                                     .pnlATitulo.Visible = True
                                     .pnlAConsultar.Visible = True
+                                    .pnlSAntProveedor.Visible = True ''
+
                                     '-- Comprobaciones
                                     .pnlCTitulo.Visible = True
                                     '.pnlCGenerarComp.Visible = True
@@ -1674,10 +1679,12 @@
                                     '-- Anticipos
                                     .pnlATitulo.Visible = True
                                     .pnlAConsultar.Visible = True
+                                    .pnlRegistrarPagoNav.Visible = True
                                     '-- Comprobaciones
                                     .pnlCTitulo.Visible = True
                                     .pnlCGenerarComp.Visible = True
                                     .pnlCConsultar.Visible = True
+                                    .pnlListValidacion.Visible = True 'Visible solo para cuentas x pagar ?
 
                                     '-- Negociación de Servicio
                                     .pnlNSTitulo.Visible = True
@@ -2815,6 +2822,8 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
+
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -2903,6 +2912,7 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -3165,6 +3175,7 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -3262,6 +3273,7 @@
         gvRegistrosV.Visible = True
         gvRegistrosG.Visible = False
         gvRegistrosDG.Visible = False
+        gvRegistrosAntProv.Visible = False
 
         'Inicia proceso'
 
@@ -3337,6 +3349,7 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -3491,6 +3504,7 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -3650,6 +3664,7 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -3753,6 +3768,7 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -3918,6 +3934,7 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -4322,6 +4339,7 @@
                 .gvRegistrosV.Visible = True
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -4421,6 +4439,7 @@
                 .gvRegistrosV.Visible = True
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -4538,6 +4557,7 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = True
                 .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -4655,6 +4675,7 @@
                 .gvRegistrosV.Visible = False
                 .gvRegistrosG.Visible = False
                 .gvRegistrosDG.Visible = True
+                .gvRegistrosAntProv.Visible = False
 
                 Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -4698,6 +4719,103 @@
         End With
     End Sub
 
+    Public Sub llenarGvAnticipos()
+        With Me
+            Try
+                .litError.Text = ""
+                'Presentar Tabla de Anticipos por procesar
+                .imgMenu.Visible = False
+                .imgTrans.Visible = False
+                .gvRegistrosReun.Visible = False
+                .gvRegistrosEval.Visible = False
+                .gvRegistrosSR.Visible = False
+                .pnlFiltroA.Visible = False
+                .gvRegistrosA.Visible = False
+                .gvRegistrosC.Visible = False
+                .gvRegistrosNS.Visible = False
+                .pnlFiltroF.Visible = False
+                .gvRegistrosF.Visible = False
+                .gvRegistrosSAP.Visible = False
+                .gvRegistrosV.Visible = False
+                .gvRegistrosG.Visible = False
+                .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = True
+
+
+                Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
+                ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
+                Dim sdaCatalogo As New SqlDataAdapter
+                Dim dsCatalogo As New DataSet
+                .gvRegistrosAntProv.DataSource = dsCatalogo
+
+
+                Dim query As String = ""
+                Select Case Val(._txtIdAct.Text)
+                    Case 135
+                        'Autorizador
+                        query = " SELECT id_ms_instancia, id_ms_anticipo_proveedor, empleado_solicita, fecha_solicita, empresa, proveedor, importe_requerido," +
+                                " CASE" +
+                                " WHEN estatus = 'P' AND inst.id_actividad = 135 THEN 'Pendiente de autorización'" +
+                                " ELSE '-'" +
+                                " END AS estado" +
+                                " FROM ms_anticipo_proveedor " +
+                                " LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol " +
+                                " WHERE id_usr_autoriza = @id_usr_autoriza AND inst.tipo = 'AP' AND inst.id_actividad = @id_actividad "
+
+                    Case 136
+                        'Tesorería
+                        query = " SELECT id_ms_instancia, id_ms_anticipo_proveedor, empleado_solicita, fecha_solicita, empresa, proveedor, importe_requerido," +
+                                " CASE" +
+                                " WHEN estatus = 'A' AND inst.id_actividad = 136 THEN 'Autorizado por el autorizador'" +
+                                " ELSE '-'" +
+                                " END AS estado" +
+                                " FROM ms_anticipo_proveedor " +
+                                " LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol " +
+                                " WHERE inst.tipo = 'AP' AND inst.id_actividad = @id_actividad "
+                    Case 138
+                        'Cuentas por pagar
+                        query = " SELECT id_ms_instancia, id_ms_anticipo_proveedor, empleado_solicita, fecha_solicita, empresa, proveedor, importe_requerido," +
+                                " CASE" +
+                                " WHEN estatus = 'A' AND inst.id_actividad = 138 THEN 'Autorizado por tesorería' " +
+                                " ELSE '-'" +
+                                " END AS estado" +
+                                " FROM ms_anticipo_proveedor " +
+                                " LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol " +
+                                " WHERE inst.tipo = 'AP' AND inst.id_actividad = @id_actividad "
+
+                    Case 140
+                        'Anticipos por comprobar
+                        query = " SELECT id_ms_instancia, id_ms_anticipo_proveedor, empleado_solicita, fecha_solicita, empresa, proveedor, importe_requerido, " +
+                                " CASE" +
+                                " WHEN estatus = 'TR' AND inst.id_actividad = 140 THEN 'Pendiente de comprobación' " +
+                                " ELSE '-'  " +
+                                " END AS estado " +
+                                " FROM ms_anticipo_proveedor " +
+                                " LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol " +
+                                " WHERE inst.tipo = 'AP' AND inst.id_actividad = 140 AND id_usr_solicita = @id_usr_solicita" +
+                                " AND NOT EXISTS (SELECT NULL FROM ms_comprobacion_anticipo comp WHERE ms_anticipo_proveedor.id_ms_anticipo_proveedor = comp.id_ms_anticipo_proveedor) "
+                End Select
+                sdaCatalogo.SelectCommand = New SqlCommand(query, ConexionBD)
+                If Val(._txtIdAct.Text) = 135 Then
+                    sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_usr_autoriza", Val(._txtIdUsuario.Text))
+                End If
+                If Val(._txtIdAct.Text) = 140 Then
+                    sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_usr_solicita", Val(._txtIdUsuario.Text))
+                End If
+                sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_actividad", Val(._txtIdAct.Text))
+                ConexionBD.Open()
+                sdaCatalogo.Fill(dsCatalogo)
+                .gvRegistrosAntProv.DataBind()
+                ConexionBD.Close()
+                sdaCatalogo.Dispose()
+                dsCatalogo.Dispose()
+                .gvRegistrosAntProv.SelectedIndex = -1
+
+            Catch ex As Exception
+                .litError.Text = ex.ToString()
+            End Try
+        End With
+    End Sub
     Public Sub llenarGridComprobacionAnticipo(Autorizador As Boolean, Segundo_Autorizador As Boolean, Tercer_Autorizador As Boolean)
         Try
             Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
@@ -5028,6 +5146,21 @@
     Protected Sub btnConsAntAud_Click(sender As Object, e As EventArgs) Handles btnConsAntAud.Click
         envio("Consulta de Anticipos Auditoria", "ContAntAud.aspx")
     End Sub
+    Protected Sub btnSAntProveedor_Click(sender As Object, e As EventArgs) Handles btnSAntProveedor.Click
+        envio("Solicitar anticipo", "SolAnticipo.aspx")
+    End Sub
+    Protected Sub btnVBOAnticipo_Click(sender As Object, e As EventArgs) Handles btnVBOAnticipo.Click
+        Me._txtIdAct.Text = 136
+        llenarGvAnticipos()
+    End Sub
+    Protected Sub btnAutSAnticipoProv_Click(sender As Object, e As EventArgs) Handles btnAutSAnticipoProv.Click
+        Me._txtIdAct.Text = 135
+        llenarGvAnticipos()
+    End Sub
+    Protected Sub btnRegistrarPagoNAv_Click(sender As Object, e As EventArgs) Handles btnRegistrarPagoNAv.Click
+        Me._txtIdAct.Text = 138
+        llenarGvAnticipos()
+    End Sub
 
     'Comprobaciones
     Protected Sub btnGenCompExt_Click(sender As Object, e As EventArgs) Handles btnGenCompExt.Click
@@ -5098,6 +5231,11 @@
         llenarGridC()
     End Sub
 
+    Protected Sub btnListValidacion_Click(sender As Object, e As EventArgs) Handles btnListValidacion.Click
+        envio("Comprobar anticipos", "CompAntCxP.aspx")
+
+    End Sub
+
     Protected Sub btnEntEfectC_Click(sender As Object, e As EventArgs) Handles btnEntEfectC.Click
         Me._txtIdAct.Text = 31
         llenarGridC()
@@ -5122,7 +5260,6 @@
     Protected Sub btnConsCompExp_Click(sender As Object, e As EventArgs) Handles btnConsCompExp.Click
         envio("Consulta de Comprobaciones Expromat", "ConsCompExp.aspx")
     End Sub
-
     Protected Sub btnPlantComp_Click(sender As Object, e As EventArgs) Handles btnPlantComp.Click
         envio("Plantilla Comprobaciones", "ConsPlant.aspx")
     End Sub
@@ -5134,6 +5271,14 @@
     Protected Sub btnConsCompXConc_Click(sender As Object, e As EventArgs) Handles btnConsCompXConc.Click
         envio("Consulta de Comprobaciones por Concepto", "ConsCompXConcepto.aspx")
     End Sub
+    Protected Sub btnConsCompAntProv_Click(sender As Object, e As EventArgs) Handles btnConsCompAntProv.Click
+        envio("Consulta de comprobacion de Anticipos proveedor", "ConsCompAntProv.aspx")
+    End Sub
+    Protected Sub btnCAntProveedor_Click(sender As Object, e As EventArgs) Handles btnCAntProveedor.Click
+        Me._txtIdAct.Text = 140
+        llenarGvAnticipos()
+    End Sub
+
 
     'Facturas SAT
     Protected Sub btnCargaFact_Click(sender As Object, e As EventArgs) Handles btnCargaFact.Click
@@ -6547,6 +6692,29 @@
                 Select Case Val(._txtIdAct.Text)
                     Case 40
                         envio("Dispersar Gasolina", "40.aspx")
+                End Select
+            Catch ex As Exception
+                .litError.Text = ex.ToString
+            End Try
+        End With
+    End Sub
+
+    Protected Sub gvRegistrosAntProv_SelectedIndexChanged(sender As Object, e As EventArgs) Handles gvRegistrosAntProv.SelectedIndexChanged
+        With Me
+            Try
+                .litError.Text = ""
+                Session("idMsInst") = Val(.gvRegistrosAntProv.DataKeys(gvRegistrosAntProv.SelectedIndex).Values("id_ms_instancia"))
+                Session("idSolicitud") = Val(.gvRegistrosAntProv.SelectedRow.Cells(1).Text)
+
+                Select Case Val(._txtIdAct.Text)
+                    Case 135
+                        envio("Autorizar anticipo", "AutorizarAnticipo.aspx")
+                    Case 136
+                        envio("Visto bueno anticipo", "VboAnticipo.aspx")
+                    Case 138
+                        envio("Registrar Pago NAV", "RegistrarPagoNAV.aspx")
+                    Case 140
+                        envio("Comprobar anticipo", "ComprobarAnticipo.aspx")
                 End Select
             Catch ex As Exception
                 .litError.Text = ex.ToString
