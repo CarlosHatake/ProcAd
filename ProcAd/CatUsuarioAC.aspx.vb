@@ -74,7 +74,8 @@
             .cbDatosComprobacion.Enabled = valor
             .cbFechaTermino.Enabled = valor
             .cbMovimientosLibre.Enabled = valor
-            cbAmericanExpress.Enabled = valor
+            .cbConsAntProv.Enabled = valor
+            .cbConsAntProv.Enabled = valor
             .gvAutorizadores.Enabled = valor
         End With
     End Sub
@@ -244,9 +245,9 @@
                                                            "     , anticipo_obl " +
                                                            "     , edit_compro_datos " +
                                                            "     , isnull(cg_usuario.fecha_termino, 'N') as fecha_termino " +
+                                                           "     , isnull(cons_comp_anticipo, 'N') as cons_comp_anticipo " +
                                                            "     , isnull(movimientos_internos, 'N') as movimientos_internos " +
-                                                           "     , isnull(american_express, 'N') as american_express " +
-                                                           "     , (select no_anticipos from cg_usuario_ant where id_usuario = @id_usuario and tipo = 'AMEX') as anticipo_AMEX " +
+                                                           "     , isnull(cons_comp_anticipo, 'N') as cons_comp_anticipo " +
                                                            "from cg_usuario " +
                                                            "  inner join bd_empleado.dbo.cg_empleado Emp on cg_usuario.id_empleado = Emp.id_empleado " +
                                                            "  inner join bd_empleado.dbo.cg_cc CC on Emp.id_cc = CC.id_cc " +
@@ -371,6 +372,11 @@
                     cbMovimientosLibre.Checked = True
                 Else
                     cbMovimientosLibre.Checked = False
+                End If
+                If dsCatalogo.Tables(0).Rows(0).Item("cons_comp_anticipo").ToString() = "S" Then
+                    cbConsAntProv.Checked = True
+                Else
+                    cbConsAntProv.Checked = False
                 End If
 
                 If dsCatalogo.Tables(0).Rows(0).Item("american_express").ToString() = "S" Then
@@ -498,9 +504,9 @@
                 ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
                 Dim SCMValores As SqlCommand = New System.Data.SqlClient.SqlCommand
                 SCMValores.Connection = ConexionBD
-                SCMValores.CommandText = ""
+                SCMValores.CommandText = "UPDATE cg_usuario SET  ant_pendientes = @ant_pendientes, limite_aut_dir = @limite_aut_dir, cotizacion_unica = @cotizacion_unica, factura_extemp = @factura_extemp, factura_emi_prev = @factura_emi_prev, pago_efectivo = @pago_efectivo, unidad_comp = @unidad_comp, transporte = @transporte, lider = @lider, omitir_PGV = @omitir_PGV, alimentos_tab = @alimentos_tab, taxi_tab = @taxi_tab , hospedaje_libre=@hospedaje_libre ,factura_extemp_comp = @factura_extemp_comp , anticipo_obl = @anticipo_obl , edit_compro_datos = @edit_compro_datos, fecha_termino = @fecha_termino, movimientos_internos = @movimientos_internos, cons_comp_anticipo = @cons_comp_anticipo WHERE id_usuario = @id_usuario"
                 SCMValores.Parameters.Clear()
-                SCMValores.CommandText = "UPDATE cg_usuario SET  ant_pendientes = @ant_pendientes, limite_aut_dir = @limite_aut_dir, cotizacion_unica = @cotizacion_unica, factura_extemp = @factura_extemp, factura_emi_prev = @factura_emi_prev, pago_efectivo = @pago_efectivo, unidad_comp = @unidad_comp, transporte = @transporte, lider = @lider, omitir_PGV = @omitir_PGV, alimentos_tab = @alimentos_tab, taxi_tab = @taxi_tab , hospedaje_libre=@hospedaje_libre ,factura_extemp_comp = @factura_extemp_comp , anticipo_obl = @anticipo_obl , edit_compro_datos = @edit_compro_datos, fecha_termino = @fecha_termino, movimientos_internos = @movimientos_internos, american_express = @american_express WHERE id_usuario = @id_usuario"
+                SCMValores.CommandText = "UPDATE cg_usuario SET  ant_pendientes = @ant_pendientes, limite_aut_dir = @limite_aut_dir, cotizacion_unica = @cotizacion_unica, factura_extemp = @factura_extemp, factura_emi_prev = @factura_emi_prev, pago_efectivo = @pago_efectivo, unidad_comp = @unidad_comp, transporte = @transporte, lider = @lider, omitir_PGV = @omitir_PGV, alimentos_tab = @alimentos_tab, taxi_tab = @taxi_tab , hospedaje_libre=@hospedaje_libre ,factura_extemp_comp = @factura_extemp_comp , anticipo_obl = @anticipo_obl , edit_compro_datos = @edit_compro_datos, fecha_termino = @fecha_termino, movimientos_internos = @movimientos_internos, cons_comp_anticipo = @cons_comp_anticipo WHERE id_usuario = @id_usuario"
                 SCMValores.Parameters.AddWithValue("@id_usuario", .gvUsuario.SelectedRow.Cells(0).Text)
                 If ban = 0 Then
                     If .cbAntPend.Checked = True Then
@@ -591,13 +597,20 @@
                     If cbMovimientosLibre.Checked = True Then
                         SCMValores.Parameters.AddWithValue("@movimientos_internos", "S")
                     Else
+                        If cbConsAntProv.Checked = True Then
+                            SCMValores.Parameters.AddWithValue("@cons_comp_anticipo", "S")
+                        Else
+                            SCMValores.Parameters.AddWithValue("@cons_comp_anticipo", "N")
+                        End If
+
                         SCMValores.Parameters.AddWithValue("@movimientos_internos", "N")
                     End If
-                    If cbAmericanExpress.Checked = True Then
-                        SCMValores.Parameters.AddWithValue("@american_express", "S")
+                    If cbConsAntProv.Checked = True Then
+                        SCMValores.Parameters.AddWithValue("@cons_comp_anticipo", "S")
                     Else
-                        SCMValores.Parameters.AddWithValue("@american_express", "N")
+                        SCMValores.Parameters.AddWithValue("@cons_comp_anticipo", "N")
                     End If
+
                     ConexionBD.Open()
                     SCMValores.ExecuteNonQuery()
                     ConexionBD.Close()

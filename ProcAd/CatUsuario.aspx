@@ -305,10 +305,9 @@
                                                  <td style="text-align: left; " class="auto-style83">
                                                     &nbsp;
                                                 </td>
-                                                <td style="text-align: left; " class="auto-style88">
-                                                      &nbsp;
-                                                    <asp:Label ID="Label1" runat="server" Font-Bold="True">Anticipo </asp:Label>
-                                                </td>   
+                                                <td style="text-align: left;" class="auto-style94">
+                                                    <asp:CheckBox ID="cbConsAntProv" runat="server" Font-Names="Verdana" Font-Size="8pt" Text="Cons. Anticipos Prov." />
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td style="text-align: left; " class="auto-style89">
@@ -321,9 +320,10 @@
                                                     &nbsp;
                                                 </td>
                                                 <td style="text-align: left; " class="auto-style88">
-                                                    <asp:CheckBox ID="cbAntXEmpr" runat="server" AutoPostBack="True" Font-Names="Verdana" Font-Size="8pt" Text="Anticipos x Empresa:" />
-                                                    <asp:TextBox ID="txtAntXEmpr" runat="server" Font-Names="Verdana" Font-Size="8pt" MaxLength="4" Width="30px"></asp:TextBox>
-                                                </td>   
+                                                      &nbsp;
+                                                    <asp:Label ID="Label1" runat="server" Font-Bold="True">Anticipo </asp:Label>
+                                                </td>
+                                                
                                             </tr>
                                              <tr>
                                                  <td class="auto-style89" style="text-align: left; ">
@@ -333,19 +333,20 @@
                                                      
                                                  </td>
                                                  <td class="auto-style83" style="text-align: left; ">&nbsp;</td>
+                                                 <td style="text-align: left; " class="auto-style88">
+                                                    <asp:CheckBox ID="cbAntXEmpr" runat="server" AutoPostBack="True" Font-Names="Verdana" Font-Size="8pt" Text="Anticipos x Empresa:" />
+                                                    <asp:TextBox ID="txtAntXEmpr" runat="server" Font-Names="Verdana" Font-Size="8pt" MaxLength="4" Width="30px"></asp:TextBox>
+                                                </td>   
+                                             </tr>
+                                            <tr>
+                                                <td>
+                                                    &nbsp;
+                                                </td>
+                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td>
                                                  <td class="auto-style88" style="text-align: left; ">
                                                      <asp:CheckBox ID="cbIngresarNocheHospedaje" runat="server" Font-Names="Verdana" Font-Size="8pt" Text="Ingresar Noches Hospedaje." />
                                                  </td>
-                                             </tr>
-                                            <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                <td>
-                                                    <asp:CheckBox ID="cbAmericanExpress" runat="server" Font-Names="Verdana" Font-Size="8pt" Text="American Express"/>
-                                                    <asp:TextBox ID="txtAnticipoAmex" runat="server" Font-Names="Verdana" Font-Size="8pt" MaxLength="4" Width="30px"></asp:TextBox>
-                                                
-                                                </td>
                                             </tr>
                                         </table> 
                                            

@@ -14,13 +14,58 @@ Option Explicit On
 Partial Public Class VboAnticipo
 
     '''<summary>
-    '''Control wsm43.
+    '''Control wsm46.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents wsm43 As Global.Infragistics.Web.UI.WebScriptManager
+    Protected WithEvents wsm46 As Global.Infragistics.Web.UI.WebScriptManager
+
+    '''<summary>
+    '''Control litError.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents litError As Global.System.Web.UI.WebControls.Literal
+
+    '''<summary>
+    '''Control _txtIdUsuario.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtIdUsuario As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control _txtBan.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtBan As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control _txtIdMsInst.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtIdMsInst As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control _txtidMsAnticipo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtidMsAnticipo As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control pnlInicio.
@@ -122,6 +167,24 @@ Partial Public Class VboAnticipo
     Protected WithEvents lblImporte As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Control lbl_Pedido.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lbl_Pedido As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control gvPedidosCompras.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvPedidosCompras As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
     '''Control lbl_Justificacion.
     '''</summary>
     '''<remarks>
@@ -131,13 +194,13 @@ Partial Public Class VboAnticipo
     Protected WithEvents lbl_Justificacion As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblJustificacion.
+    '''Control txtJustificacion.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblJustificacion As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents txtJustificacion As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control lbl_Adjunto.
@@ -149,31 +212,22 @@ Partial Public Class VboAnticipo
     Protected WithEvents lbl_Adjunto As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control lblAdjunto.
+    '''Control upAdjuntos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lblAdjunto As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents upAdjuntos As Global.System.Web.UI.UpdatePanel
 
     '''<summary>
-    '''Control lbl_Pedido.
+    '''Control gvAdjuntos.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents lbl_Pedido As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
-    '''Control lblPedido.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblPedido As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents gvAdjuntos As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''Control lbl_Observaciones.
@@ -192,6 +246,24 @@ Partial Public Class VboAnticipo
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtObservaciones As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control lblFechaPagoAutorizar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblFechaPagoAutorizar As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control wdteFechaPagoAutorizar.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents wdteFechaPagoAutorizar As Global.Infragistics.Web.UI.EditorControls.WebDatePicker
 
     '''<summary>
     '''Control btnAutorizar.
