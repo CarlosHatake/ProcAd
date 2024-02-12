@@ -4486,14 +4486,7 @@ Partial Public Class Menu
     '''</remarks>
     Protected WithEvents btnAutorizarCompAnticipo As Global.System.Web.UI.WebControls.Button
 
-    '''<summary>
-    '''Control Image9.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image9 As Global.System.Web.UI.WebControls.Image
+
 
     '''<summary>
     '''Control btnSegundoAutorizador.
@@ -4504,14 +4497,6 @@ Partial Public Class Menu
     '''</remarks>
     Protected WithEvents btnSegundoAutorizador As Global.System.Web.UI.WebControls.Button
 
-    '''<summary>
-    '''Control Image10.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image10 As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
     '''Control btnTercerAutorizador.
@@ -4522,14 +4507,7 @@ Partial Public Class Menu
     '''</remarks>
     Protected WithEvents btnTercerAutorizador As Global.System.Web.UI.WebControls.Button
 
-    '''<summary>
-    '''Control Image4.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image4 As Global.System.Web.UI.WebControls.Image
+
 
     '''<summary>
     '''Control btnCompCodCont.
@@ -4540,14 +4518,6 @@ Partial Public Class Menu
     '''</remarks>
     Protected WithEvents btnCompCodCont As Global.System.Web.UI.WebControls.Button
 
-    '''<summary>
-    '''Control Image8.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image8 As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
     '''Control btnAutorizarCP.

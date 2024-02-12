@@ -165,3 +165,8 @@ C:\Users\UNNE\source\repos\Proyecto ProcAd\ProcAd\ProcAd\obj\Debug\ProcAd.vbproj
 C:\Users\UNNE\source\repos\Proyecto ProcAd\ProcAd\ProcAd\obj\Debug\ProcAd.dll
 C:\Users\UNNE\source\repos\Proyecto ProcAd\ProcAd\ProcAd\obj\Debug\ProcAd.xml
 C:\Users\UNNE\source\repos\Proyecto ProcAd\ProcAd\ProcAd\obj\Debug\ProcAd.pdb
+C:\Users\UNNE\source\repos\ProcAd080224\ProcAd\ProcAd\obj\Debug\ProcAd.vbproj.AssemblyReference.cache
+C:\Users\UNNE\source\repos\ProcAd080224\ProcAd\ProcAd\obj\Debug\ProcAd.Resources.resources
+C:\Users\UNNE\source\repos\ProcAd080224\ProcAd\ProcAd\obj\Debug\ProcAd.vbproj.GenerateResource.cache
+C:\Users\UNNE\source\repos\ProcAd080224\ProcAd\ProcAd\obj\Debug\ProcAd.dll.licenses
+C:\Users\UNNE\source\repos\ProcAd080224\ProcAd\ProcAd\obj\Debug\ProcAd.vbproj.CoreCompileInputs.cache
