@@ -10079,6 +10079,15 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:ProcAd._125._lblTipoMov">
+<summary>
+Control lblTipoMov.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:ProcAd._125._lbl_CuentaContable">
 <summary>
 Control lbl_CuentaContable.
@@ -55115,6 +55124,717 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:ProcAd.ConsAntProv._wsmConsAnt">
+<summary>
+Control wsmConsAnt.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv.__txtIdSolicito">
+<summary>
+Control _txtIdSolicito.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv.__txtEmpleado">
+<summary>
+Control _txtEmpleado.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv.__txtPerfil">
+<summary>
+Control _txtPerfil.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv.__txtIdUsuario">
+<summary>
+Control _txtIdUsuario.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._litError">
+<summary>
+Control litError.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlFiltros">
+<summary>
+Control pnlFiltros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Filtros">
+<summary>
+Control lbl_Filtros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlSolicitó">
+<summary>
+Control pnlSolicitó.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._cbSolicitante">
+<summary>
+Control cbSolicitante.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlSolicitante">
+<summary>
+Control pnlSolicitante.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._ddlSolicitante">
+<summary>
+Control ddlSolicitante.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._cbEmpresa">
+<summary>
+Control cbEmpresa.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlEmpresa">
+<summary>
+Control pnlEmpresa.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._ddlEmpresa">
+<summary>
+Control ddlEmpresa.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._cbFechaC">
+<summary>
+Control cbFechaC.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlFechaC">
+<summary>
+Control pnlFechaC.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_FechaCI">
+<summary>
+Control lbl_FechaCI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wdpFechaI">
+<summary>
+Control wdpFechaI.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_FechaCF">
+<summary>
+Control lbl_FechaCF.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wdpFechaF">
+<summary>
+Control wdpFechaF.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._cbAutorizador">
+<summary>
+Control cbAutorizador.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlAutorizador">
+<summary>
+Control pnlAutorizador.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._ddlAutorizador">
+<summary>
+Control ddlAutorizador.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._cbStatus">
+<summary>
+Control cbStatus.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlStatus">
+<summary>
+Control pnlStatus.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._ddlStatus">
+<summary>
+Control ddlStatus.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._cbTipoAnt">
+<summary>
+Control cbTipoAnt.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlTipoAnt">
+<summary>
+Control pnlTipoAnt.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._ddlTipoAnt">
+<summary>
+Control ddlTipoAnt.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._cbNoAnticipo">
+<summary>
+Control cbNoAnticipo.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlNoAnticipo">
+<summary>
+Control pnlNoAnticipo.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._txtNoAnticipo">
+<summary>
+Control txtNoAnticipo.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._btnBuscar">
+<summary>
+Control btnBuscar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlRegistros">
+<summary>
+Control pnlRegistros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._btnExportar">
+<summary>
+Control btnExportar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._gvRegistros">
+<summary>
+Control gvRegistros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._gvRegistrosT">
+<summary>
+Control gvRegistrosT.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._pnlDetalle">
+<summary>
+Control pnlDetalle.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._btnNueBusProd">
+<summary>
+Control btnNueBusProd.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Folio">
+<summary>
+Control lbl_Folio.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblFolio">
+<summary>
+Control lblFolio.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Solicitante">
+<summary>
+Control lbl_Solicitante.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblSolicitante">
+<summary>
+Control lblSolicitante.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_NoProveedor">
+<summary>
+Control lbl_NoProveedor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblNoProveedor">
+<summary>
+Control lblNoProveedor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Empresa">
+<summary>
+Control lbl_Empresa.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblEmpresa">
+<summary>
+Control lblEmpresa.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Autorizador">
+<summary>
+Control lbl_Autorizador.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblAutorizador">
+<summary>
+Control lblAutorizador.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Periodo">
+<summary>
+Control lbl_Periodo.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblPeriodo">
+<summary>
+Control lblPeriodo.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Destino">
+<summary>
+Control lbl_Destino.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblDestino">
+<summary>
+Control lblDestino.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Act">
+<summary>
+Control lbl_Act.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._txtAct">
+<summary>
+Control txtAct.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_NoPersonas">
+<summary>
+Control lbl_NoPersonas.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wneNoPersonas">
+<summary>
+Control wneNoPersonas.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Días">
+<summary>
+Control lbl_Días.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Monto">
+<summary>
+Control lbl_Monto.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_BuenViaje">
+<summary>
+Control lbl_BuenViaje.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_TipoPago">
+<summary>
+Control lbl_TipoPago.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblTipoPago">
+<summary>
+Control lblTipoPago.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Hospedaje">
+<summary>
+Control lbl_Hospedaje.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wneDiasH">
+<summary>
+Control wneDiasH.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wceMontoH">
+<summary>
+Control wceMontoH.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Alimentos">
+<summary>
+Control lbl_Alimentos.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wneDiasA">
+<summary>
+Control wneDiasA.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wceMontoA">
+<summary>
+Control wceMontoA.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Casetas">
+<summary>
+Control lbl_Casetas.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wneDiasC">
+<summary>
+Control wneDiasC.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wceMontoC">
+<summary>
+Control wceMontoC.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_Otros">
+<summary>
+Control lbl_Otros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wneDiasO">
+<summary>
+Control wneDiasO.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wceMontoO">
+<summary>
+Control wceMontoO.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblOtros">
+<summary>
+Control lblOtros.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lbl_MontoT">
+<summary>
+Control lbl_MontoT.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._wceMontoT">
+<summary>
+Control wceMontoT.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.ConsAntProv._lblMontoTLetra">
+<summary>
+Control lblMontoTLetra.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:ProcAd.ConsAutorizador._wsmConsCompT">
 <summary>
 Control wsmConsCompT.
@@ -73304,6 +74024,33 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:ProcAd.Menu._pnlModCargasCombustible">
+<summary>
+Control pnlModCargasCombustible.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._Image5">
+<summary>
+Control Image5.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._btnModCargasC">
+<summary>
+Control btnModCargasC.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:ProcAd.Menu._pnlCaTitulo">
 <summary>
 Control pnlCaTitulo.
@@ -73712,6 +74459,33 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:ProcAd.Menu._btnConsFactLiq">
 <summary>
 Control btnConsFactLiq.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._pnlFCFDIConsulta">
+<summary>
+Control pnlFCFDIConsulta.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._imgFCFDI1">
+<summary>
+Control imgFCFDI1.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._btnConsCFDI">
+<summary>
+Control btnConsCFDI.
 </summary>
 <remarks>
 Campo generado automáticamente.
@@ -74582,15 +75356,6 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
-<member name="F:ProcAd.Menu._btnCorrFactura">
-<summary>
-Control btnCorrFactura.
-</summary>
-<remarks>
-Campo generado automáticamente.
-Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-</remarks>
-</member>
 <member name="F:ProcAd.Menu._pnlIFAutorizarFact">
 <summary>
 Control pnlIFAutorizarFact.
@@ -74639,6 +75404,15 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:ProcAd.Menu._imgF4">
 <summary>
 Control imgF4.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._btnCorrFactura">
+<summary>
+Control btnCorrFactura.
 </summary>
 <remarks>
 Campo generado automáticamente.
@@ -75449,6 +76223,33 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:ProcAd.Menu._btnConsAntAud">
 <summary>
 Control btnConsAntAud.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._pnlConsAntProv">
+<summary>
+Control pnlConsAntProv.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._Image4">
+<summary>
+Control Image4.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._Button1">
+<summary>
+Control Button1.
 </summary>
 <remarks>
 Campo generado automáticamente.

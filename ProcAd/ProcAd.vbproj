@@ -232,6 +232,7 @@
     <Content Include="ConsAmpl.aspx" />
     <Content Include="ConsAnt.aspx" />
     <Content Include="ConsAntCaja.aspx" />
+    <Content Include="ConsAntProv.aspx" />
     <Content Include="ConsAutorizador.aspx" />
     <Content Include="ConsBloqueosST.aspx" />
     <Content Include="ConsCFDI.aspx" />
@@ -1026,6 +1027,13 @@
     </Compile>
     <Compile Include="ConsAntCaja.aspx.vb">
       <DependentUpon>ConsAntCaja.aspx</DependentUpon>
+      <SubType>ASPXCodebehind</SubType>
+    </Compile>
+    <Compile Include="ConsAntProv.aspx.designer.vb">
+      <DependentUpon>ConsAntProv.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ConsAntProv.aspx.vb">
+      <DependentUpon>ConsAntProv.aspx</DependentUpon>
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="ConsAutorizador.aspx.designer.vb">

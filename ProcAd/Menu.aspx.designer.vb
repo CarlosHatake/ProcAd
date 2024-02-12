@@ -1301,33 +1301,6 @@ Partial Public Class Menu
     Protected WithEvents btnConsFactLiq As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control pnlFCFDITitulo.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlFCFDITitulo As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''Control imgFCFDI.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents imgFCFDI As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''Control lblProcAdFCFDI.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents lblProcAdFCFDI As Global.System.Web.UI.WebControls.Label
-
-    '''<summary>
     '''Control pnlFCFDIConsulta.
     '''</summary>
     '''<remarks>
@@ -2219,15 +2192,6 @@ Partial Public Class Menu
     Protected WithEvents imgIF3 As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
-    '''Control btnCorrFactura.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnCorrFactura As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''Control pnlIFAutorizarFact.
     '''</summary>
     '''<remarks>
@@ -2280,6 +2244,15 @@ Partial Public Class Menu
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents imgF4 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnCorrFactura.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCorrFactura As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control btnAsigCuenta.
@@ -3090,6 +3063,33 @@ Partial Public Class Menu
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnConsAntAud As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlConsAntProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlConsAntProv As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control Image4.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image4 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control Button1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Button1 As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control pnlRVTitulo.

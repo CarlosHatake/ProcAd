@@ -669,7 +669,7 @@
                                                    </div>
                                                </div>
 
-                                               <div id="headFacturaCFDI">
+                                               <%--<div id="headFacturaCFDI">
                                                        <div class="mb-0">
                                                            <a class="btn btn-link" data-toggle="collapse" data-target="#collFacturasCFDI" aria-expanded="true" aria-controls="collFacturasCFDI">
                                                                <asp:Panel ID="pnlFCFDITitulo" runat="server">
@@ -686,7 +686,7 @@
                                                                </asp:Panel>
                                                            </a>
                                                        </div>
-                                                   </div>
+                                                   </div>--%>
                                                    <div id="collFacturasCFDI" class="collapse" aria-labelledby="headFacturaSAT" data-parent="#accordion">
                                                        <div class="card-body">
                                                            <asp:Panel ID="pnlFCFDIConsulta" runat="server">
@@ -1150,8 +1150,7 @@
                                                                            <asp:Image ID="imgIF3" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
                                                                        </td>
                                                                        <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnCorrFactura" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Corregir Factura" Width="105px" ForeColor="Black" />
-                                                                       </td>
+                                                                           &nbsp;</td>
                                                                    </tr>
                                                                </table>
                                                            </asp:Panel>
@@ -1175,7 +1174,8 @@
                                                                            <asp:Image ID="imgF4" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
                                                                        </td>
                                                                        <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnAsigCuenta" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Asignar Cuenta" Width="100px" ForeColor="Black" />
+                                                                           <asp:Button ID="btnCorrFactura" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Corregir Factura" Width="105px" ForeColor="Black" />
+                                                                           <asp:Button ID="btnAsigCuenta" runat="server" BackColor="White" BorderStyle="None" CssClass="stbutton" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" ForeColor="Black" Text="Asignar Cuenta" Width="100px" />
                                                                        </td>
                                                                    </tr>
                                                                </table>
@@ -1547,6 +1547,19 @@
                                                                        </td>
                                                                        <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
                                                                            <asp:Button ID="btnConsAntAud" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Consulta de Anticipos Auditoria" Width="187px" ForeColor="Black" />
+                                                                       </td>
+                                                                   </tr>
+                                                               </table>
+                                                           </asp:Panel>
+
+                                                           <asp:Panel ID="pnlConsAntProv" runat="server">
+                                                               <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
+                                                                   <tr>
+                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                                                                           <asp:Image ID="Image4" runat="server" ImageUrl="images\icn_search.png" Width="17px" />
+                                                                       </td>
+                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                                                                           <asp:Button ID="Button1" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Consulta de Anticipos Proveedor" Width="187px" ForeColor="Black" />
                                                                        </td>
                                                                    </tr>
                                                                </table>
