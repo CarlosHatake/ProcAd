@@ -68,15 +68,6 @@ Partial Public Class GenerarReporteDinamico
     Protected WithEvents pnlFiltros As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control cbContrato.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cbContrato As Global.System.Web.UI.WebControls.CheckBox
-
-    '''<summary>
     '''Control pnlContrato.
     '''</summary>
     '''<remarks>
@@ -86,15 +77,6 @@ Partial Public Class GenerarReporteDinamico
     Protected WithEvents pnlContrato As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control cbAnexo.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cbAnexo As Global.System.Web.UI.WebControls.CheckBox
-
-    '''<summary>
     '''Control pnlAnexo.
     '''</summary>
     '''<remarks>
@@ -102,15 +84,6 @@ Partial Public Class GenerarReporteDinamico
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents pnlAnexo As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''Control cbEquipo.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents cbEquipo As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
     '''Control pnlEquipo.

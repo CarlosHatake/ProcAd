@@ -26,7 +26,7 @@
                     <tr style="height: 40px">
                         <td style="width: 300px"></td>
                         <td>
-                            <asp:CheckBox ID="cbContrato" runat="server" Text="Contrato:" Width="90px" Font-Bold="true" />
+                            <asp:Label runat ="server" Text="Contrato:" Font-Bold="true" ></asp:Label>
                         </td>
                         <td style="vertical-align:top">
                             <asp:Panel runat="server" ID="pnlContrato">
@@ -43,7 +43,7 @@
                         </td>
                         <td style="width: 70px"></td>
                         <td>
-                            <asp:CheckBox ID="cbAnexo" runat="server" Text="Anexo:" Font-Bold="true" />
+                            <asp:Label runat="server" Text="Anexo" Font-Bold="true"></asp:Label>
                         </td>
                         <td style="vertical-align:top">
                             <asp:Panel runat="server" ID="pnlAnexo">
@@ -60,7 +60,7 @@
                         </td>
                         <td style="width: 70px"></td>
                         <td>
-                            <asp:CheckBox ID="cbEquipo" runat="server" Text="Equipo:" Font-Bold="true"/>
+                            <asp:Label runat="server" Text="Equipo:" Font-Bold="true"/>
                         </td>
                         <td>
                             <asp:Panel runat="server" ID="pnlEquipo">
