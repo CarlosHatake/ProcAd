@@ -59,6 +59,24 @@ Partial Public Class Anexos
     Protected WithEvents _txtIdMsInst As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control _txtNombreArchivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtNombreArchivo As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control _txtIdMsContrato.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents _txtIdMsContrato As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''Control pnlInicio.
     '''</summary>
     '''<remarks>
@@ -104,6 +122,15 @@ Partial Public Class Anexos
     Protected WithEvents pnlCargarArchivo As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
+    '''Control lbl_cargaArchivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lbl_cargaArchivo As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control fuArchivo.
     '''</summary>
     '''<remarks>
@@ -122,6 +149,15 @@ Partial Public Class Anexos
     Protected WithEvents btnValidar As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
+    '''Control hlPlantilla.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents hlPlantilla As Global.System.Web.UI.WebControls.HyperLink
+
+    '''<summary>
     '''Control btnGenerarPlantilla.
     '''</summary>
     '''<remarks>
@@ -131,13 +167,13 @@ Partial Public Class Anexos
     Protected WithEvents btnGenerarPlantilla As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control gvRegistros.
+    '''Control lbl_Registrados.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents gvRegistros As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents lbl_Registrados As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control lblRegistrados.
@@ -149,6 +185,15 @@ Partial Public Class Anexos
     Protected WithEvents lblRegistrados As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Control lbl_Omitidos.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lbl_Omitidos As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control lblOmitidos.
     '''</summary>
     '''<remarks>
@@ -156,6 +201,15 @@ Partial Public Class Anexos
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents lblOmitidos As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control gvRegistros.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvRegistros As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''Control btnGuardarArchivo.

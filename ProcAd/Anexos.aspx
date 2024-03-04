@@ -30,6 +30,8 @@
                 <asp:TextBox ID="_txtIdUsuario" runat="server" Width="15px" Visible="False"></asp:TextBox>
                 <asp:TextBox ID="_txtBan" runat="server" Width="15px" Visible="False"></asp:TextBox>
                 <asp:TextBox ID="_txtIdMsInst" runat="server" Width="15px" Visible="False"></asp:TextBox>
+                <asp:TextBox ID="_txtNombreArchivo" runat="server" Width="15px" Visible="False"></asp:TextBox>
+                <asp:TextBox ID="_txtIdMsContrato" runat="server" Width="15px" Visible="False"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -49,7 +51,7 @@
                     <table>
                         <tr>
                             <td style="width: 610px"></td>
-                            <td>
+                            <td style="font-family: Verdana; font-size: 8pt;">
                                 <asp:CheckBoxList ID="cbTipoCarga" runat="server" AutoPostBack="true">
                                     <asp:ListItem Text="Carga de archivo" Value="1" onclick="MutExChkList(this);" />
                                     <asp:ListItem Text="Carga manual" Value="2" onclick="MutExChkList(this);" />
@@ -70,8 +72,8 @@
                         </tr>
                         <tr>
                             <td style="width: 100px"></td>
-                            <td>
-                                <asp:Label runat="server" Text="Cargar archivo:"></asp:Label>
+                            <td style="font-family: Verdana; font-size: 8pt;">
+                                <asp:Label ID="lbl_cargaArchivo" runat="server" Text="Cargar archivo:"></asp:Label>
                             </td>
                             <td>
                                 <asp:FileUpload runat="server" ID="fuArchivo" Font-Size="8pt" Font-Names="Verdana" />
@@ -79,21 +81,64 @@
                             <td>&nbsp;&nbsp;
                                 <asp:Button runat="server" ID="btnValidar" Text="Validar archivo" Font-Size="8pt" Font-Names="Verdana" />
                             </td>
-                            <td style="width:500px"></td>
+                            <td style="width:500px; text-align:right">
+                            </td>
                             <td>
-                                <asp:Button runat="server" ID="btnGenerarPlantilla" Text="Generar plantilla" />
                             </td>
                         </tr>
                         <tr>
                             <td style="width: 100px"></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td style="width:75%"></td>
+                            <td>
+                               <asp:HyperLink ID="hlPlantilla" runat="server" Font-Names="Verdana" Font-Size="8pt">Plantilla</asp:HyperLink>
+                            </td>
+                            <td>
+                               <asp:Button runat="server" ID="btnGenerarPlantilla" Text="Generar plantilla" Font-Size="8pt" Font-Names="Verdana"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px"></td>
+
+                            <td style="font-family: Verdana; font-size: 8pt;">
+                                <asp:Label ID="lbl_Registrados" runat="server" Text="Registrados:" Font-Names="Verdana" Font-Size="8pt"></asp:Label>
+                            </td>
+                            <td style="font-family: Verdana; font-size: 8pt;">
+                                <asp:Label runat="server" ID="lblRegistrados" Font-Bold="true"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width: 200px"></td>
+
+                            <td style="text-align: right">
+                                <asp:Label ID="lbl_Omitidos" runat="server" Text="Omitidos:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:Label runat="server" ID="lblOmitidos" Font-Bold="true"></asp:Label>
+                            </td>
                         </tr>
                     </table>
                     <table>
                         <tr>
                             <td style="width: 100px"></td>
                             <td>
-                                <asp:GridView ID="gvRegistros" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="1200px">
+                                <asp:GridView ID="gvRegistros" runat="server" AutoGenerateColumns="False" BackColor="White" BorderColor="#CCCCCC" BorderStyle="None" BorderWidth="1px" CellPadding="4" ForeColor="Black" GridLines="Horizontal" Width="1200px" >
                                     <Columns>
+                                        <asp:CommandField ButtonType="Image" SelectImageUrl="images\ok.png" ShowSelectButton="True">
+                                            <ItemStyle Width="15px" />
+                                        </asp:CommandField>
                                         <asp:BoundField DataField="empresa" HeaderText="Empresa">
                                             <ItemStyle HorizontalAlign="Center" Width="30px" />
                                         </asp:BoundField>
@@ -103,28 +148,31 @@
                                         <asp:BoundField DataField="anexo" HeaderText="Anexo">
                                             <ItemStyle HorizontalAlign="Center" Width="120px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="arrendado" HeaderText="Arrendado">
+                                        <asp:BoundField DataField="arrendadora" HeaderText="Arrendado">
                                             <ItemStyle HorizontalAlign="Center" Width="50px" />
                                         </asp:BoundField>
                                         <asp:BoundField DataField="serie" HeaderText="Serie">
                                             <ItemStyle HorizontalAlign="Center" Width="50px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="tipo_arrendamiento" HeaderText="Tipo de arrendamiento">
+                                        <asp:BoundField DataField="tipo de arrendamiento" HeaderText="Tipo de arrendamiento">
                                             <ItemStyle HorizontalAlign="Center" Width="50px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="periodo" HeaderText="Periodo">
+                                        <asp:BoundField DataField="plazo" HeaderText="Periodo">
                                             <ItemStyle HorizontalAlign="Center" Width="30px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="fecha_inicio" HeaderText="Fecha inicio" DataFormatString="{0:dd/MM/yyyy}">
+                                        <asp:BoundField DataField="inicio" HeaderText="Fecha inicio" DataFormatString="{0:dd/MM/yyyy}">
                                             <ItemStyle HorizontalAlign="Center" Width="90px" />
                                         </asp:BoundField>
-                                        <asp:BoundField DataField="fecha_fin" HeaderText="Fecha fin" DataFormatString="{0:dd/MM/yyyy}">
+                                        <asp:BoundField DataField="terminacion" HeaderText="Fecha fin" DataFormatString="{0:dd/MM/yyyy}">
                                             <ItemStyle HorizontalAlign="Center" Width="90px" />
                                         </asp:BoundField>
+                                        <%--
                                         <asp:BoundField DataField="mes_año" HeaderText="Mes y año">
                                             <ItemStyle HorizontalAlign="Center" Width="30px" />
-                                        </asp:BoundField>
-                                        <asp:BoundField DataField="monto" HeaderText="Monto" DataFormatString="{0:c}">
+                                        </asp:BoundField
+                                        </asp:BoundField
+                                        --%>
+                                        <asp:BoundField DataField="inversion s/iva" HeaderText="Monto" DataFormatString="{0:c}">
                                             <ItemStyle HorizontalAlign="Right" Width="90px" />
                                         </asp:BoundField>
 
@@ -140,31 +188,7 @@
                                 </asp:GridView>
                             </td>
                         </tr>
-                    </table>
-                    <table>
-                        <tr>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td style="width: 200px"></td>
-
-                            <td>
-                                <asp:Label runat="server" Text="Registrados:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblRegistrados" Font-Bold="true" ></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="width: 200px"></td>
-
-                            <td style="text-align:right">
-                                <asp:Label runat="server" Text="Omitidos:"></asp:Label>
-                            </td>
-                            <td>
-                                <asp:Label runat="server" ID="lblOmitidos" Font-Bold="true" ></asp:Label>
-                            </td>
-                        </tr>
+                      
                     </table>
                     <table>
                         <tr>
