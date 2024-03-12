@@ -12,6 +12,12 @@ Public Class clsAccess
         'usr = "sa"
         'pass = "12345#b"
 
+        'servidor = "148.223.153.43\MSSQLSERVER1"
+        servidor = "ATENEA\MSSQLSERVER1"
+        usr = "INT_SIS_App"
+        pass = "K3ccq#iup2b5"
+
+
         Select Case sistema
             Case "ProcAd"
                 Return "Data Source=" + servidor + ";Initial Catalog=bd_ProcAd;Persist Security Info=True;User ID=" + usr + ";Password=" + pass

@@ -44,6 +44,23 @@
                     .pnlAConsultar.Visible = False
                     .pnlAConsCuadreA.Visible = False
                     .pnlAConsAud.Visible = False
+                    .pnlConsCompAntPro.Visible = False
+
+
+                    '--antcipo provedor
+                    .pnlSAntProveedor.Visible = False
+                    .pnlVBOAnticipo.Visible = False 'Poner a false
+                    .pnlRegistrarPagoNav.Visible = False ' poner a false
+
+
+                    .pnlCAntProveedor.Visible = False
+                    .pnlAutAntProvee.Visible = False
+                    .pnlAutAntProvee2.Visible = False
+                    .pnlAutAntProvee3.Visible = False
+                    .pnlCompCodCont.Visible = False
+                    .pnlAutorizarCPAP.Visible = False
+
+
                     '-- Comprobaciones
                     .pnlCTitulo.Visible = False
                     .pnlCGenerarCompExt.Visible = False
@@ -297,6 +314,89 @@
                                 .pnlChecador.Visible = True
                             End If
 
+                            'Acceso a consultas de comprobación de anticipos
+                            Dim sdaConsProv As New SqlDataAdapter
+                            Dim dsConsProv As New DataSet
+                            sdaConsProv.SelectCommand = New SqlCommand("select anticipo_proved from cg_usuario where id_usuario = @id_usuario", ConexionBD)
+                            sdaConsProv.SelectCommand.Parameters.AddWithValue("@id_usuario", ._txtIdUsuario.Text)
+                            ConexionBD.Open()
+                            sdaConsProv.Fill(dsConsProv)
+                            ConexionBD.Close()
+
+                            If dsConsProv.Tables(0).Rows(0).Item("anticipo_proved").ToString() = "S" Then
+                                .pnlSAntProveedor.Visible = True
+                                .pnlConsAntProv.Visible = True
+                                .pnlConsCompAntPro.Visible = True
+                                .pnlCAntProveedor.Visible = True
+                            Else
+                                .pnlSAntProveedor.Visible = False
+                                .pnlConsAntProv.Visible = False
+                                .pnlConsCompAntPro.Visible = False
+                            End If
+
+                            'Acceso autorizar anticipo Proveedor
+
+                            Dim banAn As Integer = 0
+                            SCMValores.Connection = ConexionBD
+                            SCMValores.CommandText = ""
+                            SCMValores.Parameters.Clear()
+                            SCMValores.CommandText = "select  Count(*) from ms_anticipo_proveedor where estatus ='P' and id_usr_autoriza = @id_usuario "
+                            SCMValores.Parameters.AddWithValue("@id_usuario", Val(._txtIdUsuario.Text))
+                            ConexionBD.Open()
+                            banAn = SCMValores.ExecuteScalar()
+                            ConexionBD.Close()
+                            If banAn > 0 Then
+                                .pnlAutSAnticipoProv.Visible = True
+                                .lblAutSAnticipoProv.Text = banAn
+                            Else
+                                .pnlAutSAnticipoProv.Visible = False
+
+                            End If
+
+                            Dim banAnPr As Integer = 0
+                            SCMValores.Connection = ConexionBD
+                            SCMValores.CommandText = ""
+                            SCMValores.Parameters.Clear()
+                            SCMValores.CommandText = "select  Count(*) from ms_anticipo_proveedor LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol where estatus ='A' AND inst.id_actividad = 136 AND inst.tipo = 'AP' "
+                            SCMValores.Parameters.AddWithValue("@id_usuario", Val(._txtIdUsuario.Text))
+                            ConexionBD.Open()
+                            banAnPr = SCMValores.ExecuteScalar()
+                            ConexionBD.Close()
+                            If banAnPr > 0 Then
+                                .lblVBOAnticipo.Text = banAnPr
+                            End If
+
+                            'Comprobacion Anticipo Proveedor
+                            Dim banCompAP As Integer = 0
+                            SCMValores.Connection = ConexionBD
+                            SCMValores.CommandText = ""
+                            SCMValores.Parameters.Clear()
+                            SCMValores.CommandText = "SELECT COUNT(*)  FROM ms_anticipo_proveedor LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol  WHERE inst.tipo = 'AP' AND inst.id_actividad = 140  AND NOT EXISTS (SELECT NULL FROM ms_comprobacion_anticipo comp WHERE ms_anticipo_proveedor.id_ms_anticipo_proveedor = comp.id_ms_anticipo_proveedor) AND id_usr_solicita = @id_usuario "
+                            SCMValores.Parameters.AddWithValue("@id_usuario", Val(._txtIdUsuario.Text))
+                            ConexionBD.Open()
+                            banCompAP = SCMValores.ExecuteScalar()
+                            ConexionBD.Close()
+                            If banCompAP > 0 Then
+                                .lblCAntProveedor.Text = banCompAP
+                            End If
+
+
+                            Dim banCompAPAut As Integer = 0
+                            SCMValores.Connection = ConexionBD
+                            SCMValores.CommandText = ""
+                            SCMValores.Parameters.Clear()
+                            SCMValores.CommandText = "select COUNT(*) from ms_comprobacion_anticipo  MSA " +
+                                                     " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol and MI.tipo ='CAP' " +
+                                                     " WHERE id_usr_autoriza = @id_usuario and MI.id_actividad =142"
+                            SCMValores.Parameters.AddWithValue("@id_usuario", Val(._txtIdUsuario.Text))
+                            ConexionBD.Open()
+                            banCompAPAut = SCMValores.ExecuteScalar()
+                            ConexionBD.Close()
+                            If banCompAPAut > 0 Then
+                                .lblAutorizarCompAnticipo.Text = banCompAPAut
+                                .pnlAutAntProvee.Visible = True
+                            End If
+                            'Autorizador
                             ''Acceso a panel de facturas CFDI
 
                             ''Dim accCFDI As Integer
@@ -349,6 +449,11 @@
                                     .pnlAConsultar.Visible = True
                                     .pnlAConsCuadreA.Visible = True
                                     .pnlAConsAud.Visible = True
+                                    .pnlVBOAnticipo.Visible = True
+                                    .pnlRegistrarPagoNav.Visible = True
+                                    .pnlConsCompAntPro.Visible = True
+                                    .pnlAutorizarCPAP.Visible = True
+                                    .pnlCompCodCont.Visible = True
                                     '-- Comprobaciones
                                     .pnlCTitulo.Visible = True
                                     .pnlCGenerarCompExt.Visible = True
@@ -1063,6 +1168,8 @@
                                     '-- Anticipos
                                     .pnlATitulo.Visible = True
                                     .pnlAConsultar.Visible = True
+                                    .pnlVBOAnticipo.Visible = True
+                                    .pnlConsCompAntPro.Visible = True
                                     '-- Comprobaciones
                                     .pnlCTitulo.Visible = True
                                     .pnlCGenerarComp.Visible = True
@@ -1360,6 +1467,10 @@
                                     .pnlCTitulo.Visible = True
                                     .pnlCGenerarComp.Visible = True
                                     .pnlCConsultar.Visible = True
+
+                                    '-- Comp Anticipo Proveedor
+                                    .pnlCompCodCont.Visible = True
+
                                     '-- Facturas SAT
                                     .pnlFSATTitulo.Visible = True
                                     .pnlFSATCarga.Visible = True
@@ -1678,6 +1789,11 @@
                                     '-- Anticipos
                                     .pnlATitulo.Visible = True
                                     .pnlAConsultar.Visible = True
+                                    .pnlRegistrarPagoNav.Visible = True
+                                    .pnlConsAntProv.Visible = True
+                                    .pnlConsCompAntPro.Visible = True
+                                    .pnlAutorizarCPAP.Visible = True
+
                                     '-- Comprobaciones
                                     .pnlCTitulo.Visible = True
                                     .pnlCGenerarComp.Visible = True
@@ -1831,6 +1947,7 @@
                                                      "where @idUsuario in (select split.a.value('.', 'NVARCHAR(MAX)') data " +
                                                      "                     from (select cast('<X>' + replace((select valor from cg_parametros where parametro = 'consulta_expromat'), ',', '</X><X>') + '</X>' as xml) as string) as A " +
                                                      "                       cross apply string.nodes('/X') as split(a)) "
+                            SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
                             ConexionBD.Open()
                             contConsExp = SCMValores.ExecuteScalar()
                             ConexionBD.Close()
@@ -3266,6 +3383,7 @@
         gvRegistrosV.Visible = True
         gvRegistrosG.Visible = False
         gvRegistrosDG.Visible = False
+        gvRegistrosAntProv.Visible = False
 
         'Inicia proceso'
 
@@ -4702,69 +4820,186 @@
         End With
     End Sub
 
-    Public Sub llenarGridComprobacionAnticipo(Autorizador As Boolean, Segundo_Autorizador As Boolean, Tercer_Autorizador As Boolean)
-        Try
-            Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
-            ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
-            Dim sdaCatalogo As New SqlDataAdapter
-            Dim dsCatalogo As New DataSet
-            gvComprobacionAnticipo.DataSource = dsCatalogo
-            gvComprobacionAnticipo.Columns(0).Visible = True
-            Dim query As String = ""
+    Public Sub llenarGvAnticipos()
+        With Me
+            Try
+                .litError.Text = ""
+                'Presentar Tabla de Anticipos por procesar
+                .imgMenu.Visible = False
+                .imgTrans.Visible = False
+                .gvRegistrosReun.Visible = False
+                .gvRegistrosEval.Visible = False
+                .gvRegistrosSR.Visible = False
+                .pnlFiltroA.Visible = False
+                .gvRegistrosA.Visible = False
+                .gvRegistrosC.Visible = False
+                .gvRegistrosNS.Visible = False
+                .pnlFiltroF.Visible = False
+                .gvRegistrosF.Visible = False
+                .gvRegistrosSAP.Visible = False
+                .gvRegistrosV.Visible = False
+                .gvRegistrosG.Visible = False
+                .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = True
 
-            If Autorizador Then
-                query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
-                       " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
-                       " MSA.fecha_solicita, centro_costos, division " +
-                       " from ms_comprobacion_anticipo MSA " +
-                       " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
-                       " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
-                       " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad "
-            End If
-            If Segundo_Autorizador Then
-                query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
-                    " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
-                    " MSA.fecha_solicita, centro_costos, division " +
-                    " from ms_comprobacion_anticipo MSA " +
-                    " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
-                    " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
-                    " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad and id_usr_autorizador2 = @id_usr_autorizador"
-            End If
-            If Tercer_Autorizador Then
-                query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
-                    " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
-                    " MSA.fecha_solicita, centro_costos, division " +
-                    " from ms_comprobacion_anticipo MSA " +
-                    " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
-                    " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
-                    " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad and id_usr_autorizador3 = @id_usr_autorizador"
-            End If
-            If Val(_txtIdAct.Text) = 149 Or Val(_txtIdAct.Text) = 150 Then
-                query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
-                       " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
-                       " MSA.fecha_solicita, centro_costos, division " +
-                       " from ms_comprobacion_anticipo MSA " +
-                       " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
-                       " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
-                       " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad "
-            End If
-            sdaCatalogo.SelectCommand = New SqlCommand(query, ConexionBD)
-            If Segundo_Autorizador Or Tercer_Autorizador Then
-                sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_autorizador", Val(_txtIdUsuario.Text))
-            End If
-            sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_actividad", Val(_txtIdAct.Text))
-            ConexionBD.Open()
-            sdaCatalogo.Fill(dsCatalogo)
-            gvComprobacionAnticipo.DataBind()
-            ConexionBD.Close()
-            sdaCatalogo.Dispose()
-            dsCatalogo.Dispose()
-            gvComprobacionAnticipo.SelectedIndex = -1
-            'Inhabilitar columnas para vista
-            gvComprobacionAnticipo.Columns(0).Visible = False
-        Catch ex As Exception
-            litError.Text = ex.Message
-        End Try
+
+                Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
+                ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
+                Dim sdaCatalogo As New SqlDataAdapter
+                Dim dsCatalogo As New DataSet
+                .gvRegistrosAntProv.DataSource = dsCatalogo
+
+
+                Dim query As String = ""
+                Select Case Val(._txtIdAct.Text)
+                    Case 135
+                        'Autorizador
+                        query = " SELECT id_ms_instancia, id_ms_anticipo_proveedor, empleado_solicita, fecha_solicita, empresa, proveedor, importe_requerido," +
+                                " CASE" +
+                                " WHEN estatus = 'P' AND inst.id_actividad = 135 THEN 'Pendiente de autorización'" +
+                                " ELSE '-'" +
+                                " END AS estado" +
+                                " FROM ms_anticipo_proveedor " +
+                                " LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol " +
+                                " WHERE id_usr_autoriza = @id_usr_autoriza AND inst.tipo = 'AP' AND inst.id_actividad = @id_actividad ORDER BY id_ms_anticipo_proveedor "
+
+                    Case 136
+                        'Tesorería
+                        query = " SELECT id_ms_instancia, id_ms_anticipo_proveedor, empleado_solicita, fecha_solicita, empresa, proveedor, importe_requerido," +
+                                " CASE" +
+                                " WHEN estatus = 'A' AND inst.id_actividad = 136 THEN 'Autorizado'" +
+                                " ELSE '-'" +
+                                " END AS estado" +
+                                " FROM ms_anticipo_proveedor " +
+                                " LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol " +
+                                " WHERE inst.tipo = 'AP' AND inst.id_actividad = @id_actividad ORDER BY id_ms_anticipo_proveedor "
+                    Case 138
+                        'Cuentas por pagar
+                        query = " SELECT id_ms_instancia, id_ms_anticipo_proveedor, empleado_solicita, fecha_solicita, empresa, proveedor, importe_requerido," +
+                                " CASE" +
+                                " WHEN estatus = 'A' AND inst.id_actividad = 138 THEN 'Autorizado Vbo' " +
+                                " ELSE '-'" +
+                                " END AS estado" +
+                                " FROM ms_anticipo_proveedor " +
+                                " LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol " +
+                                " WHERE inst.tipo = 'AP' AND inst.id_actividad = @id_actividad ORDER BY id_ms_anticipo_proveedor "
+
+                    Case 140
+                        'Anticipos por comprobar
+                        query = " SELECT id_ms_instancia, id_ms_anticipo_proveedor, empleado_solicita, fecha_solicita, empresa, proveedor, importe_requerido, " +
+                                " CASE" +
+                                " WHEN estatus = 'TR' AND inst.id_actividad = 140 THEN 'Pendiente de comprobación' " +
+                                " ELSE '-'  " +
+                                " END AS estado " +
+                                " FROM ms_anticipo_proveedor " +
+                                " LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol " +
+                                " WHERE inst.tipo = 'AP' AND inst.id_actividad = 140 AND id_usr_solicita = @id_usr_solicita" +
+                                " AND NOT EXISTS (SELECT NULL FROM ms_comprobacion_anticipo comp WHERE ms_anticipo_proveedor.id_ms_anticipo_proveedor = comp.id_ms_anticipo_proveedor) ORDER BY id_ms_anticipo_proveedor "
+                End Select
+                sdaCatalogo.SelectCommand = New SqlCommand(query, ConexionBD)
+                If Val(._txtIdAct.Text) = 135 Then
+                    sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_usr_autoriza", Val(._txtIdUsuario.Text))
+                End If
+                If Val(._txtIdAct.Text) = 140 Then
+                    sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_usr_solicita", Val(._txtIdUsuario.Text))
+                End If
+                sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_actividad", Val(._txtIdAct.Text))
+                ConexionBD.Open()
+                sdaCatalogo.Fill(dsCatalogo)
+                .gvRegistrosAntProv.DataBind()
+                ConexionBD.Close()
+                sdaCatalogo.Dispose()
+                dsCatalogo.Dispose()
+                .gvRegistrosAntProv.SelectedIndex = -1
+
+            Catch ex As Exception
+                .litError.Text = ex.ToString()
+            End Try
+        End With
+    End Sub
+    Public Sub llenarGridComprobacionAnticipo(Autorizador As Boolean, Segundo_Autorizador As Boolean, Tercer_Autorizador As Boolean)
+        With Me
+            Try
+                .imgMenu.Visible = False
+                .imgTrans.Visible = False
+                .gvRegistrosReun.Visible = False
+                .gvRegistrosEval.Visible = False
+                .gvRegistrosSR.Visible = False
+                .pnlFiltroA.Visible = False
+                .gvRegistrosA.Visible = False
+                .gvRegistrosC.Visible = False
+                .gvRegistrosNS.Visible = False
+                .pnlFiltroF.Visible = False
+                .gvRegistrosF.Visible = False
+                .gvRegistrosSAP.Visible = False
+                .gvRegistrosV.Visible = False
+                .gvRegistrosG.Visible = False
+                .gvRegistrosDG.Visible = False
+                .gvRegistrosAntProv.Visible = False
+
+
+                Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
+                ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
+                Dim sdaCatalogo As New SqlDataAdapter
+                Dim dsCatalogo As New DataSet
+                gvComprobacionAnticipo.DataSource = dsCatalogo
+                gvComprobacionAnticipo.Columns(0).Visible = True
+                Dim query As String = ""
+
+                If Autorizador Then
+                    query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
+                           " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
+                           " MSA.fecha_solicita, centro_costos, division " +
+                           " from ms_comprobacion_anticipo MSA " +
+                           " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
+                           " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
+                           " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad AND MSA.id_usr_autoriza = @id_autorizador "
+                End If
+                If Segundo_Autorizador Then
+                    query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
+                        " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
+                        " MSA.fecha_solicita, centro_costos, division " +
+                        " from ms_comprobacion_anticipo MSA " +
+                        " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
+                        " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
+                        " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad and id_usr_autorizador2 = @id_autorizador"
+                End If
+                If Tercer_Autorizador Then
+                    query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
+                        " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
+                        " MSA.fecha_solicita, centro_costos, division " +
+                        " from ms_comprobacion_anticipo MSA " +
+                        " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
+                        " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
+                        " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad and id_usr_autorizador3 = @id_autorizador"
+                End If
+                If Val(_txtIdAct.Text) = 149 Or Val(_txtIdAct.Text) = 150 Then
+                    query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
+                           " (select nombre + ' ' + ap_paterno + ' ' + ap_materno from bd_Empleado.dbo.cg_empleado where id_empleado = CG.id_empleado) as solicita, " +
+                           " MSA.fecha_solicita, centro_costos, division " +
+                           " from ms_comprobacion_anticipo MSA " +
+                           " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
+                           " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
+                           " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad "
+                End If
+                sdaCatalogo.SelectCommand = New SqlCommand(query, ConexionBD)
+                If Autorizador Or Segundo_Autorizador Or Tercer_Autorizador Then
+                    sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_autorizador", Val(_txtIdUsuario.Text))
+                End If
+                sdaCatalogo.SelectCommand.Parameters.AddWithValue("@id_actividad", Val(_txtIdAct.Text))
+                ConexionBD.Open()
+                sdaCatalogo.Fill(dsCatalogo)
+                gvComprobacionAnticipo.DataBind()
+                ConexionBD.Close()
+                sdaCatalogo.Dispose()
+                dsCatalogo.Dispose()
+                gvComprobacionAnticipo.SelectedIndex = -1
+                'Inhabilitar columnas para vista
+                gvComprobacionAnticipo.Columns(0).Visible = False
+            Catch ex As Exception
+                litError.Text = ex.Message
+            End Try
+        End With
     End Sub
 
     Public Function valNoProv()
@@ -4955,11 +5190,40 @@
     Protected Sub btnConsSRAV_Click(sender As Object, e As EventArgs) Handles btnConsSRAV.Click
         envio("Consulta de Solicitudes de Recursos Detalle", "ConsSolRecDet.aspx")
     End Sub
+    ' Anticipo proveedor
+    Protected Sub btnSAntProveedor_Click(sender As Object, e As EventArgs) Handles btnSAntProveedor.Click
+        envio("Solicitar anticipo", "134.aspx")
+    End Sub
+
+    Protected Sub btnVBOAnticipo_Click(sender As Object, e As EventArgs) Handles btnVBOAnticipo.Click
+        Me._txtIdAct.Text = 136
+        llenarGvAnticipos()
+    End Sub
+
+    Protected Sub btnRegistrarPagoNAv_Click(sender As Object, e As EventArgs) Handles btnRegistrarPagoNAv.Click
+        Me._txtIdAct.Text = 138
+        llenarGvAnticipos()
+    End Sub
+
+    Protected Sub btnCAntProveedor_Click(sender As Object, e As EventArgs) Handles btnCAntProveedor.Click
+        Me._txtIdAct.Text = 140
+        llenarGvAnticipos()
+    End Sub
+
+    'Comprobar anticiipo Proveedor
+    Protected Sub btnConsAntiProv_Click(sender As Object, e As EventArgs) Handles btnConsAntiProv.Click
+        envio("Consulta de Comprobaciones Anticipo Proveedor", "ConsCompAntProv.aspx")
+    End Sub
 
     'Anticipos
     Protected Sub btnGenTransf_Click(sender As Object, e As EventArgs) Handles btnGenTransf.Click
         Me._txtIdAct.Text = 3
         llenarGridA()
+    End Sub
+
+    Protected Sub btnAutSAnticipoProv_Click(sender As Object, e As EventArgs) Handles btnAutSAnticipoProv.Click
+        Me._txtIdAct.Text = 135
+        llenarGvAnticipos()
     End Sub
 
     Protected Sub ddlEmpresaA_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlEmpresaA.SelectedIndexChanged
@@ -5309,6 +5573,10 @@
     Protected Sub btnAsigCuenta_Click(sender As Object, e As EventArgs) Handles btnAsigCuenta.Click
         Me._txtIdAct.Text = 15
         llenarGridF()
+    End Sub
+
+    Protected Sub btnConsAntProv_Click(sender As Object, e As EventArgs) Handles btnConsAntProv.Click
+        envio("Consulta de Anticipo Proveedor", "ConAntProvedor.aspx")
     End Sub
 
     Protected Sub ddlEmpresaF_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ddlEmpresaF.SelectedIndexChanged
@@ -6558,6 +6826,28 @@
         End With
     End Sub
 
+    Protected Sub gvRegistrosAntProv_SelectedIndexChanged(sender As Object, e As EventArgs) Handles gvRegistrosAntProv.SelectedIndexChanged
+        With Me
+            Try
+                .litError.Text = ""
+                Session("idMsInst") = Val(.gvRegistrosAntProv.DataKeys(gvRegistrosAntProv.SelectedIndex).Values("id_ms_instancia"))
+                Session("idSolicitud") = Val(.gvRegistrosAntProv.SelectedRow.Cells(1).Text)
+
+                Select Case Val(._txtIdAct.Text)
+                    Case 135
+                        envio("Autorizar anticipo", "135.aspx")
+                    Case 136
+                        envio("Visto bueno anticipo", "136.aspx")
+                    Case 138
+                        envio("Registrar Pago NAV", "138.aspx")
+                    Case 140
+                        envio("Comprobar anticipo", "140.aspx")
+                End Select
+            Catch ex As Exception
+                .litError.Text = ex.ToString
+            End Try
+        End With
+    End Sub
 #End Region
 
     Protected Sub btnGenAAE_Click(sender As Object, e As EventArgs) Handles btnGenAAE.Click
@@ -6595,7 +6885,7 @@
         llenarGridComprobacionAnticipo(False, False, False)
     End Sub
 
-    Protected Sub btnAutorizarCP_Click(sender As Object, e As EventArgs) Handles btnAutorizarCP.Click
+    Protected Sub btnAutorizarCPAP_Click(sender As Object, e As EventArgs) Handles btnAutorizarCPAP.Click
         Me._txtIdAct.Text = 150
         llenarGridComprobacionAnticipo(False, False, False)
     End Sub
@@ -6621,5 +6911,6 @@
         End Try
 
     End Sub
+
 
 End Class

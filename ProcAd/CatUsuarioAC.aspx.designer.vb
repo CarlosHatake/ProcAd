@@ -572,6 +572,15 @@ Partial Public Class CatUsuarioAC
     Protected WithEvents txtAnticipoAmex As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control cbAnticipoProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cbAnticipoProv As Global.System.Web.UI.WebControls.CheckBox
+
+    '''<summary>
     '''Control gvAutorizadores.
     '''</summary>
     '''<remarks>

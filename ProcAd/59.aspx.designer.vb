@@ -806,13 +806,22 @@ Partial Public Class _59
     Protected WithEvents lbl_ImporteAmex As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''Control txtImporte.
+    '''Control upSubtotal1.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents txtImporte As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents upSubtotal1 As Global.System.Web.UI.UpdatePanel
+
+    '''<summary>
+    '''Control wceSubtotal1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents wceSubtotal1 As Global.Infragistics.Web.UI.EditorControls.WebCurrencyEditor
 
     '''<summary>
     '''Control upVehiculo.

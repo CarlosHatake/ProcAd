@@ -15,7 +15,8 @@
                     If Session("litError") = "" And Val(Session("id_usuario")) > 0 Then
                         ._txtIdUsuario.Text = Session("id_usuario")
                         ._txtBan.Text = 0
-                        pnlAnticiposDecision.Visible = False
+                        pnlAnticiposDecision.Visible = True
+
                         'Creación de Variables para la conexión y consulta de información a la base de datos
                         Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                         ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
@@ -801,7 +802,7 @@
                 rbdOpcionAnticipo.Items(0).Text = rbdOpcionAnticipo.Items(0).Text + " (" + gvAnticipos.Rows.Count().ToString + ")"
                 rbdOpcionAnticipo.Items(1).Text = rbdOpcionAnticipo.Items(1).Text + " (" + gvAnticiposAmex.Rows.Count().ToString + ")"
 
-                If gvAnticiposAmex.Rows.Count <> 0 And gvAnticipos.Rows.Count <> 0 And gvAnticipos.Visible = True And gvAnticiposAmex.Visible = True Then
+                If gvAnticiposAmex.Rows.Count <> 0 And gvAnticipos.Rows.Count <> 0 And gvAnticipos.Visible And gvAnticiposAmex.Visible = True Then
                     pnlAnticiposDecision.Visible = True
                     gvAnticipos.Visible = False
                     gvAnticiposAmex.Visible = False

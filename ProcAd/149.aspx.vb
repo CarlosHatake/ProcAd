@@ -101,9 +101,9 @@
                 gvEvidencias.DataSource = dsEvidencias
                 'Evidencias
                 sdaEvidencias.SelectCommand = New SqlCommand("select nombre as archivo " +
-                                                           "     , 'http://148.223.153.43/ProcAd - Adjuntos IngFact/' + cast(id_dt_archivo_adj_comp_anticipo as varchar(20)) + '-' + nombre as path " +
+                                                           "     , 'http://148.223.153.43/ProcAd - Adjuntos CompAnt/' + cast(id_dt_archivo_adj_comp_anticipo as varchar(20)) + '-' + nombre as path " +
                                                            "from dt_archivo_adj_comp_anticipo " +
-                                                           "where id_ms_comp_anticipo_proveedor = @id_ms_comp_anticipo_proveedor", ConexionBD)
+                                                           " where id_ms_comp_anticipo_proveedor = @id_ms_comp_anticipo_proveedor", ConexionBD)
                 sdaEvidencias.SelectCommand.Parameters.AddWithValue("@id_ms_comp_anticipo_proveedor", Val(lblFolio.Text))
                 ConexionBD.Open()
                 sdaEvidencias.Fill(dsEvidencias)

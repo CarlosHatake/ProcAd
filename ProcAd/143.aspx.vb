@@ -98,7 +98,7 @@
                         .gvEvidencias.DataSource = dsEvidencias
                         'Evidencias
                         sdaEvidencias.SelectCommand = New SqlCommand("select nombre as archivo " +
-                                                                   "     , 'http://148.223.153.43/ProcAd - Adjuntos IngFact/' + cast(id_dt_archivo_adj_comp_anticipo as varchar(20)) + '-' + nombre as path " +
+                                                                   "     , 'http://148.223.153.43/ProcAd - Adjuntos CompAnt/' + cast(id_dt_archivo_adj_comp_anticipo as varchar(20)) + '-' + nombre as path " +
                                                                    "from dt_archivo_adj_comp_anticipo " +
                                                                    "where id_ms_comp_anticipo_proveedor = @id_ms_comp_anticipo_proveedor", ConexionBD)
                         sdaEvidencias.SelectCommand.Parameters.AddWithValue("@id_ms_comp_anticipo_proveedor", Val(.lblFolio.Text))
@@ -230,53 +230,53 @@
                     ConexionBD.Close()
 
 
-                    If estatusCancelacion = "ZD" Or estatusCancelacion = "ZC" Then
-                        'Envío de Correo
-                        Dim Mensaje As New System.Net.Mail.MailMessage()
-                        Dim destinatario As String = ""
-                        SCMValores.CommandText = "select cgEmpl.correo " +
-                                                 "from cg_usuario " +
-                                                 "  left join bd_empleado.dbo.cg_empleado cgEmpl on cg_usuario.id_empleado = cgEmpl.id_empleado " +
-                                                 "where cg_usuario.id_usuario = @idAut "
-                        Select Case estatusCancelacion
-                            Case "ZD"
-                                'Segundo Autorizador
-                                SCMValores.Parameters.AddWithValue("@idAut", Val(._txtIdAutorizador2.Text))
-                            Case "ZC"
-                                'Tercer Autorizador
-                                SCMValores.Parameters.AddWithValue("@idAut", Val(._txtIdAutorizador3.Text))
-                        End Select
-                        'Obtener el Correos del Autorizador
-                        ConexionBD.Open()
-                        destinatario = SCMValores.ExecuteScalar()
-                        ConexionBD.Close()
+                    'If estatusCancelacion = "ZD" Or estatusCancelacion = "ZC" Then
+                    '    'Envío de Correo
+                    '    Dim Mensaje As New System.Net.Mail.MailMessage()
+                    '    Dim destinatario As String = ""
+                    '    SCMValores.CommandText = "select cgEmpl.correo " +
+                    '                             "from cg_usuario " +
+                    '                             "  left join bd_empleado.dbo.cg_empleado cgEmpl on cg_usuario.id_empleado = cgEmpl.id_empleado " +
+                    '                             "where cg_usuario.id_usuario = @idAut "
+                    '    Select Case estatusCancelacion
+                    '        Case "ZD"
+                    '            'Segundo Autorizador
+                    '            SCMValores.Parameters.AddWithValue("@idAut", Val(._txtIdAutorizador2.Text))
+                    '        Case "ZC"
+                    '            'Tercer Autorizador
+                    '            SCMValores.Parameters.AddWithValue("@idAut", Val(._txtIdAutorizador3.Text))
+                    '    End Select
+                    '    'Obtener el Correos del Autorizador
+                    '    ConexionBD.Open()
+                    '    destinatario = SCMValores.ExecuteScalar()
+                    '    ConexionBD.Close()
 
-                        Mensaje.[To].Add(destinatario)
-                        Mensaje.Bcc.Add("notificaciones.procad@unne.com.mx")
-                        Mensaje.From = New MailAddress("notificaciones.procad@unne.com.mx")
-                        Mensaje.Subject = "ProcAd - Solicitud de Comprobación Anticipo No. " + .lblFolio.Text + " por Autorizar"
-                        Dim texto As String
-                        texto = "<span style=""font-family:Verdana;font-size: 10pt;"">" +
-                                "Se ingresó la solicitud número <b>" + .lblFolio.Text +
-                                "</b> por parte de <b>" + .lblSolicitante.Text +
-                                "</b><br><br>Favor de determinar si procede </span>"
-                        Mensaje.Body = texto
-                        Mensaje.IsBodyHtml = True
-                        Mensaje.Priority = MailPriority.Normal
+                    '    Mensaje.[To].Add(destinatario)
+                    '    Mensaje.Bcc.Add("notificaciones.procad@unne.com.mx")
+                    '    Mensaje.From = New MailAddress("notificaciones.procad@unne.com.mx")
+                    '    Mensaje.Subject = "ProcAd - Solicitud de Comprobación Anticipo No. " + .lblFolio.Text + " por Autorizar"
+                    '    Dim texto As String
+                    '    texto = "<span style=""font-family:Verdana;font-size: 10pt;"">" +
+                    '            "Se ingresó la solicitud número <b>" + .lblFolio.Text +
+                    '            "</b> por parte de <b>" + .lblSolicitante.Text +
+                    '            "</b><br><br>Favor de determinar si procede </span>"
+                    '    Mensaje.Body = texto
+                    '    Mensaje.IsBodyHtml = True
+                    '    Mensaje.Priority = MailPriority.Normal
 
-                        Dim Servidor As New SmtpClient()
-                        Servidor.Host = "10.10.10.30"
-                        Servidor.Port = 587
-                        Servidor.EnableSsl = False
-                        Servidor.UseDefaultCredentials = False
-                        Servidor.Credentials = New System.Net.NetworkCredential("nprocad", "mc8HLB8lPe78")
+                    '    Dim Servidor As New SmtpClient()
+                    '    Servidor.Host = "10.10.10.30"
+                    '    Servidor.Port = 587
+                    '    Servidor.EnableSsl = False
+                    '    Servidor.UseDefaultCredentials = False
+                    '    Servidor.Credentials = New System.Net.NetworkCredential("nprocad", "mc8HLB8lPe78")
 
-                        Try
-                            Servidor.Send(Mensaje)
-                        Catch ex As System.Net.Mail.SmtpException
-                            .litError.Text = ex.ToString
-                        End Try
-                    End If
+                    '    Try
+                    '        Servidor.Send(Mensaje)
+                    '    Catch ex As System.Net.Mail.SmtpException
+                    '        .litError.Text = ex.ToString
+                    '    End Try
+                    'End If
 
                     .pnlInicio.Enabled = False
 

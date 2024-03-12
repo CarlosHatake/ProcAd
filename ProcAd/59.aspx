@@ -520,7 +520,13 @@
                                                          <asp:Label ID="lbl_ImporteAmex" runat="server" Text="Importe:"></asp:Label>
                                                     </td>
                                                     <td>
-                                                        <asp:TextBox ID="txtImporte" runat="server"></asp:TextBox>
+                                                        <%--<asp:TextBox ID="txtImporte" runat="server"></asp:TextBox>--%>
+                                                        <asp:UpdatePanel ID="upSubtotal1" runat="server" UpdateMode="Conditional">
+                                                            <ContentTemplate>
+                                                                <ig:WebCurrencyEditor ID="wceSubtotal1" runat="server" Width="80px">
+                                                                </ig:WebCurrencyEditor>
+                                                            </ContentTemplate>
+                                                        </asp:UpdatePanel>
                                                     </td>
                                                 </tr>
                                             </table>

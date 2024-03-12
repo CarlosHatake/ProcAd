@@ -667,7 +667,7 @@
             SCMValores.Parameters.AddWithValue("@dias_casetas", DBNull.Value)
             SCMValores.Parameters.AddWithValue("@monto_casetas", 0)
             SCMValores.Parameters.AddWithValue("@dias_otros", DBNull.Value)
-            SCMValores.Parameters.AddWithValue("@monto_otros", Val(txtImporte.Text))
+            SCMValores.Parameters.AddWithValue("@monto_otros", Val(wceSubtotal1.Value))
             SCMValores.Parameters.AddWithValue("@otros_especifico", "Boletos de avión American Express")
             SCMValores.Parameters.AddWithValue("@codigo_reservacion", txtCodigoReservacion.Text)
             ConexionBD.Open()
@@ -686,9 +686,10 @@
             Try
                 .litError.Text = ""
 
-                If .cblRecursos.Items(3).Selected = True And (txtCodigoReservacion.Text = "" Or txtImporte.Text = "") Then
+                If .cblRecursos.Items(3).Selected = True And (txtCodigoReservacion.Text = "" Or wceSubtotal1.Text = "" Or wceSubtotal1.Value < 800) Then
                     litError.Text = "Debe meter un Codigo de reservación y un importe"
                 Else
+
                     If Session("Error") = "" Then
                         Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
                         ConexionBD.ConnectionString = accessDB.conBD("ProcAd")

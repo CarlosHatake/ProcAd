@@ -170,6 +170,8 @@
                 <asp:TextBox ID="_txtTot_ret_irs" runat="server" Width="15px" Visible="False"></asp:TextBox>
                 <asp:TextBox ID="_txtBotonCancelar" runat="server" Width="15px" Visible="false"></asp:TextBox>
                 <asp:TextBox ID="_txtAnticipo" runat="server" Width="15px" Visible="false"></asp:TextBox>
+                <asp:TextBox ID="_txtSNAnticipo" runat="server" Width="15px" Visible="false"></asp:TextBox>
+
                
                 <asp:UpdatePanel ID="upAbreviatura" runat="server" UpdateMode="Conditional">
                     <ContentTemplate>
@@ -187,6 +189,7 @@
                             <asp:UpdatePanel ID="UpdatePanel3" runat="server" UpdateMode="Conditional">
                                 <ContentTemplate>
                                     <asp:Literal ID="litError" runat="server"></asp:Literal>
+                                    <asp:Literal ID="litErrorAMEX" runat="server"></asp:Literal>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
                         </td>

@@ -308,6 +308,17 @@
                                                      <asp:TextBox ID="txtAnticipoAmex" runat="server" Font-Names="Verdana" Font-Size="8pt" MaxLength="4" Width="30px"></asp:TextBox>
                                                  </td>
                                              </tr>
+                                                <tr>
+                                                 <td class="auto-style89" style="text-align: left; ">
+                                                      &nbsp;
+                                                 </td>
+                                                 <td class="auto-style90" style="text-align: left; ">
+                                                      &nbsp;</td>
+                                                 <td class="auto-style83" style="text-align: left; ">&nbsp;</td>
+                                                 <td class="auto-style88" style="text-align: left;">
+                                                     <asp:CheckBox ID="cbAnticipoProv" runat="server" Font-Names="Verdana" Font-Size="8pt" Text="Anticipo Proveedor" />
+                                                 </td>
+                                             </tr>
                                         </table> 
                                      <%--   <table style="width:865px;">
                                             <tr>
