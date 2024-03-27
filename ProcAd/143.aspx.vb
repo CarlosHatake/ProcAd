@@ -230,53 +230,53 @@
                     ConexionBD.Close()
 
 
-                    If estatusCancelacion = "ZD" Or estatusCancelacion = "ZC" Then
-                        'Envío de Correo
-                        Dim Mensaje As New System.Net.Mail.MailMessage()
-                        Dim destinatario As String = ""
-                        SCMValores.CommandText = "select cgEmpl.correo " +
-                                                 "from cg_usuario " +
-                                                 "  left join bd_empleado.dbo.cg_empleado cgEmpl on cg_usuario.id_empleado = cgEmpl.id_empleado " +
-                                                 "where cg_usuario.id_usuario = @idAut "
-                        Select Case estatusCancelacion
-                            Case "ZD"
-                                'Segundo Autorizador
-                                SCMValores.Parameters.AddWithValue("@idAut", Val(._txtIdAutorizador2.Text))
-                            Case "ZC"
-                                'Tercer Autorizador
-                                SCMValores.Parameters.AddWithValue("@idAut", Val(._txtIdAutorizador3.Text))
-                        End Select
-                        'Obtener el Correos del Autorizador
-                        ConexionBD.Open()
-                        destinatario = SCMValores.ExecuteScalar()
-                        ConexionBD.Close()
+                    'If estatusCancelacion = "ZD" Or estatusCancelacion = "ZC" Then
+                    '    'Envío de Correo
+                    '    Dim Mensaje As New System.Net.Mail.MailMessage()
+                    '    Dim destinatario As String = ""
+                    '    SCMValores.CommandText = "select cgEmpl.correo " +
+                    '                             "from cg_usuario " +
+                    '                             "  left join bd_empleado.dbo.cg_empleado cgEmpl on cg_usuario.id_empleado = cgEmpl.id_empleado " +
+                    '                             "where cg_usuario.id_usuario = @idAut "
+                    '    Select Case estatusCancelacion
+                    '        Case "ZD"
+                    '            'Segundo Autorizador
+                    '            SCMValores.Parameters.AddWithValue("@idAut", Val(._txtIdAutorizador2.Text))
+                    '        Case "ZC"
+                    '            'Tercer Autorizador
+                    '            SCMValores.Parameters.AddWithValue("@idAut", Val(._txtIdAutorizador3.Text))
+                    '    End Select
+                    '    'Obtener el Correos del Autorizador
+                    '    ConexionBD.Open()
+                    '    destinatario = SCMValores.ExecuteScalar()
+                    '    ConexionBD.Close()
 
-                        Mensaje.[To].Add(destinatario)
-                        Mensaje.Bcc.Add("notificaciones.procad@unne.com.mx")
-                        Mensaje.From = New MailAddress("notificaciones.procad@unne.com.mx")
-                        Mensaje.Subject = "ProcAd - Solicitud de Comprobación Anticipo No. " + .lblFolio.Text + " por Autorizar"
-                        Dim texto As String
-                        texto = "<span style=""font-family:Verdana;font-size: 10pt;"">" +
-                                "Se ingresó la solicitud número <b>" + .lblFolio.Text +
-                                "</b> por parte de <b>" + .lblSolicitante.Text +
-                                "</b><br><br>Favor de determinar si procede </span>"
-                        Mensaje.Body = texto
-                        Mensaje.IsBodyHtml = True
-                        Mensaje.Priority = MailPriority.Normal
+                    '    Mensaje.[To].Add(destinatario)
+                    '    Mensaje.Bcc.Add("notificaciones.procad@unne.com.mx")
+                    '    Mensaje.From = New MailAddress("notificaciones.procad@unne.com.mx")
+                    '    Mensaje.Subject = "ProcAd - Solicitud de Comprobación Anticipo No. " + .lblFolio.Text + " por Autorizar"
+                    '    Dim texto As String
+                    '    texto = "<span style=""font-family:Verdana;font-size: 10pt;"">" +
+                    '            "Se ingresó la solicitud número <b>" + .lblFolio.Text +
+                    '            "</b> por parte de <b>" + .lblSolicitante.Text +
+                    '            "</b><br><br>Favor de determinar si procede </span>"
+                    '    Mensaje.Body = texto
+                    '    Mensaje.IsBodyHtml = True
+                    '    Mensaje.Priority = MailPriority.Normal
 
-                        Dim Servidor As New SmtpClient()
-                        Servidor.Host = "10.10.10.30"
-                        Servidor.Port = 587
-                        Servidor.EnableSsl = False
-                        Servidor.UseDefaultCredentials = False
-                        Servidor.Credentials = New System.Net.NetworkCredential("nprocad", "mc8HLB8lPe78")
+                    '    Dim Servidor As New SmtpClient()
+                    '    Servidor.Host = "10.10.10.30"
+                    '    Servidor.Port = 587
+                    '    Servidor.EnableSsl = False
+                    '    Servidor.UseDefaultCredentials = False
+                    '    Servidor.Credentials = New System.Net.NetworkCredential("nprocad", "mc8HLB8lPe78")
 
-                        Try
-                            Servidor.Send(Mensaje)
-                        Catch ex As System.Net.Mail.SmtpException
-                            .litError.Text = ex.ToString
-                        End Try
-                    End If
+                    '    Try
+                    '        Servidor.Send(Mensaje)
+                    '    Catch ex As System.Net.Mail.SmtpException
+                    '        .litError.Text = ex.ToString
+                    '    End Try
+                    'End If
 
                     .pnlInicio.Enabled = False
 
@@ -320,17 +320,27 @@
                         'Actualizar datos de la Solicitud
                         SCMValores.CommandText = ""
                         SCMValores.Parameters.Clear()
-                        SCMValores.CommandText = "update ms_factura set fecha_autoriza = @fecha_autoriza, fecha_autoriza2 = @fecha_autoriza_2, fecha_autoriza_3 = @fecha_autoriza_3, estatus = @status where id_ms_comprobacion_anticipo = @id_ms_comprobacion_anticipo "
+                        SCMValores.CommandText = "update ms_comprobacion_anticipo set fecha_autoriza = @fecha_autoriza, fecha_autoriza2 = @fecha_autoriza_2, fecha_autoriza_3 = @fecha_autoriza_3, estatus = @status where id_ms_comprobacion_anticipo = @id_ms_comprobacion_anticipo "
                         'SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
                         'SCMValores.Parameters.AddWithValue("@comentario_autoriza", .txtComentario.Text.Trim)
                         SCMValores.Parameters.AddWithValue("@id_ms_comprobacion_anticipo", Val(.lblFolio.Text))
                         SCMValores.Parameters.AddWithValue("@status", estatusCancelacion)
                         If estatusCancelacion = "ZA" Then
                             SCMValores.Parameters.AddWithValue("@fecha_autoriza", Date.Now)
-                        ElseIf estatusCancelacion = "ZD" Then
+                        Else
+                            SCMValores.Parameters.AddWithValue("@fecha_autoriza", DBNull.Value)
+                        End If
+
+                        If estatusCancelacion = "ZD" Then
                             SCMValores.Parameters.AddWithValue("@fecha_autoriza_2", Date.Now)
-                        ElseIf estatusCancelacion = "ZC" Then
+                        Else
+                            SCMValores.Parameters.AddWithValue("@fecha_autoriza_2", DBNull.Value)
+                        End If
+
+                        If estatusCancelacion = "ZC" Then
                             SCMValores.Parameters.AddWithValue("@fecha_autoriza_3", Date.Now)
+                        Else
+                            SCMValores.Parameters.AddWithValue("@fecha_autoriza_3", DBNull.Value)
                         End If
                         ConexionBD.Open()
                         SCMValores.ExecuteNonQuery()

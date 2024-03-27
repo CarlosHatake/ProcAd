@@ -554,17 +554,12 @@ Partial Public Class CatUsuarioAC
     Protected WithEvents cbFechaTermino As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
-<<<<<<< HEAD
     '''Control cbAmericanExpress.
-=======
-    '''Control cbIngresarNocheHospedaje.
->>>>>>> 4bb1234db008fd6cdf4f68b2ca54cb821a88456c
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-<<<<<<< HEAD
     Protected WithEvents cbAmericanExpress As Global.System.Web.UI.WebControls.CheckBox
 
     '''<summary>
@@ -575,9 +570,15 @@ Partial Public Class CatUsuarioAC
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents txtAnticipoAmex As Global.System.Web.UI.WebControls.TextBox
-=======
+
+    '''<summary>
+    '''Control cbIngresarNocheHospedaje.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
     Protected WithEvents cbIngresarNocheHospedaje As Global.System.Web.UI.WebControls.CheckBox
->>>>>>> 4bb1234db008fd6cdf4f68b2ca54cb821a88456c
 
     '''<summary>
     '''Control gvAutorizadores.

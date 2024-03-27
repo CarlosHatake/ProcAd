@@ -582,15 +582,15 @@
                     SCMValores.Connection = ConexionBD
                     SCMValores.CommandText = ""
                     SCMValores.Parameters.Clear()
-                    SCMValores.CommandText = "select case when isnull((select no_anticipos from cg_usuario_ant where id_usuario = @idUsuario), 0) = 0 " + _
-                                             "         then (select count(*) " + _
-                                             "               from ms_anticipo " + _
-                                             "               where id_usr_solicita = @idUsuario " + _
-                                             "               	 and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA')) " + _
-                                             "         else case when (select count(*) from ms_anticipo where id_usr_solicita = @idUsuario and empresa = @Empresa and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA')) >= (select no_anticipos from cg_usuario_ant where id_usuario = @idUsuario) " + _
-                                             "                then 1 " + _
-                                             "                else 0 " + _
-                                             "              end " + _
+                    SCMValores.CommandText = "select case when isnull((select no_anticipos from cg_usuario_ant where id_usuario = @idUsuario and tipo is null), 0) = 0 " +
+                                             "         then (select count(*) " +
+                                             "               from ms_anticipo " +
+                                             "               where id_usr_solicita = @idUsuario " +
+                                             "               	 and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA')) " +
+                                             "         else case when (select count(*) from ms_anticipo where id_usr_solicita = @idUsuario and empresa = @Empresa and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA')) >= (select no_anticipos from cg_usuario_ant where id_usuario = @idUsuario and tipo is null) " +
+                                             "                then 1 " +
+                                             "                else 0 " +
+                                             "              end " +
                                              "       end as no_anticipos "
                     SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
                     SCMValores.Parameters.AddWithValue("@Empresa", .ddlEmpresa.SelectedItem.Text)

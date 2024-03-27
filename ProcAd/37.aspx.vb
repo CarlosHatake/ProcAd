@@ -1676,13 +1676,13 @@
                     If .cblRecursos.Items(0).Selected = True Then
                         SCMValores.CommandText = ""
                         SCMValores.Parameters.Clear()
-                        SCMValores.CommandText = "select case when isnull((select no_anticipos from cg_usuario_ant where id_usuario = @idUsuario), 0) = 0 " +
+                        SCMValores.CommandText = "select case when isnull((select no_anticipos from cg_usuario_ant where id_usuario = @idUsuario and tipo is null ), 0) = 0 " +
                                                  "         then (select count(*) " +
                                                  "               from ms_anticipo " +
                                                  "               where id_usr_solicita = @idUsuario " +
                                                  "               	 and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA') " +
                                                  "                   and tipo = 'A') " +
-                                                 "         else case when (select count(*) from ms_anticipo where id_usr_solicita = @idUsuario and empresa = @Empresa and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA') and tipo = 'A') >= (select no_anticipos from cg_usuario_ant where id_usuario = @idUsuario) " +
+                                                 "         else case when (select count(*) from ms_anticipo where id_usr_solicita = @idUsuario and empresa = @Empresa and status in ('P', 'A', 'TR', 'EE', 'TRCP', 'EECP', 'TRCA', 'EECA') and tipo = 'A') >= (select no_anticipos from cg_usuario_ant where id_usuario = @idUsuario and tipo is null ) " +
                                                  "                then 1 " +
                                                  "                else 0 " +
                                                  "              end " +

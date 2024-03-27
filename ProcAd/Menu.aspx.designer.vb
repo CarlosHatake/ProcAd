@@ -3101,13 +3101,13 @@ Partial Public Class Menu
     Protected WithEvents pnlVBOAnticipo As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control Image9.
+    '''Control Img9VBO.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Image9 As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents Img9VBO As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
     '''Control btnVBOAnticipo.
@@ -3128,13 +3128,13 @@ Partial Public Class Menu
     Protected WithEvents pnlAutSAnticipoProv As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control Image8.
+    '''Control Img8AAP.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Image8 As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents Img8AAP As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
     '''Control btnAutSAnticipoProv.
@@ -3839,13 +3839,13 @@ Partial Public Class Menu
     Protected WithEvents pnlCAntProveedor As Global.System.Web.UI.WebControls.Panel
 
     '''<summary>
-    '''Control Image10.
+    '''Control imgCAP.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents Image10 As Global.System.Web.UI.WebControls.Image
+    Protected WithEvents imgCAP As Global.System.Web.UI.WebControls.Image
 
     '''<summary>
     '''Control btnCAntProveedor.
@@ -4107,6 +4107,132 @@ Partial Public Class Menu
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnConsCompXConc As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlAutorizarTemporal.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlAutorizarTemporal As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control pnlAutorizarCompAnticipo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlAutorizarCompAnticipo As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control imgAT1.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents imgAT1 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnAutorizarCompAnticipo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnAutorizarCompAnticipo As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlSegundoAutorizador.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlSegundoAutorizador As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control imgAT2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents imgAT2 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnSegundoAutorizador.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnSegundoAutorizador As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control pnlTercerAutorizador.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnlTercerAutorizador As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control imgAT3.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents imgAT3 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnTercerAutorizador.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnTercerAutorizador As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control img4CompCodCont.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents img4CompCodCont As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnCompCodCont.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnCompCodCont As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control Image8.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image8 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnAutorizarCP.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnAutorizarCP As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''Control pnlVBRTitulo.
@@ -4460,105 +4586,6 @@ Partial Public Class Menu
     Protected WithEvents btnConsFactIng As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''Control pnlAutorizarTemporal.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents pnlAutorizarTemporal As Global.System.Web.UI.WebControls.Panel
-
-    '''<summary>
-    '''Control imgAT1.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents imgAT1 As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''Control btnAutorizarCompAnticipo.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnAutorizarCompAnticipo As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control Image9.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image9 As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''Control btnSegundoAutorizador.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnSegundoAutorizador As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control Image10.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image10 As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''Control btnTercerAutorizador.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnTercerAutorizador As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control Image4.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image4 As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''Control btnCompCodCont.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnCompCodCont As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
-    '''Control Image8.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Image8 As Global.System.Web.UI.WebControls.Image
-
-    '''<summary>
-    '''Control btnAutorizarCP.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents btnAutorizarCP As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''Control imgMenu.
     '''</summary>
     '''<remarks>
@@ -4739,15 +4766,6 @@ Partial Public Class Menu
     Protected WithEvents gvMovInt As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
-    '''Control gvRegistrosAntProv.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents gvRegistrosAntProv As Global.System.Web.UI.WebControls.GridView
-
-    '''<summary>
     '''Control gvComprobacionAnticipo.
     '''</summary>
     '''<remarks>
@@ -4755,6 +4773,15 @@ Partial Public Class Menu
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents gvComprobacionAnticipo As Global.System.Web.UI.WebControls.GridView
+
+    '''<summary>
+    '''Control gvRegistrosAntProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents gvRegistrosAntProv As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''Control btnSalir.

@@ -165,3 +165,35 @@ C:\Users\UNNE\source\repos\Proyecto ProcAd\ProcAd\ProcAd\obj\Debug\ProcAd.vbproj
 C:\Users\UNNE\source\repos\Proyecto ProcAd\ProcAd\ProcAd\obj\Debug\ProcAd.dll
 C:\Users\UNNE\source\repos\Proyecto ProcAd\ProcAd\ProcAd\obj\Debug\ProcAd.xml
 C:\Users\UNNE\source\repos\Proyecto ProcAd\ProcAd\ProcAd\obj\Debug\ProcAd.pdb
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\ProcAd.dll.config
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\ProcAd.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\ProcAd.pdb
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\ProcAd.xml
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Newtonsoft.Json.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Spire.Common.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Spire.License.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Spire.Pdf.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Spire.XLS.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\System.Net.Http.Formatting.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\System.Web.Http.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\System.Web.Http.WebHost.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Microsoft.mshtml.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Newtonsoft.Json.xml
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Spire.Common.xml
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Spire.Pdf.xml
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\Spire.XLS.xml
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\System.Net.Http.Formatting.xml
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\System.Web.Http.xml
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\System.Web.Http.WebHost.xml
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\es\System.Net.Http.Formatting.resources.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\es\System.Web.Http.resources.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\bin\es\System.Web.Http.WebHost.resources.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\obj\Debug\ProcAd.vbproj.AssemblyReference.cache
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\obj\Debug\ProcAd.Resources.resources
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\obj\Debug\ProcAd.vbproj.GenerateResource.cache
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\obj\Debug\ProcAd.dll.licenses
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\obj\Debug\ProcAd.vbproj.CoreCompileInputs.cache
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\obj\Debug\ProcAd.vbproj.CopyComplete
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\obj\Debug\ProcAd.dll
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\obj\Debug\ProcAd.xml
+C:\Users\UNNE\Documents\Repositorios\ProcAd\ProcAd\obj\Debug\ProcAd.pdb

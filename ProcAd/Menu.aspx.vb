@@ -2729,34 +2729,75 @@
                                 .lblComp.Text = ""
                             End If
 
+                            'Autorizaciones de Comprobacion Anticipo
+                            Dim autorizacionComprobacionAnticipo As Integer
+                            SCMValores.CommandText = "SELECT count(*) from ms_comprobacion_anticipo  where id_usr_autoriza = @idUsuario and estatus = 'P'"
+                            ConexionBD.Open()
+                            autorizacionComprobacionAnticipo = SCMValores.ExecuteScalar
+                            ConexionBD.Close()
+
+                            If autorizacionComprobacionAnticipo > 0 Then
+                                pnlAutorizarCompAnticipo.Visible = True
+                            Else
+                                pnlAutorizarCompAnticipo.Visible = False
+
+                            End If
+
+                            'Autorizaciones de Comprobacion Anticipo SEGUNDO AUTORIZADOR
+                            SCMValores.CommandText = "SELECT count(*) from ms_comprobacion_anticipo  where id_usr_autorizador2 = @idUsuario and estatus = 'A'"
+                            ConexionBD.Open()
+                            autorizacionComprobacionAnticipo = SCMValores.ExecuteScalar()
+                            ConexionBD.Close()
+
+                            If autorizacionComprobacionAnticipo > 0 Then
+                                pnlSegundoAutorizador.Visible = True
+
+                            Else
+                                pnlSegundoAutorizador.Visible = False
+
+                            End If
+
+                            'Autorizaciones de Comprobacion Anticipo TERCER AUTORIZADOR
+                            SCMValores.CommandText = "SELECT count(*) from ms_comprobacion_anticipo  where id_usr_autorizador3 = @idUsuario and estatus = 'A'"
+                            ConexionBD.Open()
+                            autorizacionComprobacionAnticipo = SCMValores.ExecuteScalar()
+                            ConexionBD.Close()
+
+                            If autorizacionComprobacionAnticipo > 0 Then
+                                pnlTercerAutorizador.Visible = True
+
+                            Else
+                                pnlTercerAutorizador.Visible = False
+
+                            End If
 
                             If Val(Session("id_actividadM")) > 0 Then
-                                ._txtIdAct.Text = Val(Session("id_actividadM"))
-                                Select Case Session("TipoM")
-                                    Case "Eval"
-                                        If (Val(._txtIdAct.Text) = 69 And .pnlEvaluacionAut.Visible = True) Or (Val(._txtIdAct.Text) = 71 And .pnlEvaluacionCorr.Visible = True) Or (Val(._txtIdAct.Text) = 72 And .pnlValidarEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 73 And .pnlAutorizarEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 81 And .pnlCorregirEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 82 And .pnlValidarEvalA.Visible = True) Then
-                                            llenarGridEval()
-                                        End If
-                                    Case "SR"
-                                        llenarGridSR()
-                                    Case "A"
-                                        llenarGridA()
-                                    Case "C"
-                                        llenarGridC()
-                                    Case "NS"
-                                        llenarGridNS()
-                                    Case "SN"
-                                        llenarGridSN()
-                                    Case "F"
-                                        llenarGridF()
-                                    Case "SAP"
-                                        llenarGridSAP()
-                                    Case "V"
-                                        llenarGridV()
-                                End Select
-                            End If
-                        Else
-                            Session("id_usuario") = 0
+                                    ._txtIdAct.Text = Val(Session("id_actividadM"))
+                                    Select Case Session("TipoM")
+                                        Case "Eval"
+                                            If (Val(._txtIdAct.Text) = 69 And .pnlEvaluacionAut.Visible = True) Or (Val(._txtIdAct.Text) = 71 And .pnlEvaluacionCorr.Visible = True) Or (Val(._txtIdAct.Text) = 72 And .pnlValidarEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 73 And .pnlAutorizarEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 81 And .pnlCorregirEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 82 And .pnlValidarEvalA.Visible = True) Then
+                                                llenarGridEval()
+                                            End If
+                                        Case "SR"
+                                            llenarGridSR()
+                                        Case "A"
+                                            llenarGridA()
+                                        Case "C"
+                                            llenarGridC()
+                                        Case "NS"
+                                            llenarGridNS()
+                                        Case "SN"
+                                            llenarGridSN()
+                                        Case "F"
+                                            llenarGridF()
+                                        Case "SAP"
+                                            llenarGridSAP()
+                                        Case "V"
+                                            llenarGridV()
+                                    End Select
+                                End If
+                            Else
+                                Session("id_usuario") = 0
                             Server.Transfer("Login.aspx")
                         End If
                     End If
@@ -4818,6 +4859,25 @@
     End Sub
     Public Sub llenarGridComprobacionAnticipo(Autorizador As Boolean, Segundo_Autorizador As Boolean, Tercer_Autorizador As Boolean)
         Try
+            litError.Text = ""
+            'Presentar Tabla de Anticipos por procesar
+            imgMenu.Visible = False
+            imgTrans.Visible = False
+            gvRegistrosReun.Visible = False
+            gvRegistrosEval.Visible = False
+            gvRegistrosSR.Visible = False
+            pnlFiltroA.Visible = False
+            gvRegistrosA.Visible = False
+            gvRegistrosC.Visible = False
+            gvRegistrosNS.Visible = False
+            pnlFiltroF.Visible = False
+            gvRegistrosF.Visible = False
+            gvRegistrosSAP.Visible = False
+            gvRegistrosV.Visible = False
+            gvRegistrosG.Visible = False
+            gvRegistrosDG.Visible = False
+            gvRegistrosAntProv.Visible = True
+
             Dim ConexionBD As SqlConnection = New System.Data.SqlClient.SqlConnection
             ConexionBD.ConnectionString = accessDB.conBD("ProcAd")
             Dim sdaCatalogo As New SqlDataAdapter

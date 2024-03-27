@@ -1579,7 +1579,7 @@
                                                                <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
                                                                    <tr>
                                                                        <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="Image9" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                           <asp:Image ID="Img9VBO" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
                                                                        </td>
                                                                        <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
                                                                            <asp:Button ID="btnVBOAnticipo" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Visto bueno anticipo de proveedor " Width="195px" ForeColor="Black" />
@@ -1591,7 +1591,7 @@
                                                                <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
                                                                    <tr>
                                                                        <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="Image8" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                           <asp:Image ID="Img8AAP" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
                                                                        </td>
                                                                        <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
                                                                            <asp:Button ID="btnAutSAnticipoProv" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Aut. anticipo de proveedor " Width="160px" ForeColor="Black" />
@@ -1936,7 +1936,7 @@
                                                                <table style="height: 20px; width: 224px; font-family: Verdana; font-size: 8px;">
                                                                    <tr>
                                                                        <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="Image10" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                                                                           <asp:Image ID="imgCAP" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
                                                                        </td>
                                                                        <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
                                                                            <asp:Button ID="btnCAntProveedor" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Comprobar anticipo " Width="130px" ForeColor="Black" />
@@ -2056,6 +2056,60 @@
                                                                    </tr>
                                                                </table>
                                                            </asp:Panel>
+                                                           <asp:Panel ID="pnlAutorizarTemporal" runat="server">
+    <table style="height: 60px; width: 224px; font-family: Verdana; font-size: 8px;">
+        <asp:Panel ID="pnlAutorizarCompAnticipo" runat="server">
+            <tr>
+
+                <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                    <asp:Image ID="imgAT1" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                </td>
+                <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                    <asp:Button ID="btnAutorizarCompAnticipo" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
+                </td>
+            </tr>
+        </asp:Panel>
+        <asp:Panel ID="pnlSegundoAutorizador" runat="server">
+            <tr>
+                <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                    <asp:Image ID="imgAT2" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                </td>
+                <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                    <asp:Button ID="btnSegundoAutorizador" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
+                </td>
+            </tr>
+        </asp:Panel>
+       
+        <asp:Panel ID="pnlTercerAutorizador" runat="server">
+            <tr>
+                <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                    <asp:Image ID="imgAT3" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+                </td>
+                <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                    <asp:Button ID="btnTercerAutorizador" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
+                </td>
+            </tr>
+        </asp:Panel>
+       
+        <tr>
+            <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                <asp:Image ID="img4CompCodCont" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+            </td>
+            <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                <asp:Button ID="btnCompCodCont" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Codificacion Contable Comprobacion Anticipo" Width="200px" ForeColor="Black" />
+            </td>
+        </tr>
+
+        <tr>
+            <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
+                <asp:Image ID="Image8" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
+            </td>
+            <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
+                <asp:Button ID="btnAutorizarCP" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Cuentas Por Pagar" Width="170px" ForeColor="Black" />
+            </td>
+        </tr>
+    </table>
+</asp:Panel>
                                                        </div>
                                                    </div>
                                                </div>
@@ -2235,51 +2289,7 @@
                                                                    </tr>
                                                                </table>
                                                            </asp:Panel>
-                                                           <asp:Panel ID="pnlAutorizarTemporal" runat="server">
-                                                               <table style="height: 60px; width: 224px; font-family: Verdana; font-size: 8px;">
-                                                                   <tr>
-                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="imgAT1" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
-                                                                       </td>
-                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnAutorizarCompAnticipo" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
-                                                                       </td>
-                                                                   </tr>
-                                                                   <tr>
-                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="Image9" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
-                                                                       </td>
-                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnSegundoAutorizador" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
-                                                                       </td>
-                                                                   </tr>
-                                                                   <tr>
-                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="Image10" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
-                                                                       </td>
-                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnTercerAutorizador" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Comprobacion Anticipo" Width="190px" ForeColor="Black" />
-                                                                       </td>
-                                                                   </tr>
-                                                                   <tr>
-                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="Image4" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
-                                                                       </td>
-                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnCompCodCont" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Codificacion Contable Comprobacion Anticipo" Width="200px" ForeColor="Black" />
-                                                                       </td>
-                                                                   </tr>
-
-                                                                   <tr>
-                                                                       <td style="border-width: 0px; padding: 0px; margin: 0px;" class="auto-style12">
-                                                                           <asp:Image ID="Image8" runat="server" ImageUrl="images\icn_edit.png" Width="17px" />
-                                                                       </td>
-                                                                       <td class="auto-style14" style="padding: 0px 0px 4px 0px; margin: 0px; border-width: 0px; text-align: left;">
-                                                                           <asp:Button ID="btnAutorizarCP" runat="server" CssClass="stbutton" BackColor="White" BorderStyle="None" Font-Bold="False" Font-Italic="False" Font-Names="Tahoma" Font-Overline="False" Font-Size="9pt" Font-Underline="True" Text="Autorizar Cuentas Por Pagar" Width="170px" ForeColor="Black" />
-                                                                       </td>
-                                                                   </tr>
-                                                               </table>
-                                                           </asp:Panel>
+                                                           
 
                                                        </div>
                                                    </div>
