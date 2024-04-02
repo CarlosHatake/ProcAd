@@ -3029,6 +3029,15 @@ Partial Public Class Menu
     Protected WithEvents lblCompAP As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
+    '''Control lblCompAPN.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblCompAPN As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
     '''Control pnlCAntProveedor.
     '''</summary>
     '''<remarks>
@@ -3063,6 +3072,42 @@ Partial Public Class Menu
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents lblCAntProveedor As Global.System.Web.UI.WebControls.Label
+
+    '''<summary>
+    '''Control pnCompAPpa.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents pnCompAPpa As Global.System.Web.UI.WebControls.Panel
+
+    '''<summary>
+    '''Control Image25.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents Image25 As Global.System.Web.UI.WebControls.Image
+
+    '''<summary>
+    '''Control btnlistAntProv.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnlistAntProv As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control lblPagoAnticipado.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblPagoAnticipado As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control pnlAutAntProvee.
@@ -3126,6 +3171,15 @@ Partial Public Class Menu
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents btnSegundoAutorizador As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''Control lblSegAut.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents lblSegAut As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
     '''Control pnlAutAntProvee3.

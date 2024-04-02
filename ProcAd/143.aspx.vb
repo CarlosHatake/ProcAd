@@ -320,21 +320,38 @@
                         'Actualizar datos de la Solicitud
                         SCMValores.CommandText = ""
                         SCMValores.Parameters.Clear()
-                        SCMValores.CommandText = "update ms_factura set fecha_autoriza = @fecha_autoriza, fecha_autoriza2 = @fecha_autoriza_2, fecha_autoriza_3 = @fecha_autoriza_3, estatus = @status where id_ms_comprobacion_anticipo = @id_ms_comprobacion_anticipo "
+                        SCMValores.CommandText = "update ms_comprobacion_anticipo set fecha_autoriza = @fecha_autoriza, fecha_autoriza2 = @fecha_autoriza_2, fecha_autoriza_3 = @fecha_autoriza_3, estatus = @status where id_ms_comprobacion_anticipo = @id_ms_comprobacion_anticipo "
                         'SCMValores.Parameters.AddWithValue("@fecha_autoriza", fecha)
                         'SCMValores.Parameters.AddWithValue("@comentario_autoriza", .txtComentario.Text.Trim)
                         SCMValores.Parameters.AddWithValue("@id_ms_comprobacion_anticipo", Val(.lblFolio.Text))
                         SCMValores.Parameters.AddWithValue("@status", estatusCancelacion)
+                        'If estatusCancelacion = "ZA" Then
+                        '    SCMValores.Parameters.AddWithValue("@fecha_autoriza", Date.Now)
+                        'ElseIf estatusCancelacion = "ZD" Then
+                        '    SCMValores.Parameters.AddWithValue("@fecha_autoriza_2", Date.Now)
+                        'ElseIf estatusCancelacion = "ZC" Then
+                        '    SCMValores.Parameters.AddWithValue("@fecha_autoriza_3", Date.Now)
+                        'End If
+                        'ConexionBD.Open()
+                        'SCMValores.ExecuteNonQuery()
+                        'ConexionBD.Close()
                         If estatusCancelacion = "ZA" Then
                             SCMValores.Parameters.AddWithValue("@fecha_autoriza", Date.Now)
-                        ElseIf estatusCancelacion = "ZD" Then
-                            SCMValores.Parameters.AddWithValue("@fecha_autoriza_2", Date.Now)
-                        ElseIf estatusCancelacion = "ZC" Then
-                            SCMValores.Parameters.AddWithValue("@fecha_autoriza_3", Date.Now)
+                        Else
+                            SCMValores.Parameters.AddWithValue("@fecha_autoriza", DBNull.Value)
                         End If
-                        ConexionBD.Open()
-                        SCMValores.ExecuteNonQuery()
-                        ConexionBD.Close()
+
+                        If estatusCancelacion = "ZD" Then
+                            SCMValores.Parameters.AddWithValue("@fecha_autoriza_2", Date.Now)
+                        Else
+                            SCMValores.Parameters.AddWithValue("@fecha_autoriza_2", DBNull.Value)
+                        End If
+
+                        If estatusCancelacion = "ZC" Then
+                            SCMValores.Parameters.AddWithValue("@fecha_autoriza_3", Date.Now)
+                        Else
+                            SCMValores.Parameters.AddWithValue("@fecha_autoriza_3", DBNull.Value)
+                        End If
 
                         ._txtBan.Text = 1
 

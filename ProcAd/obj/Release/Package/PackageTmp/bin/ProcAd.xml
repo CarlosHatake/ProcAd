@@ -12887,6 +12887,96 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:ProcAd._141._wsm46">
+<summary>
+Control wsm46.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd._141._litError">
+<summary>
+Control litError.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd._141.__txtIdUsuario">
+<summary>
+Control _txtIdUsuario.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd._141.__txtBan">
+<summary>
+Control _txtBan.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd._141.__txtIdMsInst">
+<summary>
+Control _txtIdMsInst.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd._141._pnlInicio">
+<summary>
+Control pnlInicio.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd._141._pnlPagoAnticipadoConPedidoCompra">
+<summary>
+Control pnlPagoAnticipadoConPedidoCompra.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd._141._lbl_PagoAnticipado">
+<summary>
+Control lbl_PagoAnticipado.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd._141._gvListaValidacion">
+<summary>
+Control gvListaValidacion.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd._141._btnComprobar">
+<summary>
+Control btnComprobar.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:ProcAd._143._wsm50">
 <summary>
 Control wsm50.
@@ -79820,6 +79910,15 @@ Campo generado automáticamente.
 Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
 </remarks>
 </member>
+<member name="F:ProcAd.Menu._lblCompAPN">
+<summary>
+Control lblCompAPN.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
 <member name="F:ProcAd.Menu._pnlCAntProveedor">
 <summary>
 Control pnlCAntProveedor.
@@ -79850,6 +79949,42 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:ProcAd.Menu._lblCAntProveedor">
 <summary>
 Control lblCAntProveedor.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._pnCompAPpa">
+<summary>
+Control pnCompAPpa.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._Image25">
+<summary>
+Control Image25.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._btnlistAntProv">
+<summary>
+Control btnlistAntProv.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._lblPagoAnticipado">
+<summary>
+Control lblPagoAnticipado.
 </summary>
 <remarks>
 Campo generado automáticamente.
@@ -79913,6 +80048,15 @@ Para modificarlo, mueva la declaración del campo del archivo del diseñador al 
 <member name="F:ProcAd.Menu._btnSegundoAutorizador">
 <summary>
 Control btnSegundoAutorizador.
+</summary>
+<remarks>
+Campo generado automáticamente.
+Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+</remarks>
+</member>
+<member name="F:ProcAd.Menu._lblSegAut">
+<summary>
+Control lblSegAut.
 </summary>
 <remarks>
 Campo generado automáticamente.

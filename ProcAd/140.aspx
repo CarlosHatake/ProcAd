@@ -141,7 +141,7 @@
                                                 <asp:Label ID="lbl_Autorizador2" runat="server" Text="Segundo Autorizador:" Visible="false"></asp:Label>
                                             </td>
                                             <td>
-                                                <asp:UpdatePanel runat="server" ID="up_Autorizador2">
+                                               <asp:UpdatePanel runat="server" ID="up_Autorizador2" UpdateMode="Conditional">
                                                     <ContentTemplate>
                                                         <asp:DropDownList ID="ddlAutorizador2" runat="server" Width="250px" Visible="false"></asp:DropDownList>
                                                     </ContentTemplate>

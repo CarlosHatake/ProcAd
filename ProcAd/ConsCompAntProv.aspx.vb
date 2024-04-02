@@ -295,7 +295,7 @@
                     query = query + "  and id_usr_autoriza = @id_usr_autoriza "
                 End If
                 If .cbDirector.Checked = True Then
-                    query = query + "  and id_usr_autorizador2  = @id_usr_autorizador2"
+                    query = query + "  and id_usr_autorizador2  = @id_usr_autorizador2 "
                 End If
                 If .cbNoComp.Checked = True Then
                     query = query + "  and id_ms_comprobacion_anticipo = @id_ms_comprobacion_anticipo "
@@ -303,7 +303,7 @@
                 If .cbEstatus.Checked = True Then
                     query = query + "  and estatus = @estatus "
                 End If
-                query = query + "ORDER BY id_ms_comprobacion_anticipo "
+                query = query + " ORDER BY id_ms_comprobacion_anticipo "
 
                 sdaConsulta.SelectCommand = New SqlCommand(query, ConexionBD)
 

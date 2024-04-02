@@ -1701,7 +1701,8 @@
                                                               "order by cgEmpl.nombre + ' ' + ap_paterno + ' ' + ap_materno ", ConexionBD)
                 sdaAut2.SelectCommand.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
                 .ddlAutorizador2.DataSource = dsAut2
-                .ddlAutorizador2.DataTextField = "autorizador"
+                '.ddlAutorizador2.DataTextField = "autorizador"
+                .ddlAutorizador2.DataTextField = "nombre_empleado"
                 .ddlAutorizador2.DataValueField = "id_usuario"
 
                 ConexionBD.Open()

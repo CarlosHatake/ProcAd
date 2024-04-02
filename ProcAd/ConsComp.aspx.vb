@@ -86,7 +86,7 @@
                         Dim dsAutorizador As New DataSet
                         query = "select distinct(autorizador) as autorizador " +
                                 "from ms_comp "
-                        If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Or ._txtPerfil.Text = "CxP" Then
+                        If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Then
                             query = query + "where empleado = @empleado "
                         End If
                         If ._txtPerfil.Text = "Aut" Or ._txtPerfil.Text = "SegViajes" Then
@@ -94,7 +94,7 @@
                         End If
                         query = query + "order by autorizador "
                         sdaAutorizador.SelectCommand = New SqlCommand(query, ConexionBD)
-                        If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Or ._txtPerfil.Text = "CxP" Then
+                        If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Then
                             sdaAutorizador.SelectCommand.Parameters.AddWithValue("@empleado", ._txtEmpleado.Text)
                         End If
                         If ._txtPerfil.Text = "Aut" Or ._txtPerfil.Text = "SegViajes" Then
@@ -112,7 +112,7 @@
                         dsAutorizador.Dispose()
                         .ddlAutorizador.SelectedIndex = -1
                         'If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Or ._txtPerfil.Text = "CxP" Then
-                        If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Or ._txtPerfil.Text = "CxP" Then
+                        If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Then
                             .pnlSolicitó.Visible = False
                         Else
                             If ._txtIdUsuario.Text = 14113 Then
@@ -331,7 +331,7 @@
                     query = query + "and (ms_comp.empleado = @autorizadorU or ms_comp.autorizador = @autorizadorU or ms_comp.id_usr_aut_dir = @idUsrDir) "
                 End If
 
-                If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Or ._txtPerfil.Text = "CxP" Or .cbSolicitante.Checked = True Then
+                If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Or .cbSolicitante.Checked = True Then
                     query = query + "  and ms_comp.id_usr_solicita = @id_usr_solicita "
                 End If
                 If .cbEmpresa.Checked = True Then
@@ -362,7 +362,7 @@
                     sdaConsulta.SelectCommand.Parameters.AddWithValue("@idUsrDir", Val(._txtIdUsuario.Text))
                 End If
 
-                If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Or ._txtPerfil.Text = "CxP" Then
+                If ._txtPerfil.Text = "Usr" Or ._txtPerfil.Text = "UsrSL" Or ._txtPerfil.Text = "Liq" Or ._txtPerfil.Text = "Conta" Or ._txtPerfil.Text = "Vig" Or ._txtPerfil.Text = "ContaF" Then
                     sdaConsulta.SelectCommand.Parameters.AddWithValue("@id_usr_solicita", Val(._txtIdUsuario.Text))
                 End If
                 If .cbSolicitante.Checked = True Then

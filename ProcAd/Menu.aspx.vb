@@ -59,6 +59,7 @@
                     .pnlAutAntProvee3.Visible = False
                     .pnlCompCodCont.Visible = False
                     .pnlAutorizarCPAP.Visible = False
+                    .pnCompAPpa.Visible = False
 
 
                     '-- Comprobaciones
@@ -367,35 +368,105 @@
                             End If
 
                             'Comprobacion Anticipo Proveedor
+
+                            ' anticipo por comprobar
                             Dim banCompAP As Integer = 0
                             SCMValores.Connection = ConexionBD
                             SCMValores.CommandText = ""
                             SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "SELECT COUNT(*)  FROM ms_anticipo_proveedor LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol  WHERE inst.tipo = 'AP' AND inst.id_actividad = 140  AND NOT EXISTS (SELECT NULL FROM ms_comprobacion_anticipo comp WHERE ms_anticipo_proveedor.id_ms_anticipo_proveedor = comp.id_ms_anticipo_proveedor) AND id_usr_solicita = @id_usuario "
+                            SCMValores.CommandText = " SELECT COUNT(*) FROM ms_anticipo_proveedor t1  " +
+                                                     " LEFT JOIN ms_instancia inst ON t1.id_ms_anticipo_proveedor = inst.id_ms_sol AND  inst.tipo ='AP'  " +
+                                                    " LEFT JOIN ms_comprobacion_anticipo  comp on comp.id_ms_anticipo_proveedor = t1.id_ms_anticipo_proveedor and comp.estatus not IN ('P','ZA','A')   " +
+                                                    " WHERE NOT EXISTS (SELECT NULL  " +
+                                                    " FROM ms_comprobacion_anticipo t2 " +
+                                                    " WHERE t2.id_ms_anticipo_proveedor  = t1.id_ms_anticipo_proveedor )   " +
+                                                    " AND t1.id_usr_solicita = @id_usuario AND inst.id_actividad =140"
                             SCMValores.Parameters.AddWithValue("@id_usuario", Val(._txtIdUsuario.Text))
                             ConexionBD.Open()
                             banCompAP = SCMValores.ExecuteScalar()
                             ConexionBD.Close()
                             If banCompAP > 0 Then
                                 .lblCAntProveedor.Text = banCompAP
+                                .lblCompAPN.Text = banCompAP
+                            End If
+
+                            'cxp
+                            If ._txtPerfil.Text = "CxP" Or ._txtPerfil.Text = "Adm" Then
+                                Dim banCompAPPa As Integer = 0
+                                SCMValores.Connection = ConexionBD
+                                SCMValores.CommandText = ""
+                                SCMValores.Parameters.Clear()
+                                SCMValores.CommandText = "select COUNT(*) from ms_anticipo_proveedor ant left join ms_instancia inst on  inst.id_ms_sol = ant.id_ms_anticipo_proveedor and tipo ='AP' where tipo_anticipo = 2 and inst.id_actividad = 141 and ant.estatus ='TR' "
+                                SCMValores.Parameters.AddWithValue("@id_usuario", Val(._txtIdUsuario.Text))
+                                ConexionBD.Open()
+                                banCompAPPa = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If banCompAPPa > 0 Then
+
+                                    If .lblCompAPN.Text = " " Then
+                                        .lblPagoAnticipado.Text = banCompAPPa
+                                        .lblCompAPN.Text = banCompAPPa
+                                    Else
+                                        .lblCompAPN.Text = Val(.lblCompAPN.Text) + banCompAPPa
+                                        .lblPagoAnticipado.Text = banCompAPPa
+                                    End If
+
+                                End If
                             End If
 
 
+
+                            'Autorizador 1
                             Dim banCompAPAut As Integer = 0
                             SCMValores.Connection = ConexionBD
                             SCMValores.CommandText = ""
                             SCMValores.Parameters.Clear()
                             SCMValores.CommandText = "select COUNT(*) from ms_comprobacion_anticipo  MSA " +
                                                      " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol and MI.tipo ='CAP' " +
-                                                     " WHERE id_usr_autoriza = @id_usuario and MI.id_actividad =142"
+                                                             " WHERE id_usr_autoriza = @id_usuario and MI.id_actividad =142"
                             SCMValores.Parameters.AddWithValue("@id_usuario", Val(._txtIdUsuario.Text))
                             ConexionBD.Open()
                             banCompAPAut = SCMValores.ExecuteScalar()
                             ConexionBD.Close()
                             If banCompAPAut > 0 Then
-                                .lblAutorizarCompAnticipo.Text = banCompAPAut
-                                .pnlAutAntProvee.Visible = True
+
+                                    .pnlAutAntProvee.Visible = True
+                                    If .lblCompAPN.Text = " " Then
+                                        .lblAutorizarCompAnticipo.Text = banCompAPAut
+                                        .lblCompAPN.Text = banCompAPAut
+                                    Else
+                                        .lblCompAPN.Text = Val(.lblCompAPN.Text) + banCompAPAut
+                                        .lblAutorizarCompAnticipo.Text = banCompAPAut
+                                    End If
+
+                                End If
+                            'Autorizador 2
+                            Dim banCompAPAut2 As Integer = 0
+                            SCMValores.Connection = ConexionBD
+                            SCMValores.CommandText = ""
+                            SCMValores.Parameters.Clear()
+                            SCMValores.CommandText = " Select COUNT(*) from ms_comprobacion_anticipo MSA  " +
+                                                         " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol  " +
+                                                         " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
+                                                         "  where MI.tipo = 'CAP' and MI.id_actividad = 143 and id_usr_autorizador2 = @id_usuario  and fecha_autoriza is not null and fecha_autoriza_2 is  null "
+                            SCMValores.Parameters.AddWithValue("@id_usuario", Val(._txtIdUsuario.Text))
+                            ConexionBD.Open()
+                            banCompAPAut2 = SCMValores.ExecuteScalar()
+                            ConexionBD.Close()
+                            If banCompAPAut2 > 0 Then
+
+                                .pnlAutAntProvee2.Visible = True
+                                If .lblCompAPN.Text = " " Then
+                                    .lblSegAut.Text = banCompAPAut2
+                                    .lblCompAPN.Text = banCompAPAut2
+                                Else
+                                    .lblCompAPN.Text = Val(.lblCompAPN.Text) + banCompAPAut2
+                                    .lblSegAut.Text = banCompAPAut2
+                                End If
                             End If
+
+
+
                             'Autorizador
                             ''Acceso a panel de facturas CFDI
 
@@ -418,1546 +489,1548 @@
                             ''End If
 
                             .imgMenu.Visible = True
-                            .imgMenu.Width = 695
-                            Select Case ._txtPerfil.Text
-                                Case "Adm"
-
-                                    .pnlCatPermisos.Visible = True
-
-                                    '-- Ingresos Checador
-                                    '.pnlChecador.Visible = True
-                                    '-- Catálogo de Usuarios
-                                    .pnlCaTitulo.Visible = True
-                                    .pnlCatAltaUsr.Visible = True
-                                    .pnlCatOrigenDest.Visible = True
-                                    .pnlCatConsAut.Visible = True
-                                    .pnlCatVoBo.Visible = True
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRAutDir.Visible = True
-                                    .pnlSRVoBo.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    .pnlSRConsultarAV.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAGenerarAAE.Visible = True
-                                    .pnlAGenerarTransfer.Visible = True
-                                    .pnlAEntregarEfect.Visible = True
-                                    .pnlARegistrarAAE.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    .pnlAConsCuadreA.Visible = True
-                                    .pnlAConsAud.Visible = True
-                                    .pnlVBOAnticipo.Visible = True
-                                    .pnlRegistrarPagoNav.Visible = True
-                                    .pnlConsCompAntPro.Visible = True
-                                    .pnlAutorizarCPAP.Visible = True
-                                    .pnlCompCodCont.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarCompExt.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutCompExt.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCValidar.Visible = True
-                                    .pnlCEntregarEfect.Visible = True
-                                    .pnlCConsultar.Visible = True
-                                    .pnlCConsCompConta.Visible = True
-                                    .pnlCConsCompSV.Visible = True
-                                    .pnlCConsCompExp.Visible = True
-                                    .pnlCConsultarComp.Visible = True
-                                    '-- Facturas SAT
-                                    .pnlFSATTitulo.Visible = True
-                                    .pnlFSATCarga.Visible = True
-                                    .pnlFSATConsultar.Visible = True
-                                    .pnlFSATLiq.Visible = False
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSIngresarCot.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = False
-                                    '.pnlFIngresar.Visible = False
-                                    '.pnlFCorregir.Visible = False
-                                    '.pnlFAutorizar.Visible = False
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFValidar.Visible = True
-                                    .pnlIFIngresarCot.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFAutorizarSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFAsigCContrato.Visible = True
-                                    .pnlIFRegContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFAsignar.Visible = True
-                                    .pnlFRegistrarNAV.Visible = True
-                                    .pnlFConsultar.Visible = True
-                                    .pnlFConsultarCot.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRAdministar.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGCargar.Visible = True
-                                    .pnlGDispersar.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-                                    .pnlModCargasCombustible.Visible = True
-
-                                    '-- Vehículos / Bloqueos por Rendimiento
-                                    .pnlVBRTitulo.Visible = True
-                                    .pnlVBRCatVehiculo.Visible = True
-                                    .pnlVBRBloqueo.Visible = True
-                                    .pnlVBRConsultar.Visible = True
-                                    .pnlRVConsultaV.Visible = True
-
-                                    ''-- Catálogos de Evaluaciones
-                                    '.pnlCatEvaluacion.Visible = True
-
-                                    '-- auditorua
-                                    pnlConsAud.Visible = True
-
-
-                                    .imgMenu.ImageUrl = "images\Admon.png"
-                                Case "AltUsr"
-                                    '-- Catálogo de Usuarios
-                                    .pnlCaTitulo.Visible = True
-                                    .pnlCatAltaUsr.Visible = True
-
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Admon.png"
-                                Case "Usr"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Auxiliar.png"
-                                Case "UsrSL"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    '.pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    '.pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    '.pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    '.pnlIFSolicitar.Visible = True
-                                    '.pnlIFCorregirSol.Visible = True
-                                    '.pnlIFSolAmplPresup.Visible = True
-                                    '.pnlIFCompContrato.Visible = True
-                                    '.pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    '.pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Auxiliar.png"
-                                Case "Liq"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Facturas SAT
-                                    .pnlFSATTitulo.Visible = True
-                                    .pnlFSATLiq.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Auxiliar.png"
-                                Case "AdmViajes"
-                                    '-- Catálogos
-                                    .pnlCaTitulo.Visible = True
-                                    .pnlCatVoBo.Visible = True
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRVoBo.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    .pnlSRConsultarAV.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAGenerarAAE.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Auxiliar.png"
-                                Case "SegViajes"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-                                    .pnlCConsCompSV.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFRegistrarNAV.Visible = True
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                                Case "Compras"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSIngresarCot.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFIngresarCot.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFRegContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    .pnlFConsultarCot.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Auxiliar.png"
-                                Case "JefCompras"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSIngresarCot.Visible = True
-                                    .pnlNSAutorizarCot.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFIngresarCot.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFRegContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    .pnlFConsultarCot.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-
-                                Case "AutAud"
-                                    '-- Catálogos
-                                    .pnlCaTitulo.Visible = True
-                                    .pnlCatAuditoria.Visible = True
-
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-
-                                Case "Aut", "DirAdFi"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRAutDir.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-
-                                Case "DesOrg"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    '-- Catálogos de Evaluaciones
-                                    .pnlCatEvaluacion.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                                Case "JefInfo"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    '-- Jefatura de Información % Cumplimiento UN
-                                    .pnlJefInfo.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                                Case "GerTesor"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    .pnlVBOAnticipo.Visible = True
-                                    .pnlConsCompAntPro.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutCompExt.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-                                    .pnlSNAutorizar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFAutorizarSol.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                                Case "ValPresup"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-                                    .pnlCConsCompSV.Visible = True
-                                    .pnlCConsCompConta.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-                                    .pnlSNValPresup.Visible = True
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFValidarPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFRegistrarNAV.Visible = True
-                                    .pnlFConsultar.Visible = True
-
-                                    '-- Presupuesto de Gastos de Viaje
-                                    .pnlPGVTitulo.Visible = True
-                                    .pnlPGVCargarPresup.Visible = True
-                                    .pnlPGVConsultarAmpl.Visible = True
-
-                                    .pnlPGVValidarAmpl.Visible = True
-
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    .pnlRVConsultaV.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                                Case "AdmonDCM"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-                                    '-- Facturas SAT
-                                    .pnlFSATTitulo.Visible = True
-                                    .pnlFSATCarga.Visible = True
-                                    .pnlFSATConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-                                    .pnlSNAutorizar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFAutorizarSol.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFAsignar.Visible = True
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Admon.png"
-                                Case "GerConta"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-                                    '-- Facturas SAT
-                                    .pnlFSATTitulo.Visible = True
-                                    .pnlFSATCarga.Visible = True
-                                    .pnlFSATConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Admon.png"
-                                Case "Aud"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    .pnlAConsAud.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    .pnlFConsultarCot.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .pnlConsAud.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                                Case "AdmCat"
-                                    '-- Catálogos
-                                    .pnlCaTitulo.Visible = True
-                                    .pnlCatAltaUsrAC.Visible = True
-                                    .pnlCatConcepto.Visible = True
-                                    .pnlCatServicio.Visible = True
-                                    pnlConsSer.Visible = True
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Comp Anticipo Proveedor
-                                    .pnlCompCodCont.Visible = True
-
-                                    '-- Facturas SAT
-                                    .pnlFSATTitulo.Visible = True
-                                    .pnlFSATCarga.Visible = True
-                                    .pnlFSATConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAsigCContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFAsignar.Visible = True
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Admon.png"
-                                Case "AdmCatEst"
-                                    '-- Facturas SAT
-                                    .pnlFSATTitulo.Visible = True
-                                    .pnlFSATCarga.Visible = True
-                                    .pnlFSATConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Admon.png"
-                                Case "Vig"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRAdministar.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Auxiliar.png"
-                                Case "CoPame", "CoDCM"
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAEntregarEfect.Visible = True
-                                    .pnlAGenerarTransfer.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-                                    .pnlFConsultar.Visible = True
-
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCValidar.Visible = True
-                                    .pnlCEntregarEfect.Visible = True
-                                    .pnlCConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGCargar.Visible = True
-                                    .pnlGDispersar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Auxiliar.png"
-                                Case "Comp"
-                                    '-- Facturas SAT
-                                    .pnlFSATTitulo.Visible = True
-                                    .pnlFSATConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlCGenerarCompExt.Visible = True
-                                    .pnlAGenerarTransfer.Visible = True
-                                    .pnlARegistrarAAE.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-                                    .pnlFConsultar.Visible = True
-
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCValidar.Visible = True
-                                    .pnlCConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGCargar.Visible = True
-                                    .pnlGDispersar.Visible = True
-                                    .pnlGConsultar.Visible = True
-                                    .pnlCConsultarComp.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Auxiliar.png"
-                                Case "Caja"
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAEntregarEfect.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    .pnlAConsCuadreA.Visible = True
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCEntregarEfect.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Auxiliar.png"
-                                Case "Conta"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-                                    .pnlCConsCompConta.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFAsignar.Visible = True
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                                Case "ContaF"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFAsignar.Visible = True
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                                Case "CxP"
-                                    .pnlCConsultarComp.Visible = True
-
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    .pnlRegistrarPagoNav.Visible = True
-                                    .pnlConsAntProv.Visible = True
-                                    .pnlConsCompAntPro.Visible = True
-                                    .pnlAutorizarCPAP.Visible = True
-
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    ''-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFRegistrarNAV.Visible = True
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                                Case "SopTec"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-                                    '-- Vehículos / Bloqueos por Rendimiento
-                                    .pnlVBRTitulo.Visible = True
-                                    .pnlVBRBloqueo.Visible = True
-                                    .pnlVBRConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Admon.png"
-                                Case "GerSopTec"
-                                    '-- Solicitar Recursos
-                                    .pnlSRTitulo.Visible = True
-                                    .pnlSRSolicitar.Visible = True
-                                    .pnlSRAutorizar.Visible = True
-                                    .pnlSRConsultar.Visible = True
-                                    '-- Anticipos
-                                    .pnlATitulo.Visible = True
-                                    .pnlAConsultar.Visible = True
-                                    '-- Comprobaciones
-                                    .pnlCTitulo.Visible = True
-                                    .pnlCGenerarComp.Visible = True
-                                    .pnlCAutorizar.Visible = True
-                                    .pnlCConsultar.Visible = True
-
-                                    '-- Negociación de Servicio
-                                    .pnlNSTitulo.Visible = True
-                                    .pnlNSSolicitar.Visible = True
-                                    .pnlNSConsultaNeg.Visible = True
-
-                                    '-- Servicios Negociados
-                                    .pnlSNTitulo.Visible = True
-                                    .pnlSNSolicitar.Visible = True
-
-                                    '-- Facturas de Gastos, Seg. y Asesorías
-                                    '.pnlFTitulo.Visible = True
-                                    '.pnlFIngresar.Visible = True
-                                    '.pnlFCorregir.Visible = True
-                                    '.pnlFAutorizar.Visible = True
-
-                                    '-- Versión 2 Inicio
-                                    .pnlIFTitulo.Visible = True
-                                    .pnlIFSolicitar.Visible = True
-                                    .pnlIFCorregirSol.Visible = True
-                                    .pnlIFSolAmplPresup.Visible = True
-                                    .pnlIFIngresar.Visible = True
-                                    .pnlIFCompContrato.Visible = True
-                                    .pnlIFAutContrato.Visible = True
-                                    .pnlIFAutorizarFact.Visible = True
-                                    '-- Versión 2 Fin
-
-                                    .pnlFConsultar.Visible = True
-                                    '-- Reservación de Vehículos
-                                    .pnlRVTitulo.Visible = True
-                                    .pnlRVConsultar.Visible = True
-                                    '-- Gasolina
-                                    .pnlGTitulo.Visible = True
-                                    .pnlGComprobar.Visible = True
-                                    .pnlGConsultar.Visible = True
-                                    '-- Vehículos / Bloqueos por Rendimiento
-                                    .pnlVBRTitulo.Visible = True
-                                    .pnlVBRCatVehiculo.Visible = True
-                                    .pnlVBRBloqueo.Visible = True
-                                    .pnlVBRConsultar.Visible = True
-
-                                    .imgMenu.ImageUrl = "images\Admon.png"
-                                Case Else
-                                    .imgMenu.ImageUrl = "images\Usuario.png"
-                            End Select
-
-                            Dim contConsExp As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                .imgMenu.Width = 695
+                                Select Case ._txtPerfil.Text
+                                    Case "Adm"
+
+                                        .pnlCatPermisos.Visible = True
+
+                                        '-- Ingresos Checador
+                                        '.pnlChecador.Visible = True
+                                        '-- Catálogo de Usuarios
+                                        .pnlCaTitulo.Visible = True
+                                        .pnlCatAltaUsr.Visible = True
+                                        .pnlCatOrigenDest.Visible = True
+                                        .pnlCatConsAut.Visible = True
+                                        .pnlCatVoBo.Visible = True
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRAutDir.Visible = True
+                                        .pnlSRVoBo.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        .pnlSRConsultarAV.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAGenerarAAE.Visible = True
+                                        .pnlAGenerarTransfer.Visible = True
+                                        .pnlAEntregarEfect.Visible = True
+                                        .pnlARegistrarAAE.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        .pnlAConsCuadreA.Visible = True
+                                        .pnlAConsAud.Visible = True
+                                        .pnlVBOAnticipo.Visible = True
+                                        .pnlRegistrarPagoNav.Visible = True
+                                        .pnlConsCompAntPro.Visible = True
+                                        .pnlAutorizarCPAP.Visible = True
+                                        .pnlCompCodCont.Visible = True
+                                        .pnCompAPpa.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarCompExt.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutCompExt.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCValidar.Visible = True
+                                        .pnlCEntregarEfect.Visible = True
+                                        .pnlCConsultar.Visible = True
+                                        .pnlCConsCompConta.Visible = True
+                                        .pnlCConsCompSV.Visible = True
+                                        .pnlCConsCompExp.Visible = True
+                                        .pnlCConsultarComp.Visible = True
+                                        '-- Facturas SAT
+                                        .pnlFSATTitulo.Visible = True
+                                        .pnlFSATCarga.Visible = True
+                                        .pnlFSATConsultar.Visible = True
+                                        .pnlFSATLiq.Visible = False
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSIngresarCot.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = False
+                                        '.pnlFIngresar.Visible = False
+                                        '.pnlFCorregir.Visible = False
+                                        '.pnlFAutorizar.Visible = False
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFValidar.Visible = True
+                                        .pnlIFIngresarCot.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFAutorizarSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFAsigCContrato.Visible = True
+                                        .pnlIFRegContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFAsignar.Visible = True
+                                        .pnlFRegistrarNAV.Visible = True
+                                        .pnlFConsultar.Visible = True
+                                        .pnlFConsultarCot.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRAdministar.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGCargar.Visible = True
+                                        .pnlGDispersar.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+                                        .pnlModCargasCombustible.Visible = True
+
+                                        '-- Vehículos / Bloqueos por Rendimiento
+                                        .pnlVBRTitulo.Visible = True
+                                        .pnlVBRCatVehiculo.Visible = True
+                                        .pnlVBRBloqueo.Visible = True
+                                        .pnlVBRConsultar.Visible = True
+                                        .pnlRVConsultaV.Visible = True
+
+                                        ''-- Catálogos de Evaluaciones
+                                        '.pnlCatEvaluacion.Visible = True
+
+                                        '-- auditorua
+                                        pnlConsAud.Visible = True
+
+
+                                        .imgMenu.ImageUrl = "images\Admon.png"
+                                    Case "AltUsr"
+                                        '-- Catálogo de Usuarios
+                                        .pnlCaTitulo.Visible = True
+                                        .pnlCatAltaUsr.Visible = True
+
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Admon.png"
+                                    Case "Usr"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Auxiliar.png"
+                                    Case "UsrSL"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        '.pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        '.pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        '.pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        '.pnlIFSolicitar.Visible = True
+                                        '.pnlIFCorregirSol.Visible = True
+                                        '.pnlIFSolAmplPresup.Visible = True
+                                        '.pnlIFCompContrato.Visible = True
+                                        '.pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        '.pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Auxiliar.png"
+                                    Case "Liq"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Facturas SAT
+                                        .pnlFSATTitulo.Visible = True
+                                        .pnlFSATLiq.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Auxiliar.png"
+                                    Case "AdmViajes"
+                                        '-- Catálogos
+                                        .pnlCaTitulo.Visible = True
+                                        .pnlCatVoBo.Visible = True
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRVoBo.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        .pnlSRConsultarAV.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAGenerarAAE.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Auxiliar.png"
+                                    Case "SegViajes"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+                                        .pnlCConsCompSV.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFRegistrarNAV.Visible = True
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                    Case "Compras"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSIngresarCot.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFIngresarCot.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFRegContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        .pnlFConsultarCot.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Auxiliar.png"
+                                    Case "JefCompras"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSIngresarCot.Visible = True
+                                        .pnlNSAutorizarCot.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFIngresarCot.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFRegContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        .pnlFConsultarCot.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+
+                                    Case "AutAud"
+                                        '-- Catálogos
+                                        .pnlCaTitulo.Visible = True
+                                        .pnlCatAuditoria.Visible = True
+
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+
+                                    Case "Aut", "DirAdFi"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRAutDir.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+
+                                    Case "DesOrg"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        '-- Catálogos de Evaluaciones
+                                        .pnlCatEvaluacion.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                    Case "JefInfo"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        '-- Jefatura de Información % Cumplimiento UN
+                                        .pnlJefInfo.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                    Case "GerTesor"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        .pnlVBOAnticipo.Visible = True
+                                        .pnlConsCompAntPro.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutCompExt.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+                                        .pnlSNAutorizar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFAutorizarSol.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                    Case "ValPresup"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+                                        .pnlCConsCompSV.Visible = True
+                                        .pnlCConsCompConta.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+                                        .pnlSNValPresup.Visible = True
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFValidarPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFRegistrarNAV.Visible = True
+                                        .pnlFConsultar.Visible = True
+
+                                        '-- Presupuesto de Gastos de Viaje
+                                        .pnlPGVTitulo.Visible = True
+                                        .pnlPGVCargarPresup.Visible = True
+                                        .pnlPGVConsultarAmpl.Visible = True
+
+                                        .pnlPGVValidarAmpl.Visible = True
+
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        .pnlRVConsultaV.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                    Case "AdmonDCM"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+                                        '-- Facturas SAT
+                                        .pnlFSATTitulo.Visible = True
+                                        .pnlFSATCarga.Visible = True
+                                        .pnlFSATConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+                                        .pnlSNAutorizar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFAutorizarSol.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFAsignar.Visible = True
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Admon.png"
+                                    Case "GerConta"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+                                        '-- Facturas SAT
+                                        .pnlFSATTitulo.Visible = True
+                                        .pnlFSATCarga.Visible = True
+                                        .pnlFSATConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Admon.png"
+                                    Case "Aud"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        .pnlAConsAud.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        .pnlFConsultarCot.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .pnlConsAud.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                    Case "AdmCat"
+                                        '-- Catálogos
+                                        .pnlCaTitulo.Visible = True
+                                        .pnlCatAltaUsrAC.Visible = True
+                                        .pnlCatConcepto.Visible = True
+                                        .pnlCatServicio.Visible = True
+                                        pnlConsSer.Visible = True
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Comp Anticipo Proveedor
+                                        .pnlCompCodCont.Visible = True
+
+                                        '-- Facturas SAT
+                                        .pnlFSATTitulo.Visible = True
+                                        .pnlFSATCarga.Visible = True
+                                        .pnlFSATConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAsigCContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFAsignar.Visible = True
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Admon.png"
+                                    Case "AdmCatEst"
+                                        '-- Facturas SAT
+                                        .pnlFSATTitulo.Visible = True
+                                        .pnlFSATCarga.Visible = True
+                                        .pnlFSATConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Admon.png"
+                                    Case "Vig"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRAdministar.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Auxiliar.png"
+                                    Case "CoPame", "CoDCM"
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAEntregarEfect.Visible = True
+                                        .pnlAGenerarTransfer.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+                                        .pnlFConsultar.Visible = True
+
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCValidar.Visible = True
+                                        .pnlCEntregarEfect.Visible = True
+                                        .pnlCConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGCargar.Visible = True
+                                        .pnlGDispersar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Auxiliar.png"
+                                    Case "Comp"
+                                        '-- Facturas SAT
+                                        .pnlFSATTitulo.Visible = True
+                                        .pnlFSATConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlCGenerarCompExt.Visible = True
+                                        .pnlAGenerarTransfer.Visible = True
+                                        .pnlARegistrarAAE.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+                                        .pnlFConsultar.Visible = True
+
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCValidar.Visible = True
+                                        .pnlCConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGCargar.Visible = True
+                                        .pnlGDispersar.Visible = True
+                                        .pnlGConsultar.Visible = True
+                                        .pnlCConsultarComp.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Auxiliar.png"
+                                    Case "Caja"
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAEntregarEfect.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        .pnlAConsCuadreA.Visible = True
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCEntregarEfect.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Auxiliar.png"
+                                    Case "Conta"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+                                        .pnlCConsCompConta.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFAsignar.Visible = True
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                    Case "ContaF"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFAsignar.Visible = True
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                    Case "CxP"
+                                        .pnlCConsultarComp.Visible = True
+
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        .pnlRegistrarPagoNav.Visible = True
+                                        .pnlConsAntProv.Visible = True
+                                        .pnlConsCompAntPro.Visible = True
+                                        .pnlAutorizarCPAP.Visible = True
+                                        .pnCompAPpa.Visible = True
+
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        ''-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFRegistrarNAV.Visible = True
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                    Case "SopTec"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+                                        '-- Vehículos / Bloqueos por Rendimiento
+                                        .pnlVBRTitulo.Visible = True
+                                        .pnlVBRBloqueo.Visible = True
+                                        .pnlVBRConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Admon.png"
+                                    Case "GerSopTec"
+                                        '-- Solicitar Recursos
+                                        .pnlSRTitulo.Visible = True
+                                        .pnlSRSolicitar.Visible = True
+                                        .pnlSRAutorizar.Visible = True
+                                        .pnlSRConsultar.Visible = True
+                                        '-- Anticipos
+                                        .pnlATitulo.Visible = True
+                                        .pnlAConsultar.Visible = True
+                                        '-- Comprobaciones
+                                        .pnlCTitulo.Visible = True
+                                        .pnlCGenerarComp.Visible = True
+                                        .pnlCAutorizar.Visible = True
+                                        .pnlCConsultar.Visible = True
+
+                                        '-- Negociación de Servicio
+                                        .pnlNSTitulo.Visible = True
+                                        .pnlNSSolicitar.Visible = True
+                                        .pnlNSConsultaNeg.Visible = True
+
+                                        '-- Servicios Negociados
+                                        .pnlSNTitulo.Visible = True
+                                        .pnlSNSolicitar.Visible = True
+
+                                        '-- Facturas de Gastos, Seg. y Asesorías
+                                        '.pnlFTitulo.Visible = True
+                                        '.pnlFIngresar.Visible = True
+                                        '.pnlFCorregir.Visible = True
+                                        '.pnlFAutorizar.Visible = True
+
+                                        '-- Versión 2 Inicio
+                                        .pnlIFTitulo.Visible = True
+                                        .pnlIFSolicitar.Visible = True
+                                        .pnlIFCorregirSol.Visible = True
+                                        .pnlIFSolAmplPresup.Visible = True
+                                        .pnlIFIngresar.Visible = True
+                                        .pnlIFCompContrato.Visible = True
+                                        .pnlIFAutContrato.Visible = True
+                                        .pnlIFAutorizarFact.Visible = True
+                                        '-- Versión 2 Fin
+
+                                        .pnlFConsultar.Visible = True
+                                        '-- Reservación de Vehículos
+                                        .pnlRVTitulo.Visible = True
+                                        .pnlRVConsultar.Visible = True
+                                        '-- Gasolina
+                                        .pnlGTitulo.Visible = True
+                                        .pnlGComprobar.Visible = True
+                                        .pnlGConsultar.Visible = True
+                                        '-- Vehículos / Bloqueos por Rendimiento
+                                        .pnlVBRTitulo.Visible = True
+                                        .pnlVBRCatVehiculo.Visible = True
+                                        .pnlVBRBloqueo.Visible = True
+                                        .pnlVBRConsultar.Visible = True
+
+                                        .imgMenu.ImageUrl = "images\Admon.png"
+                                    Case Else
+                                        .imgMenu.ImageUrl = "images\Usuario.png"
+                                End Select
+
+                                Dim contConsExp As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "where @idUsuario in (select split.a.value('.', 'NVARCHAR(MAX)') data " +
                                                      "                     from (select cast('<X>' + replace((select valor from cg_parametros where parametro = 'consulta_expromat'), ',', '</X><X>') + '</X>' as xml) as string) as A " +
                                                      "                       cross apply string.nodes('/X') as split(a)) "
-                            SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
-                            ConexionBD.Open()
-                            contConsExp = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contConsExp > 0 Then 'Usuario de Expromat configurado para Consultas
-                                .pnlCConsFactExp.Visible = True
-                                .pnlCConsCompExp.Visible = True
-                            End If
+                                SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
+                                ConexionBD.Open()
+                                contConsExp = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contConsExp > 0 Then 'Usuario de Expromat configurado para Consultas
+                                    .pnlCConsFactExp.Visible = True
+                                    .pnlCConsCompExp.Visible = True
+                                End If
 
-                            Dim contVal As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                Dim contVal As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from (select distinct(id_usr_valida) as validador " +
                                                      "      from cg_tipo_servicio " +
                                                      "      where status = 'A' " +
@@ -1972,23 +2045,23 @@
                                                      "      where id_usr_valida is not null " +
                                                      "        and fecha_valida is null) validadores " +
                                                      "where @idUsuario = validador "
-                            ConexionBD.Open()
-                            contVal = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contVal > 0 Then
-                                .pnlIFValidar.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contVal = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contVal > 0 Then
+                                    .pnlIFValidar.Visible = True
+                                End If
 
-                            'Verificar si existe evaluación pendiente por registrar
-                            ''SCMValores.CommandText = "select count(*) as empInd " + _
-                            ''                         "from dt_empleado " + _
-                            ''                         "where case len(@no_empleado) when 4 then '000' + @no_empleado when 5 then '00' + @no_empleado else @no_empleado end = dt_empleado.no_empleado " + _
-                            ''                         " and status = 'A'" + _
-                            ''                         " and (select cast(valor as datetime) " + _
-                            ''                         "      from cg_parametros " + _
-                            ''                         "      where parametro = 'mes_eval') >= dateadd(mm, 2, cast(cast(datepart(year, fecha_ingreso) as varchar(4)) + '/' + cast(datepart(month, fecha_ingreso) as varchar(2)) + '/01' as date)) "
-                            Dim evalReg As Integer
-                            SCMValores.CommandText = "select count(*) as empInd " +
+                                'Verificar si existe evaluación pendiente por registrar
+                                ''SCMValores.CommandText = "select count(*) as empInd " + _
+                                ''                         "from dt_empleado " + _
+                                ''                         "where case len(@no_empleado) when 4 then '000' + @no_empleado when 5 then '00' + @no_empleado else @no_empleado end = dt_empleado.no_empleado " + _
+                                ''                         " and status = 'A'" + _
+                                ''                         " and (select cast(valor as datetime) " + _
+                                ''                         "      from cg_parametros " + _
+                                ''                         "      where parametro = 'mes_eval') >= dateadd(mm, 2, cast(cast(datepart(year, fecha_ingreso) as varchar(4)) + '/' + cast(datepart(month, fecha_ingreso) as varchar(2)) + '/01' as date)) "
+                                Dim evalReg As Integer
+                                SCMValores.CommandText = "select count(*) as empInd " +
                                                      "from dt_empleado " +
                                                      "  left join ms_evaluacion on dt_empleado.no_empleado = ms_evaluacion.no_empleado " +
                                                      "                         and mes_eval = month((select cast(valor as datetime) " +
@@ -2004,16 +2077,16 @@
                                                      "       from cg_parametros " +
                                                      "       where parametro = 'mes_eval') >= dateadd(mm, 2, cast(cast(datepart(year, fecha_ingreso) as varchar(4)) + '/' + cast(datepart(month, fecha_ingreso) as varchar(2)) + '/01' as date)) " +
                                                      "  and id_ms_evaluacion is null "
-                            ConexionBD.Open()
-                            evalReg = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If evalReg > 0 Then
-                                .pnlEvaluacion.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                evalReg = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If evalReg > 0 Then
+                                    .pnlEvaluacion.Visible = True
+                                End If
 
-                            'Verificar si existe al menos una evaluación por validar por el usuario
-                            Dim evalAut As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Verificar si existe al menos una evaluación por validar por el usuario
+                                Dim evalAut As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_evaluacion " +
                                                      "where id_usr_valida = @idUsuario " +
                                                      "  and status = 'P' " +
@@ -2023,53 +2096,53 @@
                                                      "  and año_eval = year((select cast(valor as datetime) " +
                                                      "                       from cg_parametros " +
                                                      "                       where parametro = 'mes_eval')) "
-                            ConexionBD.Open()
-                            evalAut = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If evalAut > 0 Then
-                                .pnlEvaluacionAut.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                evalAut = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If evalAut > 0 Then
+                                    .pnlEvaluacionAut.Visible = True
+                                End If
 
 
-                            'Verificar si tiene acceso a realizar un movimiento interno
-                            Dim movInt As Integer
-                            SCMValores.CommandText = "select count(*) from " +
+                                'Verificar si tiene acceso a realizar un movimiento interno
+                                Dim movInt As Integer
+                                SCMValores.CommandText = "select count(*) from " +
                                 "cg_usuario where movimientos_internos = 'S' and id_usuario = @idUsuario "
-                            ConexionBD.Open()
-                            movInt = SCMValores.ExecuteScalar
-                            ConexionBD.Close()
-                            If movInt > 0 Then
-                                pnlMovInt.Visible = True
-                                pnlAutMovInt.Visible = False
-                                pnlSolMovInt.Visible = True
-                            End If
-                            'Verificar si existe algun autorizacion por aprobar en caso de se autorizador'
-                            Dim autMovInt As Integer
-                            SCMValores.CommandText = "select count(*) from " +
+                                ConexionBD.Open()
+                                movInt = SCMValores.ExecuteScalar
+                                ConexionBD.Close()
+                                If movInt > 0 Then
+                                    pnlMovInt.Visible = True
+                                    pnlAutMovInt.Visible = False
+                                    pnlSolMovInt.Visible = True
+                                End If
+                                'Verificar si existe algun autorizacion por aprobar en caso de se autorizador'
+                                Dim autMovInt As Integer
+                                SCMValores.CommandText = "select count(*) from " +
                                                      "ms_movimientos_internos " +
                                                      "left join ms_instancia On ms_instancia.id_ms_sol = ms_movimientos_internos.id_ms_movimientos_internos " +
                                                      "where id_usr_autoriza  = @idUsuario and id_actividad = 124"
-                            ' SCMValores.Parameters.AddWithValue("@idUsuario", Val(_txtIdUsuario.Text))
-                            ConexionBD.Open()
-                            autMovInt = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If autMovInt > 0 Then
-                                pnlMovInt.Visible = True
-                                pnlAutMovInt.Visible = True
-                                lblAutMovInt.Visible = True
-                                lblAutMovInt.Text = autMovInt.ToString
-                                lblAutMov.Visible = True
-                                lblAutMov.Text = autMovInt.ToString
-                            Else
-                                lblAutMovInt.Visible = False
-                                lblAutMov.Visible = False
-                            End If
+                                ' SCMValores.Parameters.AddWithValue("@idUsuario", Val(_txtIdUsuario.Text))
+                                ConexionBD.Open()
+                                autMovInt = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If autMovInt > 0 Then
+                                    pnlMovInt.Visible = True
+                                    pnlAutMovInt.Visible = True
+                                    lblAutMovInt.Visible = True
+                                    lblAutMovInt.Text = autMovInt.ToString
+                                    lblAutMov.Visible = True
+                                    lblAutMov.Text = autMovInt.ToString
+                                Else
+                                    lblAutMovInt.Visible = False
+                                    lblAutMov.Visible = False
+                                End If
 
 
 
-                            'Verificar si existe al menos una evaluación por corregir del usuario
-                            Dim evalCorr As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Verificar si existe al menos una evaluación por corregir del usuario
+                                Dim evalCorr As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_evaluacion " +
                                                      "where id_usr_registro = @idUsuario " +
                                                      "  and status = 'PC' " +
@@ -2079,16 +2152,16 @@
                                                      "  and año_eval = year((select cast(valor as datetime) " +
                                                      "                       from cg_parametros " +
                                                      "                       where parametro = 'mes_eval')) "
-                            ConexionBD.Open()
-                            evalCorr = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If evalCorr > 0 Then
-                                .pnlEvaluacionCorr.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                evalCorr = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If evalCorr > 0 Then
+                                    .pnlEvaluacionCorr.Visible = True
+                                End If
 
-                            'Validar si existe la menos un grupo de evaluaciones por autorizar 
-                            Dim evalAAut As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si existe la menos un grupo de evaluaciones por autorizar 
+                                Dim evalAAut As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_evaluacionA " +
                                                      "where status = 'PA' " +
                                                      "  and id_usr_director = @idUsuario " +
@@ -2098,16 +2171,16 @@
                                                      "  and año_eval = year((select cast(valor as datetime) " +
                                                      "                       from cg_parametros " +
                                                      "                       where parametro = 'mes_eval')) "
-                            ConexionBD.Open()
-                            evalAAut = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If evalAAut > 0 Then
-                                .pnlAutorizarEvalA.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                evalAAut = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If evalAAut > 0 Then
+                                    .pnlAutorizarEvalA.Visible = True
+                                End If
 
-                            'Validar si existe la menos un grupo de evaluaciones por corregir
-                            Dim evalACorr As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si existe la menos un grupo de evaluaciones por corregir
+                                Dim evalACorr As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_evaluacionA " +
                                                      "where status = 'PCA' " +
                                                      "  and ms_evaluacionA.id_usr_evalua = @idUsuario " +
@@ -2117,16 +2190,16 @@
                                                      "  and año_eval = year((select cast(valor as datetime) " +
                                                      "                       from cg_parametros " +
                                                      "                       where parametro = 'mes_eval')) "
-                            ConexionBD.Open()
-                            evalACorr = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If evalACorr > 0 Then
-                                .pnlCorregirEvalA.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                evalACorr = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If evalACorr > 0 Then
+                                    .pnlCorregirEvalA.Visible = True
+                                End If
 
-                            'Validar si existe la menos un grupo de evaluaciones por validar
-                            Dim evalAVal As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si existe la menos un grupo de evaluaciones por validar
+                                Dim evalAVal As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_evaluacionA " +
                                                      "where status = 'PVA' " +
                                                      "  and @idUsuario in (select top 1 ms_evaluacion.id_usr_valida " +
@@ -2141,16 +2214,16 @@
                                                      "  and año_eval = year((select cast(valor as datetime) " +
                                                      "                       from cg_parametros " +
                                                      "                       where parametro = 'mes_eval')) "
-                            ConexionBD.Open()
-                            evalAVal = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If evalAVal > 0 Then
-                                .pnlValidarEvalA.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                evalAVal = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If evalAVal > 0 Then
+                                    .pnlValidarEvalA.Visible = True
+                                End If
 
-                            'Validar si existe la menos un grupo de evaluaciones por procesar (1ra Quincena)
-                            Dim evalProc1Q As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si existe la menos un grupo de evaluaciones por procesar (1ra Quincena)
+                                Dim evalProc1Q As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_evaluacion " +
                                                      "where status in ('PCE', 'PPE', 'EP') " +
                                                      "  and @idUsuario = (select valor " +
@@ -2163,16 +2236,16 @@
                                                      "                       from cg_parametros " +
                                                      "                       where parametro = 'mes_eval')) " +
                                                      "  and fecha_nomina_1ra is null "
-                            ConexionBD.Open()
-                            evalProc1Q = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If evalProc1Q > 0 Then
-                                .pnlProcesarEval1Q.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                evalProc1Q = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If evalProc1Q > 0 Then
+                                    .pnlProcesarEval1Q.Visible = True
+                                End If
 
-                            'Validar si existe la menos un grupo de evaluaciones por concentrar
-                            Dim evalConc As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si existe la menos un grupo de evaluaciones por concentrar
+                                Dim evalConc As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_evaluacion " +
                                                      "where status = 'PCE' " +
                                                      "  and @idUsuario = (select valor " +
@@ -2184,16 +2257,16 @@
                                                      "  and año_eval = year((select cast(valor as datetime) " +
                                                      "                       from cg_parametros " +
                                                      "                       where parametro = 'mes_eval')) "
-                            ConexionBD.Open()
-                            evalConc = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If evalConc > 0 Then
-                                .pnlConcentrarEval.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                evalConc = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If evalConc > 0 Then
+                                    .pnlConcentrarEval.Visible = True
+                                End If
 
-                            'Validar si existe la menos un grupo de evaluaciones por procesar (2da Quincena)
-                            Dim evalProc2Q As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si existe la menos un grupo de evaluaciones por procesar (2da Quincena)
+                                Dim evalProc2Q As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_evaluacion " +
                                                      "where status = 'PPE' " +
                                                      "  and @idUsuario = (select valor " +
@@ -2205,17 +2278,17 @@
                                                      "  and año_eval = year((select cast(valor as datetime) " +
                                                      "                       from cg_parametros " +
                                                      "                       where parametro = 'mes_eval')) "
-                            ConexionBD.Open()
-                            evalProc2Q = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If evalProc2Q > 0 Then
-                                .pnlProcesarEval2Q.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                evalProc2Q = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If evalProc2Q > 0 Then
+                                    .pnlProcesarEval2Q.Visible = True
+                                End If
 
-                            'Validar si debe tener acceso a la consulta
-                            Dim contPnl As Integer
-                            SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si debe tener acceso a la consulta
+                                Dim contPnl As Integer
+                                SCMValores.Parameters.Clear()
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_evaluacion " +
                                                      "  left join cg_usuario cgUsrEval on ms_evaluacion.id_usr_registro = cgUsrEval.id_usuario " +
                                                      "  left join cg_usuario cgUsrVal on ms_evaluacion.id_usr_valida = cgUsrVal.id_usuario " +
@@ -2224,74 +2297,74 @@
                                                      "   or cgUsrVal.id_usuario = @idUsuario " +
                                                      "   or cgUsrDir.id_usuario = @idUsuario " +
                                                      "   or ms_evaluacion.no_empleado = @noEmpleado "
-                            SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
-                            SCMValores.Parameters.AddWithValue("@noEmpleado", Val(._txtNoEmpleado.Text))
-                            ConexionBD.Open()
-                            contPnl = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contPnl > 0 Or ._txtPerfil.Text = "DesOrg" Or ._txtPerfil.Text = "JefInfo" Then
-                                .pnlConsEvaluacion.Visible = True
-                            End If
+                                SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
+                                SCMValores.Parameters.AddWithValue("@noEmpleado", Val(._txtNoEmpleado.Text))
+                                ConexionBD.Open()
+                                contPnl = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contPnl > 0 Or ._txtPerfil.Text = "DesOrg" Or ._txtPerfil.Text = "JefInfo" Then
+                                    .pnlConsEvaluacion.Visible = True
+                                End If
 
-                            'Validar si debe tener a Catálogo de Grupos
-                            Dim contLid As Integer
-                            SCMValores.Parameters.Clear()
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si debe tener a Catálogo de Grupos
+                                Dim contLid As Integer
+                                SCMValores.Parameters.Clear()
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from cg_usuario " +
                                                      "where id_usuario = @idUsuario " +
                                                      "  and lider = 'S' "
-                            SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
-                            ConexionBD.Open()
-                            contLid = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contLid > 0 Then
-                                .pnlCatGrupo.Visible = True
-                            End If
+                                SCMValores.Parameters.AddWithValue("@idUsuario", Val(._txtIdUsuario.Text))
+                                ConexionBD.Open()
+                                contLid = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contLid > 0 Then
+                                    .pnlCatGrupo.Visible = True
+                                End If
 
-                            'Validar si es Secretario de algún Grupo Activo
-                            Dim contSec As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si es Secretario de algún Grupo Activo
+                                Dim contSec As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from cg_grupo " +
                                                      "where id_usr_secretario = @idUsuario " +
                                                      "  and status = 'A' "
-                            ConexionBD.Open()
-                            contSec = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contSec > 0 Then
-                                .pnlAltaReunion.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contSec = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contSec > 0 Then
+                                    .pnlAltaReunion.Visible = True
+                                End If
 
-                            Dim SCMTemp As SqlCommand = New System.Data.SqlClient.SqlCommand
-                            SCMTemp.Connection = ConexionBD
-                            SCMTemp.CommandText = ""
-                            SCMTemp.Parameters.Clear()
-                            SCMTemp.CommandText = "update dt_reunion set status = 'Z' where id_ms_reunion in (select id_ms_reunion from ms_reunion where status = 'P' and dateadd(hour, 1, fecha_reunion) < getdate()) "
-                            ConexionBD.Open()
-                            SCMTemp.ExecuteNonQuery()
-                            ConexionBD.Close()
-                            SCMTemp.CommandText = "update ms_reunion set status = 'Z' where status = 'P' and dateadd(hour, 1, fecha_reunion) < getdate() "
-                            ConexionBD.Open()
-                            SCMTemp.ExecuteNonQuery()
-                            ConexionBD.Close()
+                                Dim SCMTemp As SqlCommand = New System.Data.SqlClient.SqlCommand
+                                SCMTemp.Connection = ConexionBD
+                                SCMTemp.CommandText = ""
+                                SCMTemp.Parameters.Clear()
+                                SCMTemp.CommandText = "update dt_reunion set status = 'Z' where id_ms_reunion in (select id_ms_reunion from ms_reunion where status = 'P' and dateadd(hour, 1, fecha_reunion) < getdate()) "
+                                ConexionBD.Open()
+                                SCMTemp.ExecuteNonQuery()
+                                ConexionBD.Close()
+                                SCMTemp.CommandText = "update ms_reunion set status = 'Z' where status = 'P' and dateadd(hour, 1, fecha_reunion) < getdate() "
+                                ConexionBD.Open()
+                                SCMTemp.ExecuteNonQuery()
+                                ConexionBD.Close()
 
-                            'Validar si es Secretario de alguna Reunión Activa
-                            Dim contSeg As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si es Secretario de alguna Reunión Activa
+                                Dim contSeg As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_reunion " +
                                                      "  left join cg_grupo on ms_reunion.id_grupo = cg_grupo.id_grupo " +
                                                      "where (ms_reunion.id_usr_secretario = @idUsuario " +
                                                      "    or cg_grupo.id_usr_lider = @idUsuario) " +
                                                      "  and ms_reunion.status in ('P', 'I') "
-                            ConexionBD.Open()
-                            contSeg = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contSeg > 0 Then
-                                .pnlSegReunion.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contSeg = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contSeg > 0 Then
+                                    .pnlSegReunion.Visible = True
+                                End If
 
-                            'Validar si es Líder, Secretario o Responsable de al menos una actividad
-                            Dim contIntReun As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si es Líder, Secretario o Responsable de al menos una actividad
+                                Dim contIntReun As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from (select distinct(id_ms_actividad) " +
                                                      "      from ms_actividad " +
                                                      "        left join cg_grupo on ms_actividad.id_grupo = cg_grupo.id_grupo " +
@@ -2303,574 +2376,574 @@
                                                      "      select distinct(id_ms_actividad) " +
                                                      "      from ms_actividad " +
                                                      "      where id_usr_responsable = @idUsuario) ms_act "
-                            ConexionBD.Open()
-                            contIntReun = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contIntReun > 0 Then
-                                .pnlConsActividad.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contIntReun = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contIntReun > 0 Then
+                                    .pnlConsActividad.Visible = True
+                                End If
 
-                            'Validar si es Integrante de al menos un Grupo
-                            Dim contIntR As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si es Integrante de al menos un Grupo
+                                Dim contIntR As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from cg_grupo " +
                                                      "  left join dt_grupo on cg_grupo.id_grupo = dt_grupo.id_grupo and dt_grupo.status = 'A' " +
                                                      "where cg_grupo.status = 'A' " +
                                                      "  and dt_grupo.status = 'A' " +
                                                      "  and id_usr_part = @idUsuario "
-                            ConexionBD.Open()
-                            contIntR = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contIntR > 0 Then
-                                .pnlAltaActividad.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contIntR = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contIntR > 0 Then
+                                    .pnlAltaActividad.Visible = True
+                                End If
 
-                            'Validar si tiene pendiente al menos una evaluación por registrar
-                            Dim contEvalReun As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si tiene pendiente al menos una evaluación por registrar
+                                Dim contEvalReun As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_contribucion " +
                                                      "where id_usr_evaluador = @idUsuario " +
                                                      "  and ms_contribucion.status = 'P' "
-                            ConexionBD.Open()
-                            contEvalReun = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contEvalReun > 0 Then
-                                .pnlEvalReunion.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contEvalReun = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contEvalReun > 0 Then
+                                    .pnlEvalReunion.Visible = True
+                                End If
 
-                            'Validar si es Secretario o Líder de alguna Reunión
-                            Dim contReu As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si es Secretario o Líder de alguna Reunión
+                                Dim contReu As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_reunion " +
                                                      "  left join cg_grupo on ms_reunion.id_grupo = cg_grupo.id_grupo " +
                                                      "where (ms_reunion.id_usr_secretario = @idUsuario " +
                                                      "    or cg_grupo.id_usr_lider = @idUsuario) "
-                            ConexionBD.Open()
-                            contReu = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contReu > 0 Then
-                                .pnlConsReunion.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contReu = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contReu > 0 Then
+                                    .pnlConsReunion.Visible = True
+                                End If
 
-                            If .pnlCatGrupo.Visible = True Or .pnlAltaReunion.Visible = True Or .pnlSegReunion.Visible = True Or .pnlEvalReunion.Visible = True Or .pnlConsReunion.Visible = True Or .pnlAltaActividad.Visible = True Or .pnlConsActividad.Visible = True Then
-                                .pnlReunionTit.Visible = True
-                            End If
+                                If .pnlCatGrupo.Visible = True Or .pnlAltaReunion.Visible = True Or .pnlSegReunion.Visible = True Or .pnlEvalReunion.Visible = True Or .pnlConsReunion.Visible = True Or .pnlAltaActividad.Visible = True Or .pnlConsActividad.Visible = True Then
+                                    .pnlReunionTit.Visible = True
+                                End If
 
-                            'Validar si tiene al menos una Negociación por Autorizar
-                            Dim contNegPend As Integer
-                            SCMValores.CommandText = "select count(*) aut_pend " +
+                                'Validar si tiene al menos una Negociación por Autorizar
+                                Dim contNegPend As Integer
+                                SCMValores.CommandText = "select count(*) aut_pend " +
                                                      "from ms_instancia " +
                                                      "  left join ms_negoc_servicio on ms_instancia.id_ms_sol = ms_negoc_servicio.id_ms_negoc_servicio and ms_instancia.tipo = 'NS' " +
                                                      "where id_actividad = 90 " +
                                                      "  and ms_negoc_servicio.id_usr_aut_negoc = @idUsuario "
-                            ConexionBD.Open()
-                            contNegPend = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contNegPend > 0 Then
-                                .pnlNSAutorizarNeg.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contNegPend = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contNegPend > 0 Then
+                                    .pnlNSAutorizarNeg.Visible = True
+                                End If
 
-                            'Validar si tiene al menos una Solicitud de Servicio Negociado por Validar
-                            Dim contValSNPend As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si tiene al menos una Solicitud de Servicio Negociado por Validar
+                                Dim contValSNPend As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_instancia " +
                                                      "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                      "where id_actividad = 94 " +
                                                      "  and id_usr_valida = @idUsuario "
-                            ConexionBD.Open()
-                            contValSNPend = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contValSNPend > 0 Then
-                                .pnlSNValidar1.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contValSNPend = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contValSNPend > 0 Then
+                                    .pnlSNValidar1.Visible = True
+                                End If
 
-                            'Validar si tiene al menos una Solicitud de Ampliación de Presupuesto
-                            Dim contSolAmplSNPend As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si tiene al menos una Solicitud de Ampliación de Presupuesto
+                                Dim contSolAmplSNPend As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_instancia " +
                                                      "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                      "where id_actividad = 99 " +
                                                      "  and id_usr_solicita = @idUsuario "
-                            ConexionBD.Open()
-                            contSolAmplSNPend = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contSolAmplSNPend > 0 Then
-                                .pnlSNSolAmplPre.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contSolAmplSNPend = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contSolAmplSNPend > 0 Then
+                                    .pnlSNSolAmplPre.Visible = True
+                                End If
 
-                            'Validar si tiene al menos una Solicitud de Servicio Negociado por Validar Soportes
-                            Dim contVal2SNPend As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si tiene al menos una Solicitud de Servicio Negociado por Validar Soportes
+                                Dim contVal2SNPend As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_instancia " +
                                                      "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                      "where id_actividad = 102 " +
                                                      "  and id_usr_valida2 = @idUsuario "
-                            ConexionBD.Open()
-                            contVal2SNPend = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contVal2SNPend > 0 Then
-                                .pnlSNValidar2.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contVal2SNPend = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contVal2SNPend > 0 Then
+                                    .pnlSNValidar2.Visible = True
+                                End If
 
-                            'Validar si tiene al menos una Solicitud de Servicio Negociado por Ingresar Factura
-                            Dim contIngFactSNPend As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si tiene al menos una Solicitud de Servicio Negociado por Ingresar Factura
+                                Dim contIngFactSNPend As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_instancia " +
                                                      "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                      "where id_actividad = 101 " +
                                                      "  and id_usr_solicita = @idUsuario "
-                            ConexionBD.Open()
-                            contIngFactSNPend = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contIngFactSNPend > 0 Then
-                                .pnlSNIngresarF.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contIngFactSNPend = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contIngFactSNPend > 0 Then
+                                    .pnlSNIngresarF.Visible = True
+                                End If
 
-                            'Validar si tiene al menos una Solicitud de Servicio Negociado por Corregir
-                            Dim contCorregFactSNPend As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si tiene al menos una Solicitud de Servicio Negociado por Corregir
+                                Dim contCorregFactSNPend As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_instancia " +
                                                      "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                      "where id_actividad = 104 " +
                                                      "  and id_usr_solicita = @idUsuario "
-                            ConexionBD.Open()
-                            contCorregFactSNPend = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contCorregFactSNPend > 0 Then
-                                .pnlSNCorregirF.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contCorregFactSNPend = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contCorregFactSNPend > 0 Then
+                                    .pnlSNCorregirF.Visible = True
+                                End If
 
-                            'Validar si tiene acceso a la consulta de Comprobaciones Detalle (ConsCompT)
-                            If Val(._txtTransporte.Text) = 1 Or ._txtPerfil.Text = "GerConta" Or ._txtPerfil.Text = "Aud" Then
-                                .pnlCConsCompT.Visible = True
-                                'Consulta de Autorizadores
-                                .pnlCaTitulo.Visible = True
-                                .pnlCatConsAut.Visible = True
-                            End If
+                                'Validar si tiene acceso a la consulta de Comprobaciones Detalle (ConsCompT)
+                                If Val(._txtTransporte.Text) = 1 Or ._txtPerfil.Text = "GerConta" Or ._txtPerfil.Text = "Aud" Then
+                                    .pnlCConsCompT.Visible = True
+                                    'Consulta de Autorizadores
+                                    .pnlCaTitulo.Visible = True
+                                    .pnlCatConsAut.Visible = True
+                                End If
 
-                            'Validar si es responsable de al menos un Centro de Costo
-                            Dim contRespCC As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si es responsable de al menos un Centro de Costo
+                                Dim contRespCC As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_presupuesto " +
                                                      "  left join bd_Empleado.dbo.cg_cc on ms_presupuesto.id_cc = cg_cc.id_cc " +
                                                      "where cg_cc.id_usr_responsable = @idUsuario " +
                                                      "  and año >= year(getdate()) "
-                            ConexionBD.Open()
-                            contRespCC = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contRespCC > 0 Then
-                                .pnlPGVConsulta.Visible = True
-                                .pnlPGVSolicitarAmpl.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contRespCC = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contRespCC > 0 Then
+                                    .pnlPGVConsulta.Visible = True
+                                    .pnlPGVSolicitarAmpl.Visible = True
+                                End If
 
-                            'Validar si es Director de al menos una solicitud de ampliación pendiente
-                            Dim contAmpP As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Validar si es Director de al menos una solicitud de ampliación pendiente
+                                Dim contAmpP As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_ampliacion_p " +
                                                      "where status = 'P' " +
                                                      "  and id_usr_autoriza = @idUsuario "
-                            ConexionBD.Open()
-                            contAmpP = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contAmpP > 0 Then
-                                .pnlPGVAutorizarAmpl.Visible = True
-                                .lblAutorizarAmplPGV.Text = contAmpP.ToString
-                                .lblPGV.Text = contAmpP.ToString
-                            Else
-                                .lblAutorizarAmplPGV.Text = ""
-                                .lblPGV.Text = ""
-                            End If
-                            'Comprobar si existen validaciones de presupuesto pendientes
-                            Dim contValP As Integer
-                            SCMValores.CommandText = " select count(*)" +
+                                ConexionBD.Open()
+                                contAmpP = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contAmpP > 0 Then
+                                    .pnlPGVAutorizarAmpl.Visible = True
+                                    .lblAutorizarAmplPGV.Text = contAmpP.ToString
+                                    .lblPGV.Text = contAmpP.ToString
+                                Else
+                                    .lblAutorizarAmplPGV.Text = ""
+                                    .lblPGV.Text = ""
+                                End If
+                                'Comprobar si existen validaciones de presupuesto pendientes
+                                Dim contValP As Integer
+                                SCMValores.CommandText = " select count(*)" +
                                                      " from ms_instancia" +
                                                      " where tipo ='SAP'" +
                                                      " and id_actividad = 117 "
-                            ConexionBD.Open()
-                            contValP = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contValP > 0 And _txtPerfil.Text = "ValPresup" Then
-                                .lblValAmplPGV.Text = contValP.ToString
-                                .lblPGV.Text = contValP.ToString
-                            Else
-                                .lblValAmplPGV.Text = ""
-                                .lblPGV.Text = ""
-                            End If
+                                ConexionBD.Open()
+                                contValP = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contValP > 0 And _txtPerfil.Text = "ValPresup" Then
+                                    .lblValAmplPGV.Text = contValP.ToString
+                                    .lblPGV.Text = contValP.ToString
+                                Else
+                                    .lblValAmplPGV.Text = ""
+                                    .lblPGV.Text = ""
+                                End If
 
 
-                            'Acceso a la consulta
-                            Dim contAmp As Integer
-                            SCMValores.CommandText = "select count(*) " +
+                                'Acceso a la consulta
+                                Dim contAmp As Integer
+                                SCMValores.CommandText = "select count(*) " +
                                                      "from ms_ampliacion_p " +
                                                      "where id_usr_solicita = @idUsuario or id_usr_autoriza = @idUsuario "
-                            ConexionBD.Open()
-                            contAmp = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
-                            If contAmp > 0 Then
-                                .pnlPGVConsultarAmpl.Visible = True
-                            End If
+                                ConexionBD.Open()
+                                contAmp = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
+                                If contAmp > 0 Then
+                                    .pnlPGVConsultarAmpl.Visible = True
+                                End If
 
-                            If .pnlPGVSolicitarAmpl.Visible = True Or .pnlPGVAutorizarAmpl.Visible = True Or .pnlPGVConsultarAmpl.Visible = True Then
-                                .pnlPGVTitulo.Visible = True
-                            End If
+                                If .pnlPGVSolicitarAmpl.Visible = True Or .pnlPGVAutorizarAmpl.Visible = True Or .pnlPGVConsultarAmpl.Visible = True Then
+                                    .pnlPGVTitulo.Visible = True
+                                End If
 
-                            If .pnlCatEvaluacion.Visible = True Or .pnlEvaluacion.Visible = True Or .pnlEvaluacionAut.Visible = True Or .pnlEvaluacionCorr.Visible = True Or .pnlValidarEvalA.Visible = True Or .pnlAutorizarEvalA.Visible = True Or .pnlCorregirEvalA.Visible = True Or .pnlProcesarEval1Q.Visible = True Or .pnlConcentrarEval.Visible = True Or .pnlProcesarEval2Q.Visible = True Or .pnlJefInfo.Visible = True Or .pnlConsEvaluacion.Visible = True Then
-                                .pnlEvaluacionTit.Visible = True
-                            End If
+                                If .pnlCatEvaluacion.Visible = True Or .pnlEvaluacion.Visible = True Or .pnlEvaluacionAut.Visible = True Or .pnlEvaluacionCorr.Visible = True Or .pnlValidarEvalA.Visible = True Or .pnlAutorizarEvalA.Visible = True Or .pnlCorregirEvalA.Visible = True Or .pnlProcesarEval1Q.Visible = True Or .pnlConcentrarEval.Visible = True Or .pnlProcesarEval2Q.Visible = True Or .pnlJefInfo.Visible = True Or .pnlConsEvaluacion.Visible = True Then
+                                    .pnlEvaluacionTit.Visible = True
+                                End If
 
-                            'Conteos
-                            ' Negociación de Servicios
-                            Dim contAutorizarNegNS As Integer
-                            If .pnlNSAutorizarNeg.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                'Conteos
+                                ' Negociación de Servicios
+                                Dim contAutorizarNegNS As Integer
+                                If .pnlNSAutorizarNeg.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_negoc_servicio on ms_instancia.id_ms_sol = ms_negoc_servicio.id_ms_negoc_servicio and ms_instancia.tipo = 'NS' " +
                                                          "where id_actividad = 90 " +
                                                          "  and ms_negoc_servicio.id_usr_aut_negoc = @idUsuario "
-                                ConexionBD.Open()
-                                contAutorizarNegNS = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contAutorizarNegNS > 0 Then
-                                    .lblAutorizarNegNS.Text = contAutorizarNegNS.ToString
+                                    ConexionBD.Open()
+                                    contAutorizarNegNS = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contAutorizarNegNS > 0 Then
+                                        .lblAutorizarNegNS.Text = contAutorizarNegNS.ToString
+                                    Else
+                                        .lblAutorizarNegNS.Text = ""
+                                    End If
                                 Else
                                     .lblAutorizarNegNS.Text = ""
                                 End If
-                            Else
-                                .lblAutorizarNegNS.Text = ""
-                            End If
 
-                            If contAutorizarNegNS > 0 Then
-                                .lblNS.Text = contAutorizarNegNS.ToString
-                            Else
-                                .lblNS.Text = ""
-                            End If
+                                If contAutorizarNegNS > 0 Then
+                                    .lblNS.Text = contAutorizarNegNS.ToString
+                                Else
+                                    .lblNS.Text = ""
+                                End If
 
-                            ' Servicios Negociados
-                            Dim contValidar1SN As Integer
-                            If .pnlSNValidar1.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                ' Servicios Negociados
+                                Dim contValidar1SN As Integer
+                                If .pnlSNValidar1.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                          "where id_actividad = 94 " +
                                                          "  and id_usr_valida = @idUsuario "
-                                ConexionBD.Open()
-                                contValidar1SN = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contValidar1SN > 0 Then
-                                    .lblValidar1SN.Text = contValidar1SN.ToString
+                                    ConexionBD.Open()
+                                    contValidar1SN = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contValidar1SN > 0 Then
+                                        .lblValidar1SN.Text = contValidar1SN.ToString
+                                    Else
+                                        .lblValidar1SN.Text = ""
+                                    End If
                                 Else
                                     .lblValidar1SN.Text = ""
                                 End If
-                            Else
-                                .lblValidar1SN.Text = ""
-                            End If
 
-                            Dim contAutorizarSN As Integer
-                            If .pnlSNAutorizar.Visible = True Then
-                                Dim query As String
-                                query = "select count(*) " +
+                                Dim contAutorizarSN As Integer
+                                If .pnlSNAutorizar.Visible = True Then
+                                    Dim query As String
+                                    query = "select count(*) " +
                                         "from ms_instancia " +
                                         "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                         "where id_actividad = 96 "
-                                If ._txtPerfil.Text = "AdmonDCM" Then
-                                    query = query + "  and empresa in ('COPE', 'DICOMEX', 'DIBIESE') "
-                                Else
-                                    query = query + "  and empresa not in ('COPE', 'DICOMEX', 'DIBIESE') "
-                                End If
-                                SCMValores.CommandText = query
-                                ConexionBD.Open()
-                                contAutorizarSN = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contAutorizarSN > 0 Then
-                                    .lblAutorizarSN.Text = contAutorizarSN.ToString
+                                    If ._txtPerfil.Text = "AdmonDCM" Then
+                                        query = query + "  and empresa in ('COPE', 'DICOMEX', 'DIBIESE') "
+                                    Else
+                                        query = query + "  and empresa not in ('COPE', 'DICOMEX', 'DIBIESE') "
+                                    End If
+                                    SCMValores.CommandText = query
+                                    ConexionBD.Open()
+                                    contAutorizarSN = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contAutorizarSN > 0 Then
+                                        .lblAutorizarSN.Text = contAutorizarSN.ToString
+                                    Else
+                                        .lblAutorizarSN.Text = ""
+                                    End If
                                 Else
                                     .lblAutorizarSN.Text = ""
                                 End If
-                            Else
-                                .lblAutorizarSN.Text = ""
-                            End If
 
-                            Dim contValidar2SN As Integer
-                            If .pnlSNValidar2.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                Dim contValidar2SN As Integer
+                                If .pnlSNValidar2.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                          "where id_actividad = 102 " +
                                                          "  and id_usr_valida2 = @idUsuario "
-                                ConexionBD.Open()
-                                contValidar2SN = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contValidar2SN > 0 Then
-                                    .lblValidar2SN.Text = contValidar2SN.ToString
+                                    ConexionBD.Open()
+                                    contValidar2SN = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contValidar2SN > 0 Then
+                                        .lblValidar2SN.Text = contValidar2SN.ToString
+                                    Else
+                                        .lblValidar2SN.Text = ""
+                                    End If
                                 Else
                                     .lblValidar2SN.Text = ""
                                 End If
-                            Else
-                                .lblValidar2SN.Text = ""
-                            End If
 
-                            If (contValidar1SN + contAutorizarSN + contValidar2SN) > 0 Then
-                                .lblSN.Text = (contValidar1SN + contAutorizarSN + contValidar2SN).ToString
-                            Else
-                                .lblSN.Text = ""
-                            End If
+                                If (contValidar1SN + contAutorizarSN + contValidar2SN) > 0 Then
+                                    .lblSN.Text = (contValidar1SN + contAutorizarSN + contValidar2SN).ToString
+                                Else
+                                    .lblSN.Text = ""
+                                End If
 
-                            ' Ingreso de Facturas
-                            Dim contValidarSol As Integer
-                            If .pnlIFValidar.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                ' Ingreso de Facturas
+                                Dim contValidarSol As Integer
+                                If .pnlIFValidar.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                          "where id_actividad = 44 " +
                                                          "  and id_usr_valida = @idUsuario "
-                                ConexionBD.Open()
-                                contValidarSol = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contValidarSol > 0 Then
-                                    .lblValidarSol.Text = contValidarSol.ToString
-                                Else
-                                    .lblValidarSol.Text = ""
-                                End If
-                            Else
-                                .lblAutorizarSol.Text = ""
-                            End If
-
-                            Dim contAutorizarSol As Integer
-                            If .pnlIFAutorizarSol.Visible = True Then
-                                Dim query As String
-                                query = "select count(*) " +
-                                        "from ms_instancia " +
-                                        "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
-                                        "where id_actividad = 47 "
-                                If ._txtPerfil.Text = "AdmonDCM" Then
-                                    query = query + "  and empresa in ('COPE', 'DICOMEX', 'DIBIESE') "
-                                Else
-                                    query = query + "  and empresa not in ('COPE', 'DICOMEX', 'DIBIESE') "
-                                End If
-                                SCMValores.CommandText = query
-                                ConexionBD.Open()
-                                contAutorizarSol = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contAutorizarSol > 0 Then
-                                    .lblAutorizarSol.Text = contAutorizarSol.ToString
+                                    ConexionBD.Open()
+                                    contValidarSol = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contValidarSol > 0 Then
+                                        .lblValidarSol.Text = contValidarSol.ToString
+                                    Else
+                                        .lblValidarSol.Text = ""
+                                    End If
                                 Else
                                     .lblAutorizarSol.Text = ""
                                 End If
-                            Else
-                                .lblAutorizarSol.Text = ""
-                            End If
 
-                            Dim contValidarPresup As Integer
-                            If .pnlIFValidarPresup.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                Dim contAutorizarSol As Integer
+                                If .pnlIFAutorizarSol.Visible = True Then
+                                    Dim query As String
+                                    query = "select count(*) " +
+                                        "from ms_instancia " +
+                                        "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
+                                        "where id_actividad = 47 "
+                                    If ._txtPerfil.Text = "AdmonDCM" Then
+                                        query = query + "  and empresa in ('COPE', 'DICOMEX', 'DIBIESE') "
+                                    Else
+                                        query = query + "  and empresa not in ('COPE', 'DICOMEX', 'DIBIESE') "
+                                    End If
+                                    SCMValores.CommandText = query
+                                    ConexionBD.Open()
+                                    contAutorizarSol = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contAutorizarSol > 0 Then
+                                        .lblAutorizarSol.Text = contAutorizarSol.ToString
+                                    Else
+                                        .lblAutorizarSol.Text = ""
+                                    End If
+                                Else
+                                    .lblAutorizarSol.Text = ""
+                                End If
+
+                                Dim contValidarPresup As Integer
+                                If .pnlIFValidarPresup.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                          "where id_actividad = 84 "
-                                ConexionBD.Open()
-                                contValidarPresup = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contValidarPresup > 0 Then
-                                    .lblValidarPresup.Text = contValidarPresup.ToString
+                                    ConexionBD.Open()
+                                    contValidarPresup = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contValidarPresup > 0 Then
+                                        .lblValidarPresup.Text = contValidarPresup.ToString
+                                    Else
+                                        .lblValidarPresup.Text = ""
+                                    End If
                                 Else
                                     .lblValidarPresup.Text = ""
                                 End If
-                            Else
-                                .lblValidarPresup.Text = ""
-                            End If
 
-                            Dim contAutContrato As Integer
-                            If .pnlIFAutContrato.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                Dim contAutContrato As Integer
+                                If .pnlIFAutContrato.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                          "  left join dt_factura on ms_factura.CFDI = dt_factura.uuid and dt_factura.movimiento in ('RECIBIDAS', 'RECIBIDA') " +
                                                          "  left join ms_contrato on ms_factura.id_ms_factura = ms_contrato.id_ms_factura " +
                                                          "where id_actividad = 55 " +
                                                          "  and ms_contrato.id_usr_autoriza = @idUsuario "
-                                ConexionBD.Open()
-                                contAutContrato = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contAutContrato > 0 Then
-                                    .lblAutContrato.Text = contAutContrato.ToString
+                                    ConexionBD.Open()
+                                    contAutContrato = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contAutContrato > 0 Then
+                                        .lblAutContrato.Text = contAutContrato.ToString
+                                    Else
+                                        .lblAutContrato.Text = ""
+                                    End If
                                 Else
                                     .lblAutContrato.Text = ""
                                 End If
-                            Else
-                                .lblAutContrato.Text = ""
-                            End If
 
-                            Dim contAutorizarFact As Integer = 0
-                            If .pnlIFAutorizarFact.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                Dim contAutorizarFact As Integer = 0
+                                If .pnlIFAutorizarFact.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_factura on ms_instancia.id_ms_sol = ms_factura.id_ms_factura and ms_instancia.tipo = 'F' " +
                                                          "where id_actividad in (50, 52, 53) " +
                                                          "  and ((id_usr_autoriza = @idUsuario and fecha_autoriza is null) " +
                                                          "    or (id_usr_autoriza2 = @idUsuario and fecha_autoriza2 is null and fecha_autoriza is not null) " +
                                                          "    or (id_usr_autoriza3 = @idUsuario and fecha_autoriza3 is null and fecha_autoriza is not null and fecha_autoriza2 is not null)) "
-                                ConexionBD.Open()
-                                contAutorizarFact = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contAutorizarFact > 0 Then
-                                    .lblAutorizarFact.Text = contAutorizarFact.ToString
+                                    ConexionBD.Open()
+                                    contAutorizarFact = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contAutorizarFact > 0 Then
+                                        .lblAutorizarFact.Text = contAutorizarFact.ToString
+                                    Else
+                                        .lblAutorizarFact.Text = ""
+                                    End If
                                 Else
                                     .lblAutorizarFact.Text = ""
                                 End If
-                            Else
-                                .lblAutorizarFact.Text = ""
-                            End If
 
-                            If (contValidarSol + contAutorizarSol + contValidarPresup + contAutContrato + contAutorizarFact) > 0 Then
-                                .lblServGastoAseso.Text = (contValidarSol + contAutorizarSol + contValidarPresup + contAutContrato + contAutorizarFact).ToString
-                            Else
-                                .lblServGastoAseso.Text = ""
-                            End If
+                                If (contValidarSol + contAutorizarSol + contValidarPresup + contAutContrato + contAutorizarFact) > 0 Then
+                                    .lblServGastoAseso.Text = (contValidarSol + contAutorizarSol + contValidarPresup + contAutContrato + contAutorizarFact).ToString
+                                Else
+                                    .lblServGastoAseso.Text = ""
+                                End If
 
-                            ' Solicitud de Recursos
-                            Dim contAutSolRec As Integer = 0
-                            If .pnlSRAutorizar.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                ' Solicitud de Recursos
+                                Dim contAutSolRec As Integer = 0
+                                If .pnlSRAutorizar.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_recursos on ms_instancia.id_ms_sol = ms_recursos.id_ms_recursos and ms_instancia.tipo = 'SR' " +
                                                          "where id_actividad = 38 " +
                                                          "  and id_usr_autoriza = @idUsuario "
-                                ConexionBD.Open()
-                                contAutSolRec = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contAutSolRec > 0 Then
-                                    .lblAutSolRec.Text = contAutSolRec.ToString
+                                    ConexionBD.Open()
+                                    contAutSolRec = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contAutSolRec > 0 Then
+                                        .lblAutSolRec.Text = contAutSolRec.ToString
+                                    Else
+                                        .lblAutSolRec.Text = ""
+                                    End If
                                 Else
                                     .lblAutSolRec.Text = ""
                                 End If
-                            Else
-                                .lblAutSolRec.Text = ""
-                            End If
 
-                            ' Solicitud de Recursos
-                            Dim contAutSolRecDir As Integer = 0
-                            If .pnlSRAutDir.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                ' Solicitud de Recursos
+                                Dim contAutSolRecDir As Integer = 0
+                                If .pnlSRAutDir.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_recursos on ms_instancia.id_ms_sol = ms_recursos.id_ms_recursos and ms_instancia.tipo = 'SR' " +
                                                          "where id_actividad = 116 " +
                                                          "  and id_usr_director = @idUsuario "
-                                ConexionBD.Open()
-                                contAutSolRecDir = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contAutSolRecDir > 0 Then
-                                    .lblSRAutDir.Text = contAutSolRecDir.ToString
+                                    ConexionBD.Open()
+                                    contAutSolRecDir = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contAutSolRecDir > 0 Then
+                                        .lblSRAutDir.Text = contAutSolRecDir.ToString
+                                    Else
+                                        .lblSRAutDir.Text = ""
+                                    End If
                                 Else
                                     .lblSRAutDir.Text = ""
                                 End If
-                            Else
-                                .lblSRAutDir.Text = ""
-                            End If
-                            Dim contVoBoSolRec As Integer
-                            If .pnlSRVoBo.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                Dim contVoBoSolRec As Integer
+                                If .pnlSRVoBo.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_recursos on ms_instancia.id_ms_sol = ms_recursos.id_ms_recursos and ms_instancia.tipo = 'SR' " +
                                                          "where id_actividad = 59 "
-                                ConexionBD.Open()
-                                contVoBoSolRec = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contVoBoSolRec > 0 Then
-                                    .lblVoBoSolRec.Text = contVoBoSolRec.ToString
+                                    ConexionBD.Open()
+                                    contVoBoSolRec = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contVoBoSolRec > 0 Then
+                                        .lblVoBoSolRec.Text = contVoBoSolRec.ToString
+                                    Else
+                                        .lblVoBoSolRec.Text = ""
+                                    End If
                                 Else
                                     .lblVoBoSolRec.Text = ""
                                 End If
-                            Else
-                                .lblVoBoSolRec.Text = ""
-                            End If
 
-                            If (contAutSolRec + contVoBoSolRec + contAutSolRecDir) > 0 Then
-                                .lblSolRec.Text = "  " + (contAutSolRec + contVoBoSolRec + contAutSolRecDir).ToString
-                            Else
-                                .lblSolRec.Text = ""
-                            End If
+                                If (contAutSolRec + contVoBoSolRec + contAutSolRecDir) > 0 Then
+                                    .lblSolRec.Text = "  " + (contAutSolRec + contVoBoSolRec + contAutSolRecDir).ToString
+                                Else
+                                    .lblSolRec.Text = ""
+                                End If
 
-                            'Pre Compro
-                            Dim contValidador As Integer
-                            Dim contPreComp As Integer
-                            SCMValores.CommandText = "select count(*) from dt_autorizador where id_autorizador =@idUsuario and validador ='S' "
-                            ConexionBD.Open()
-                            contValidador = SCMValores.ExecuteScalar()
-                            ConexionBD.Close()
+                                'Pre Compro
+                                Dim contValidador As Integer
+                                Dim contPreComp As Integer
+                                SCMValores.CommandText = "select count(*) from dt_autorizador where id_autorizador =@idUsuario and validador ='S' "
+                                ConexionBD.Open()
+                                contValidador = SCMValores.ExecuteScalar()
+                                ConexionBD.Close()
 
-                            If contValidador > 0 Then
-                                pnlPreAtorizacion.Visible = True
-                                SCMValores.CommandText = "select count(*) " +
+                                If contValidador > 0 Then
+                                    pnlPreAtorizacion.Visible = True
+                                    SCMValores.CommandText = "select count(*) " +
                                                        "from ms_instancia " +
                                                        "  left join ms_comp on ms_instancia.id_ms_sol = ms_comp.id_ms_comp and ms_instancia.tipo = 'C' " +
                                                        "where id_actividad = 115 " +
                                                        "  and ((ms_comp.id_validador = @idUsuario and ms_comp.status = 'P')) "
-                                ConexionBD.Open()
-                                contPreComp = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contPreComp > 0 Then
-                                    .lblPreAutorizacion.Text = contPreComp.ToString
+                                    ConexionBD.Open()
+                                    contPreComp = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contPreComp > 0 Then
+                                        .lblPreAutorizacion.Text = contPreComp.ToString
+                                    Else
+                                        .lblPreAutorizacion.Text = ""
+                                    End If
                                 Else
-                                    .lblPreAutorizacion.Text = ""
+                                    pnlPreAtorizacion.Visible = False
                                 End If
-                            Else
-                                pnlPreAtorizacion.Visible = False
-                            End If
 
 
-                            ' Comprobaciones
-                            Dim contAutComp As Integer
-                            If .pnlCAutorizar.Visible = True Then
-                                SCMValores.CommandText = "select count(*) " +
+                                ' Comprobaciones
+                                Dim contAutComp As Integer
+                                If .pnlCAutorizar.Visible = True Then
+                                    SCMValores.CommandText = "select count(*) " +
                                                          "from ms_instancia " +
                                                          "  left join ms_comp on ms_instancia.id_ms_sol = ms_comp.id_ms_comp and ms_instancia.tipo = 'C' " +
                                                          "where id_actividad = 9 " +
                                                          "  and ((id_usr_autoriza = @idUsuario and ms_comp.status = 'P') or (id_usr_aut_dir = @idUsuario and ms_comp.status = 'A')) "
-                                ConexionBD.Open()
-                                contAutComp = SCMValores.ExecuteScalar()
-                                ConexionBD.Close()
-                                If contAutComp > 0 Then
-                                    .lblAutComp.Text = contAutComp.ToString
+                                    ConexionBD.Open()
+                                    contAutComp = SCMValores.ExecuteScalar()
+                                    ConexionBD.Close()
+                                    If contAutComp > 0 Then
+                                        .lblAutComp.Text = contAutComp.ToString
+                                    Else
+                                        .lblAutComp.Text = ""
+                                    End If
                                 Else
                                     .lblAutComp.Text = ""
                                 End If
+
+                                If contAutComp > 0 Then
+                                    .lblComp.Text = contAutComp.ToString
+                                Else
+                                    .lblComp.Text = ""
+                                End If
+
+
+                                If Val(Session("id_actividadM")) > 0 Then
+                                    ._txtIdAct.Text = Val(Session("id_actividadM"))
+                                    Select Case Session("TipoM")
+                                        Case "Eval"
+                                            If (Val(._txtIdAct.Text) = 69 And .pnlEvaluacionAut.Visible = True) Or (Val(._txtIdAct.Text) = 71 And .pnlEvaluacionCorr.Visible = True) Or (Val(._txtIdAct.Text) = 72 And .pnlValidarEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 73 And .pnlAutorizarEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 81 And .pnlCorregirEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 82 And .pnlValidarEvalA.Visible = True) Then
+                                                llenarGridEval()
+                                            End If
+                                        Case "SR"
+                                            llenarGridSR()
+                                        Case "A"
+                                            llenarGridA()
+                                        Case "C"
+                                            llenarGridC()
+                                        Case "NS"
+                                            llenarGridNS()
+                                        Case "SN"
+                                            llenarGridSN()
+                                        Case "F"
+                                            llenarGridF()
+                                        Case "SAP"
+                                            llenarGridSAP()
+                                        Case "V"
+                                            llenarGridV()
+                                    End Select
+                                End If
                             Else
-                                .lblAutComp.Text = ""
-                            End If
-
-                            If contAutComp > 0 Then
-                                .lblComp.Text = contAutComp.ToString
-                            Else
-                                .lblComp.Text = ""
-                            End If
-
-
-                            If Val(Session("id_actividadM")) > 0 Then
-                                ._txtIdAct.Text = Val(Session("id_actividadM"))
-                                Select Case Session("TipoM")
-                                    Case "Eval"
-                                        If (Val(._txtIdAct.Text) = 69 And .pnlEvaluacionAut.Visible = True) Or (Val(._txtIdAct.Text) = 71 And .pnlEvaluacionCorr.Visible = True) Or (Val(._txtIdAct.Text) = 72 And .pnlValidarEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 73 And .pnlAutorizarEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 81 And .pnlCorregirEvalA.Visible = True) Or (Val(._txtIdAct.Text) = 82 And .pnlValidarEvalA.Visible = True) Then
-                                            llenarGridEval()
-                                        End If
-                                    Case "SR"
-                                        llenarGridSR()
-                                    Case "A"
-                                        llenarGridA()
-                                    Case "C"
-                                        llenarGridC()
-                                    Case "NS"
-                                        llenarGridNS()
-                                    Case "SN"
-                                        llenarGridSN()
-                                    Case "F"
-                                        llenarGridF()
-                                    Case "SAP"
-                                        llenarGridSAP()
-                                    Case "V"
-                                        llenarGridV()
-                                End Select
-                            End If
-                        Else
-                            Session("id_usuario") = 0
+                                Session("id_usuario") = 0
                             Server.Transfer("Login.aspx")
                         End If
                     End If
@@ -4792,6 +4865,7 @@
                         query = "select ms_instancia.id_ms_instancia " +
                                 "     , ms_comb.id_ms_comb " +
                                 "     , empleado as solicito " +
+                                "     , ms_comb.empresa as Empresa" + '
                                 "     , periodo_ini as desde " +
                                 "     , periodo_fin as hasta " +
                                 "     , no_eco " +
@@ -4886,15 +4960,18 @@
 
                     Case 140
                         'Anticipos por comprobar
-                        query = " SELECT id_ms_instancia, id_ms_anticipo_proveedor, empleado_solicita, fecha_solicita, empresa, proveedor, importe_requerido, " +
-                                " CASE" +
-                                " WHEN estatus = 'TR' AND inst.id_actividad = 140 THEN 'Pendiente de comprobación' " +
-                                " ELSE '-'  " +
-                                " END AS estado " +
-                                " FROM ms_anticipo_proveedor " +
-                                " LEFT JOIN ms_instancia inst ON ms_anticipo_proveedor.id_ms_anticipo_proveedor = inst.id_ms_sol " +
-                                " WHERE inst.tipo = 'AP' AND inst.id_actividad = 140 AND id_usr_solicita = @id_usr_solicita" +
-                                " AND NOT EXISTS (SELECT NULL FROM ms_comprobacion_anticipo comp WHERE ms_anticipo_proveedor.id_ms_anticipo_proveedor = comp.id_ms_anticipo_proveedor) ORDER BY id_ms_anticipo_proveedor "
+                        query = " SELECT id_ms_instancia, t1.id_ms_anticipo_proveedor, t1.empleado_solicita, t1.fecha_solicita, t1.empresa, t1.proveedor, importe_requerido,     " +
+                                "   CASE " +
+                                "  WHEN t1.estatus = 'TR' AND inst.id_actividad = 140 THEN 'Pendiente de comprobación' " +
+                                "  ELSE '-'" +
+                                "   END AS estado " +
+                                "   FROM ms_anticipo_proveedor t1 " +
+                                "  LEFT JOIN ms_instancia inst ON t1.id_ms_anticipo_proveedor = inst.id_ms_sol AND  inst.tipo ='AP' " +
+                                "  LEFT JOIN ms_comprobacion_anticipo  comp on comp.id_ms_anticipo_proveedor = t1.id_ms_anticipo_proveedor and comp.estatus not IN ('P','ZA','A') " +
+                                " WHERE NOT EXISTS (SELECT NULL " +
+                                "   FROM ms_comprobacion_anticipo t2 " +
+                                "   WHERE t2.id_ms_anticipo_proveedor  = t1.id_ms_anticipo_proveedor ) " +
+                                " AND t1.id_usr_solicita = @id_usr_solicita AND inst.id_actividad =140 "
                 End Select
                 sdaCatalogo.SelectCommand = New SqlCommand(query, ConexionBD)
                 If Val(._txtIdAct.Text) = 135 Then
@@ -4962,7 +5039,7 @@
                         " from ms_comprobacion_anticipo MSA " +
                         " inner join ms_instancia MI on MSA.id_ms_comprobacion_anticipo = MI.id_ms_sol " +
                         " left join cg_usuario CG on MSA.id_usr_solicita = CG.id_usuario " +
-                        " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad and id_usr_autorizador2 = @id_autorizador"
+                        " where MI.tipo = 'CAP' and MI.id_actividad = @id_actividad and id_usr_autorizador2 = @id_autorizador and fecha_autoriza is not null and fecha_autoriza_2 is  null"
                 End If
                 If Tercer_Autorizador Then
                     query = " Select id_ms_instancia, id_ms_comprobacion_anticipo, empresa, " +
@@ -6866,7 +6943,9 @@
     Protected Sub btnCatPermisos_Click(sender As Object, e As EventArgs) Handles btnCatPermisos.Click
         envio("Catálogo de Perfiles", "CatPermisos.aspx")
     End Sub
-
+    Protected Sub btnlistAntProv_Click(sender As Object, e As EventArgs) Handles btnlistAntProv.Click
+        envio("Lista de Validación pagos anticipados con Pedido de Compra", "141.aspx")
+    End Sub
     Protected Sub btnAutorizarCompAnticipo_Click(sender As Object, e As EventArgs) Handles btnAutorizarCompAnticipo.Click
         Me._txtIdAct.Text = 142
         llenarGridComprobacionAnticipo(True, False, False)
